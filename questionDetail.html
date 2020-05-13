@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://wenda.wecenter.com/question/32886 -->
+<html class="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="renderer" content="webkit">
+    <title>问题详情</title>
+    <link rel="stylesheet" type="text/css" href="local/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="local/icon.css">
+    <link href="local/common.css" rel="stylesheet" type="text/css">
+    <link href="local/link.css" rel="stylesheet" type="text/css">
+    <link href="local/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="local/tomorrow.css">
+    <script src="local/jquery.2.js" type="text/javascript"></script>
+    <script src="local/jquery.form.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="local/layer.css" id="layuicss-layer">
+    <link rel="stylesheet" href="local/laydate.css" id="layuicss-laydate">
+</head>
+<body>
+<div class="aw-top-menu-wrap" id="top">
+    <div class="container">
+        <!-- logo -->
+        <div class="aw-logo hidden-xs">
+            <a href="http://wenda.wecenter.com/"></a>
+        </div>
+        <!-- end logo -->
+        <!-- 搜索框 -->
+        <div class="aw-search-box  hidden-xs hidden-sm">
+            <form class="navbar-search" action="http://wenda.wecenter.com/search/" id="global_search_form"
+                  method="post">
+                <label class="oldPwdTip aw-search-query-label"
+                       onclick="$(this).hide();$(&#39;#aw-search-query&#39;).focus();">搜索问题、话题或人...</label> <input
+                    class="form-control search-query" type="text" value="" autocomplete="off" name="q"
+                    id="aw-search-query" onfocus="hideOldPwdTip(&#39;aw-search-query&#39;);"
+                    onblur="toggleOldPwdTip(&#39;aw-search-query&#39;,this.value);">
+                <span title="搜索" id="global_search_btns" onclick="$(&#39;#global_search_form&#39;).submit();"><i
+                        class="icon icon-search"></i></span>
+                <div class="aw-dropdown">
+                    <div class="mod-body">
+                        <p class="title">输入关键字进行搜索</p>
+                        <ul class="aw-dropdown-list collapse"></ul>
+                        <p class="search"><span>搜索:</span><a onclick="$(&#39;#global_search_form&#39;).submit();"></a>
+                        </p>
+                    </div>
+                    <div class="mod-footer">
+                        <a href="javascript:;" onclick="$(&#39;#header_publish&#39;).click();"
+                           class="pull-right btn btn-mini btn-success publish">发起问题</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- end 搜索框 -->
+        <!-- 导航 -->
+        <div class="aw-top-nav navbar">
+            <div class="navbar-header">
+                <button class="navbar-toggle pull-left">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="javaScript:;" @click="routerToTag()">全部</a></li>
+                    <template v-for="(value,index) in TTagResults">
+                        <li>
+                            <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                        </li>
+                        </option>
+                    </template>
+                </ul>
+            </nav>
+        </div>
+        <template v-if="userName == null">
+            <div class="aw-user-nav">
+                <!-- 登陆&注册栏 -->
+                <a class="login btn btn-normal btn-primary" @click="routerToLogin">登录</a>
+                <a class="register btn btn-normal btn-success" @click="routerToLogin">注册</a>
+                <!-- end 登陆&注册栏 -->
+            </div>
+        </template>
+        <template v-else>
+            <!-- 用户栏 -->
+            <div class="aw-user-nav">
+                <!-- 登陆&注册栏 -->
+                <a href="http://wenda.wecenter.com/people/52724" class="aw-user-nav-dropdown">
+                    <img :alt="userName" src="local/avatar-mid-img.png">{{userName}}
+                </a>
+                <div class="aw-dropdown dropdown-list pull-right">
+                    <ul class="aw-dropdown-list">
+                        <li><a href="http://wenda.wecenter.com/inbox/"><i class="icon icon-inbox"></i> 个人主面<span
+                                class="badge badge-important collapse" id="inbox_unread" style="display: none;">0</span></a>
+                        </li>
+                        <li class="hidden-xs"><a href="http://wenda.wecenter.com/setting/profile/"><i
+                                class="icon icon-setting"></i> 设置</a></li>
+                        <li><a href="http://wenda.wecenter.com/logout/"><i class="icon icon-logout"></i> 退出</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end 用户栏 -->
+            <!-- 发起 -->
+            <div class="aw-publish-btn">
+                <a id="header_publish" class="btn-primary" href="javaScript:;"
+                   @click="routerToPublish()"><i
+                        class="icon icon-ask"></i>发起</a>
+            </div>
+            <!-- end 发起 -->
+        </template>
+        <!-- end 发起 -->
+    </div>
+</div>
+<div class="aw-container-wrap" id="body">
+    <div class="container">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content">
+                    <!-- 话题推荐bar -->
+                    <!-- 话题推荐bar -->
+                    <!-- 话题bar -->
+                    <div class="aw-mod aw-topic-bar" id="question_topic_editor" data-type="question" data-id="32886">
+                        <div class="tag-bar clearfix">
+														<span class="topic-tag" data-id="3868">
+								<a href="http://wenda.wecenter.com/topic/3868" class="text">WeCenter3.5.0</a>
+							</span>
+
+                        </div>
+                    </div>
+                    <!-- end 话题bar -->
+                    <div class="aw-mod aw-question-detail aw-item">
+                        <div class="mod-head">
+                            <h1>{{TQuestionsResult.title}}</h1>
+
+                            <input type="hidden" id="share_content" value="">
+                            <input type="hidden" id="share_url" value="">
+                            <input type="hidden" id="share_title" value="">
+                            <div class="operate clearfix">
+                                <a href="javascript:;" onclick="AWS.User.follow($(this), &#39;question&#39;, 32886);"
+                                   class="follow btn btn-normal btn-success pull-left "><span>关注</span> <em>|</em>
+                                    <b>10</b></a>
+                                <!-- 下拉菜单 -->
+                                <div class="btn-group pull-left">
+                                    <a class="btn btn-gray dropdown-toggle" href="javascript:;">...</a>
+                                    <div class="aw-dropdown pull-right" role="menu" aria-labelledby="dropdownMenu">
+                                        <ul class="aw-dropdown-list">
+                                            <li>
+                                                <a href="http://wenda.wecenter.com/question/32886?column=log&amp;rf=false"
+                                                   rel="nofollow">修改记录</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- end 下拉菜单 -->
+                            </div>
+                        </div>
+
+                        <div class="mod-body">
+                            <div class="content markitup-box" v-html="TQuestionsResult.content">
+                            </div>
+                        </div>
+
+                        <div class="mod-footer">
+                            <div class="meta">
+                                <span class="text-color-999">2020-04-22</span>
+
+                                <a data-id="32886" data-type="question" class="aw-add-comment text-color-999 "
+                                   data-comment-count="0"><i class="icon icon-comment"></i>添加评论</a>
+
+                                <a class="text-color-999 aw-invite-replay"><i class="icon icon-invite"></i>邀请 </a>
+
+
+                                <div class="pull-right more-operate">
+                                    <a data-placement="bottom" title="" data-toggle="tooltip"
+                                       data-original-title="感谢提问者" onclick="AWS.User.question_thanks($(this), 32886);"
+                                       class="aw-icon-thank-tips text-color-999"><i class="icon icon-thank"></i>感谢</a>
+
+                                    <!-- <a class="text-color-999"  onclick="AWS.dialog('shareOut', {item_type:'question', item_id:32886});"> -->
+                                    <a class="text-color-999 dropdown-toggle" data-toggle="dropdown"
+                                       id="question_share">
+                                        <i class="icon icon-share"></i>分享 </a>
+                                    <div class="aw-dropdown shareout pull-right bdsharebuttonbox bdshare-button-style0-16"
+                                         data-bd-bind="1589375458825">
+                                        <ul class="aw-dropdown-list">
+                                            <li><a href="http://wenda.wecenter.com/#" class="bds_weixin"
+                                                   data-cmd="weixin" title="分享到微信"> 微信</a></li>
+                                            <li><a href="http://wenda.wecenter.com/#" class="bds_sqq" data-cmd="sqq"
+                                                   title="分享到QQ"> QQ</a></li>
+                                            <li><a href="http://wenda.wecenter.com/#" class="bds_tsina" data-cmd="tsina"
+                                                   title="分享到新浪微博"> 微博</a></li>
+                                            <li><a href="http://wenda.wecenter.com/#" class="bds_qzone" data-cmd="qzone"
+                                                   title="分享到QQ空间">空间</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <a href="javascript:;" class="text-color-999"
+                                       onclick="AWS.dialog(&#39;report&#39;, {item_type:&#39;question&#39;, item_id:32886,item_reson:&#39;广告/SPAM,恶意灌水,违规内容,文不对题,重复发问&#39;})"><i
+                                            class="icon icon-report"></i>举报</a></div>
+                            </div>
+                        </div>
+
+                        <!-- 站内邀请 -->
+                        <div class="aw-invite-box collapse" style="display: none;">
+                            <div class="mod-head clearfix">
+                                <div class="search-box pull-left">
+                                    <input id="invite-input" class="form-control" type="text" placeholder="搜索你想邀请的人...">
+                                    <div class="aw-dropdown">
+                                        <p class="title">没有找到相关结果</p>
+                                        <ul class="aw-dropdown-list"></ul>
+                                    </div>
+                                    <i class="icon icon-search"></i>
+                                </div>
+                                <div class="invite-list pull-left collapse">
+                                    已邀请:
+                                </div>
+                            </div>
+                            <div class="mod-body clearfix">
+                                <ul>
+                                    <li style="display: list-item;">
+                                        <a class="aw-user-img pull-left" data-id="52528"
+                                           href="http://wenda.wecenter.com/people/52528"><img class="img" alt=""
+                                                                                              src="local/28_avatar_mid.jpg"></a>
+                                        <div class="main">
+                                            <a class="pull-right btn btn-mini btn-success" data-value="LongDragon"
+                                               data-id="52528"
+                                               onclick="AWS.User.invite_user($(this),$(this).parents(&#39;li&#39;).find(&#39;img&#39;).attr(&#39;src&#39;));">邀请</a>
+
+                                            <a class="aw-user-name" data-id="52528"
+                                               href="http://wenda.wecenter.com/people/52528">LongDragon</a>
+
+                                            <p>
+
+                                                在 <span class="topic-tag"><a class="text" data-id="3868"
+                                                                             href="http://wenda.wecenter.com/topic/3868">WeCenter3.5.0</a></span>
+                                                话题下 获得 4 个赞同 </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mod-footer" style="display: none;">
+                                <a class="next pull-right">&gt;</a> <a class="prev active pull-right">&lt;</a>
+                            </div>
+                        </div>
+                        <!-- end 站内邀请 -->
+                        <!-- 相关链接 -->
+                        <div class="aw-question-related-box collapse" style="display: none;">
+                            <form action="http://wenda.wecenter.com/publish/ajax/save_related_link/" method="post"
+                                  onsubmit="return false" id="related_link_form">
+                                <div class="mod-head">
+                                    <h2>与内容相关的链接</h2>
+                                </div>
+                                <div class="mod-body clearfix">
+                                    <input type="hidden" name="item_id" value="32886">
+                                    <input type="text" class="form-control pull-left " name="link" value="">
+
+                                    <a onclick="AWS.ajax_post($(&#39;#related_link_form&#39;,function(){ window.location.reload();}));"
+                                       class="pull-left btn btn-success">提交</a>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end 相关链接 -->
+                    </div>
+
+                    <div class="aw-mod aw-question-comment">
+                        <div class="mod-head">
+                            <ul class="nav nav-tabs aw-nav-tabs active">
+                                <li><a href="http://wenda.wecenter.com/question/32886?uid=focus">关注的人</a></li>
+                                <li><a href="http://wenda.wecenter.com/question/32886?sort_key=add_time&amp;sort=ASC">时间
+                                    <i class="icon icon-up"></i></a></li>
+                                <li class="active"><a
+                                        href="http://wenda.wecenter.com/question/32886&amp;sort_key=agree_count&amp;sort=DESC">票数</a>
+                                </li>
+
+                                <h2 class="hidden-xs">{{TAnswerQueryBasePageHelperResult.total}} 个回复</h2>
+                            </ul>
+                        </div>
+
+
+                        <div class="mod-body aw-feed-list">
+
+                            <template v-for="(value,index) in TAnswerQueryBasePageHelperResult.list">
+                                <div class="aw-item" uninterested_count="0" force_fold="0" id="answer_list_50838">
+                                    <div class="mod-head">
+                                        <a class="anchor" name="answer_50838"></a>
+                                        <!-- 用户头像 -->
+                                        <a class="aw-user-img aw-border-radius-5"
+                                           href="http://wenda.wecenter.com/people/52528" data-id="52528"><img
+                                                src="local/28_avatar_mid.jpg" alt=""></a>
+                                        <!-- end 用户头像 -->
+                                        <div class="title">
+                                            <p>
+                                                <a class="aw-user-name" href="http://wenda.wecenter.com/people/52528"
+                                                   data-id="52528">LongDragon</a>
+                                                - <span class="text-color-999">PHPer</span></p>
+                                            <p class="text-color-999 aw-agree-by">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div v-html="value.content">
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <!-- end 问题详细模块 -->
+
+
+                    <!-- end 回复编辑器 -->
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-md-3 aw-side-bar hidden-xs hidden-sm">
+                    <!-- 发起人 -->
+                    <div class="aw-mod">
+                        <div class="mod-head">
+                            <h3>发起人</h3>
+                        </div>
+                        <div class="mod-body">
+                            <dl>
+                                <dt class="pull-left aw-border-radius-5">
+                                    <a href="http://wenda.wecenter.com/people/45510"><img alt="技术-安辰"
+                                                                                          src="local/10_avatar_mid.jpg"></a>
+                                </dt>
+                                <dd class="pull-left">
+                                    <a class="aw-user-name" href="http://wenda.wecenter.com/people/45510"
+                                       data-id="45510">技术 - 安辰</a>
+                                    <i class="icon-v" title="个人认证"></i>
+                                    <a class="icon-inverse follow tooltips icon icon-plus  active"
+                                       onclick="AWS.User.follow($(this), &#39;user&#39;, 45510);"
+                                       data-original-title="取消关注"></a>
+                                    <p>WeCenter技术</p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <!-- end 发起人 -->
+
+                    <!-- 邀请别人回复 -->
+                    <div class="aw-mod email-invite-replay">
+                        <div class="mod-head">
+                            <h3>邮件邀请别人回复</h3>
+                        </div>
+                        <div class="mod-body clearfix">
+                            <!-- 侧边栏邀请box -->
+                            <form method="post"
+                                  action="http://wenda.wecenter.com/question/ajax/email_invite/question_id-32886"
+                                  onsubmit="return false;" id="email_invite_form">
+                                <input class="form-control" type="text" name="email" placeholder="邮件邀请回复...">
+                                <a class="pull-right btn btn-mini btn-success"
+                                   onclick="AWS.ajax_post($(&#39;#email_invite_form&#39;));">邀请</a>
+                            </form>
+                            <!-- end 侧边栏邀请box -->
+                        </div>
+                    </div>
+                    <!-- end 邀请别人回复 -->
+
+                    <!-- 推荐内容 -->
+                    <div class="aw-mod">
+                        <div class="mod-head">
+                            <h3>推荐内容</h3>
+                        </div>
+                        <div class="mod-body font-size-12">
+                            <ul>
+                                <li>
+                                    <a href="http://wenda.wecenter.com/question/32883">WeCenter3.5.0免费学习版发布</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end 推荐内容 -->
+
+                    <!-- 相关问题 -->
+                    <div class="aw-mod">
+                        <div class="mod-head">
+                            <h3>相关问题</h3>
+                        </div>
+                        <div class="mod-body font-size-12">
+                            <ul>
+                                <li><a href="http://wenda.wecenter.com/question/21635">新版编辑器bug集中收集贴</a></li>
+                                <li><a href="http://wenda.wecenter.com/question/18763">wecenter3.0开发版本尝鲜测试下载</a></li>
+                                <li><a href="http://wenda.wecenter.com/question/3326">对answion这个版本很失望</a></li>
+                                <li><a href="http://wenda.wecenter.com/question/32569">WeCenter3.3.3版本发布...</a></li>
+                                <li><a href="http://wenda.wecenter.com/question/401">beta版本的细节调整建议（带图示）</a></li>
+                                <li><a href="http://wenda.wecenter.com/question/32867">WeCenter 3.3.5版本bug反馈贴</a></li>
+                                <li>
+                                    <a href="http://wenda.wecenter.com/question/14188">{bug反馈}WeCenter 2.5 RC 1[积分规则] 没这个页面  </a>
+                                </li>
+                                <li><a href="http://wenda.wecenter.com/question/32678">WeCenter3.3.4版本发布, 修复已知手机端BUG</a>
+                                </li>
+                                <li><a href="http://wenda.wecenter.com/question/4631">赶在1.1正式版前再反馈一下建议</a></li>
+                                <li><a href="http://wenda.wecenter.com/question/363">官方会做悬赏功能么？如果做，大概在什么时间货版本做？</a></li>
+                                <li><a href="http://wenda.wecenter.com/question/32808">WeCenter3.3.5版本发布, 修复反馈的已知BUG</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end 相关问题 -->
+
+                    <!-- 问题状态 -->
+                    <div class="aw-mod question-status">
+                        <div class="mod-head">
+                            <h3>问题状态</h3>
+                        </div>
+                        <div class="mod-body">
+                            <ul>
+                                <li>最新活动: <span class="aw-text-color-blue">5 天前</span></li>
+                                <li>浏览: <span class="aw-text-color-blue">770</span></li>
+                                <li>关注: <span class="aw-text-color-blue">10</span> 人</li>
+
+                                <li class="aw-border-radius-5" id="focus_users"><a
+                                        href="http://wenda.wecenter.com/people/11199"><img src="local/99_avatar_mid.jpg"
+                                                                                           class="aw-user-name"
+                                                                                           data-id="11199"
+                                                                                           alt="logclub"></a> <a
+                                        href="http://wenda.wecenter.com/people/23489"><img
+                                        src="local/avatar-mid-img.png" class="aw-user-name" data-id="23489"
+                                        alt="marco_hsu"></a> <a href="http://wenda.wecenter.com/people/36406"><img
+                                        src="local/06_avatar_mid.jpg" class="aw-user-name" data-id="36406" alt="一次问答网"></a>
+                                    <a href="http://wenda.wecenter.com/people/45510"><img src="local/10_avatar_mid.jpg"
+                                                                                          class="aw-user-name"
+                                                                                          data-id="45510"
+                                                                                          alt="技术-安辰"></a> <a
+                                            href="http://wenda.wecenter.com/people/49214"><img
+                                            src="local/14_avatar_mid.jpg" class="aw-user-name" data-id="49214"
+                                            alt="yanglvshi"></a> <a href="http://wenda.wecenter.com/people/49718"><img
+                                            src="local/18_avatar_mid.jpg" class="aw-user-name" data-id="49718"
+                                            alt="yangshuohyx"></a> <a href="http://wenda.wecenter.com/people/49969"><img
+                                            src="local/avatar-mid-img.png" class="aw-user-name" data-id="49969"
+                                            alt="wuyudong"></a> <a href="http://wenda.wecenter.com/people/52528"><img
+                                            src="local/28_avatar_mid.jpg" class="aw-user-name" data-id="52528"
+                                            alt="LongDragon"></a> <a href="http://wenda.wecenter.com/people/52537"><img
+                                            src="local/37_avatar_mid.jpg" class="aw-user-name" data-id="52537"
+                                            alt="a707609131"></a> <a href="http://wenda.wecenter.com/people/52695"><img
+                                            src="local/95_avatar_mid.jpg" class="aw-user-name" data-id="52695"
+                                            alt="gocloud"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end 问题状态 -->
+                </div>
+                <!-- end 侧边栏 -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="aw-content-wrap clearfix">
+            <div class="col-sm-12 col-md-9 aw-main-content">
+                <!-- 回复编辑器 -->
+                <div class="aw-mod aw-replay-box question">
+                    <a name="answer_form"></a>
+                    <form action="http://wenda.wecenter.com/question/ajax/save_answer/" onsubmit="return false;"
+                          method="post" id="answer_form" class="question_answer_form">
+                        <input type="hidden" name="post_hash" value="558d7fa668f8075e3462f6112d02c1f3">
+                        <input type="hidden" name="question_id" value="32886">
+                        <input type="hidden" name="attach_access_key" value="b2f0a5665b8022ea67b32095afbbc39b">
+                        <div class="mod-head">
+                            <a href="http://wenda.wecenter.com/people/" class="aw-user-name"><img alt="zhong2"
+                                                                                                  src="local/24_avatar_mid.jpg"></a>
+                            <p>
+                                zhong2 </p>
+                        </div>
+                        <div class="mod-body">
+                            <div class="aw-mod aw-editor-box">
+                                <div class="mod-head">
+                                    <div class="wmd-panel">
+                                            <textarea style="display: none;" id="wangcontent" rows="15"
+                                                      name="answer_content"></textarea>
+                                        <div id="wmd-input">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mod-body clearfix">
+                                        <span class="pull-right text-color-999"
+                                              id="answer_content_message">&nbsp;</span>
+                                </div>
+                                <div class="mod-body clearfix">
+                                    <a href="javascript:;"
+                                       onclick="answer()"
+                                       class="btn btn-normal btn-success pull-right btn-reply"
+                                       id="publish_submit">回复</a>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" charset="utf-8" src="local/wangEditor.js"></script>
+<script type="text/javascript" charset="utf-8" src="local/wangEditorExt.js"></script>
+<script type="text/javascript" src="local/plugin.js"></script>
+<script type="text/javascript" charset="utf-8" src="vueJs/vue.js"></script>
+<link rel="stylesheet" href="css/ElementIndex.css">
+<script src="js/ElementIndex.js"></script>
+<script type="text/javascript" charset="utf-8" src="vueJs/axios.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="vueJs/api.js"></script>
+<div class="aw-footer-wrap">
+    <div class="aw-footer">
+        Copyright © 2020<span class="hidden-xs"> - 潮文工作室 QQ号：2942200183, All Rights Reserved</span>
+    </div>
+</div>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var $text1 = $('#wangcontent');
+    var editor = new E('#wmd-input');
+    editor.customConfig.onchange = function (html) {
+        $text1.val(html)
+    };
+    editor.customConfig.onchange = function (html) {
+        $text1.val(html)
+    };
+    editor.customConfig.codeType = {
+        title: "选择代码类型:",
+        type: [
+            "C/C++", "Php", "C#", "Java", "Css", "Sql", "Html", "Bash/Shell"
+        ]
+    };
+    editor.customConfig.uploadImgServer = uploadFile;
+    editor.customConfig.onchangeTimeout = 200;
+    editor.customConfig.uploadImgTimeout = 30000;
+    editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
+    editor.customConfig.uploadFileName = 'files';
+    editor.customConfig.customUploadImg = function (files, insert) {
+        var form = new FormData();
+        files.forEach(file => form.append('files', file, file.name));
+        axios.post(uploadFile, form)
+            .then(function (res) {
+                let response = res.data;
+                if (response.code == 0) {
+
+                    response.content.forEach(url => {
+                        console.info(BASE_URL + url);
+                        insert(BASE_URL + "/" + url);//插入图片
+                    })
+                } else {
+                    console.info(response.msg)
+                }
+            }).catch(
+            function (response) {
+                console.info(response)
+            });
+
+    }
+
+    editor.create();
+    editor.txt.html($text1.val());
+    E.attach.init('#wmd-input', "question");
+    E.viewSource.init(editor);
+</script>
+</div>
+<script>
+    var topHead = new Vue({
+        el: "#top",
+        data: {
+            userId: null,
+            userName: null,
+            TTagResults: [{
+                id: null,
+                tag: null
+            }],
+        },
+        methods: {
+            routerToLogin() {
+                //跳转携带参数
+                window.open(WEBSTROM_BASE_URL + "/login.html?", '_self');
+            },
+            routerToPublish() {
+                window.open(WEBSTROM_BASE_URL + "/publish.html", '_self');
+            },
+            routerToTag(tag) {
+                //跳转携带参数
+                let queryStr = "";
+                if (tag) {
+                    queryStr = queryStr + "tag=" + tag + "";
+                }
+                window.open(WEBSTROM_BASE_URL + "/index.html?" + queryStr, '_self');
+            },
+
+        }
+    });
+</script>
+<script>
+    var vue = new Vue({
+            el: "#body",
+            data: {
+                userId: '',
+                questionId: '',
+                /** 存储TQuestions插入结果*/
+                TQuestionsInsertParam: {
+                    id: null,
+                    userId: null,
+                    title: null,
+                    content: null,
+                    status: null,
+                    deleteFlag: null,
+                    blackFlag: null,
+                    createTime: null,
+                    updateTime: null
+                },
+                /** 存储TQuestions单个结果*/
+                TQuestionsResult: {
+                    id: null,
+                    userId: null,
+                    title: null,
+                    content: null,
+                    status: null,
+                    deleteFlag: null,
+                    blackFlag: null,
+                    createTime: null,
+                    updateTime: null
+                },
+                /** 存储TAnswer插入结果*/
+                TAnswerInsertParam: {
+                    id: null,
+                    userId: null,
+                    questionId: null,
+                    content: null,
+                    deleteFlag: null,
+                    status: null,
+                    blackFlag: null,
+                    time: null,
+                    answerId: null
+                }
+                ,
+                /** 存储TAnswer多条件查询条件(分页，去除分页的num和size)*/
+                TAnswerQueryBasePageHelperParam: {
+                    id: null,
+                    userId: null,
+                    questionId: null,
+                    content: null,
+                    deleteFlag: null,
+                    status: null,
+                    blackFlag: null,
+                    time: null,
+                    answerId: null,
+                    pageNum: 1,
+                    pageSize: 10
+                }
+                ,
+                /** 存储TAnswer存储多条件查询结果(分页，去除分页的num和size)*/
+                TAnswerQueryBasePageHelperResult: {
+                    pageNum: null,
+                    pageSize: null,
+                    size: null,
+                    orderBy: null,
+                    startRow: null,
+                    endRow: null,
+                    total: null,
+                    pages: null,
+                    list: [{
+                        id: null,
+                        userId: null,
+                        questionId: null,
+                        content: null,
+                        deleteFlag: null,
+                        status: null,
+                        blackFlag: null,
+                        time: null,
+                        answerId: null
+                    }],
+                    firstPage: null,
+                    prePage: 0,
+                    nextPage: null,
+                    lastPage: null,
+                    isFirstPage: true,
+                    isLastPage: null,
+                    hasPreviousPage: null,
+                    hasNextPage: null,
+                    navigatePages: null,
+                    navigatepageNums: []
+                }
+                ,
+                TTagQueryBaseParam: {
+                    id: null,
+                    tag: null
+                },
+                TTagResults: [{
+                    id: null,
+                    tag: null
+                }]
+
+            },
+            created() {
+                /**
+                 * 1.接收外界参数
+                 */
+                var questionId = queryUrlParam('id')
+                this.questionId = questionId;
+                this.queryTQuestionsByPrimaryKey(questionId)
+                this.TAnswerQueryBasePageHelperParam.questionId = questionId;
+                this.getUserId();
+                this.getUserName();
+                this.queryBasePageHelperTAnswer();
+                this.queryBaseTTag();
+            },
+            methods: {
+
+                /** 主键查询TQuestions */
+                queryTQuestionsByPrimaryKey(id) {
+                    let self = this;
+                    axios.get(queryTQuestionsByPrimaryKey, {
+                        params: {
+                            id: id
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            self.TQuestionsResult = data.content;
+                            self.TQuestionsResult.content = base64Decode(data.content.content)
+                            console.log(self.TQuestionsResult);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }).catch(
+                        function (response) {
+                            //失败回调
+                            alert(self.alertError);
+                        })
+                },
+                answer() {
+
+                }
+                ,
+                getUserId() {
+                    let self = this;
+                    axios.get(getUserId, {}).then(function (res) {
+                        let response = res.data;
+                        if (response.code == 0) {
+                            self.userId = response.content;
+                            topHead.userId = response.content;
+                            self.$message({
+                                type: 'success',
+                                message: '查询成功',
+                                duration: 1000
+                            });
+                        } else {
+                            // self.$message({
+                            //     type: 'error',
+                            //     message: '查询异常' + response.msg,
+                            //     duration: 1000
+                            // });
+                            console.info("用户未登录");
+                        }
+                    }).catch(
+                        function (response) {
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+
+
+                }, getUserName() {
+                    let self = this;
+                    axios.get(getUserName, {}).then(function (res) {
+                        let response = res.data;
+                        if (response.code == 0) {
+                            self.userName = response.content;
+                            topHead.userName = response.content;
+                            self.$message({
+                                type: 'success',
+                                message: '查询成功',
+                                duration: 1000
+                            });
+                        } else {
+                            // self.$message({
+                            //     type: 'error',
+                            //     message: '查询异常' + response.msg,
+                            //     duration: 1000
+                            // });
+                            console.info("用户未登录");
+                        }
+                    }).catch(
+                        function (response) {
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+
+
+                },
+                insertTAnswer() {
+                    let self = this;
+                    self.TAnswerInsertParam.id = uuid();
+                    self.TAnswerInsertParam.userId = self.userId;
+                    self.TAnswerInsertParam.questionId = self.questionId;
+                    self.TAnswerInsertParam.content = base64Encode(editor.txt.html());
+                    axios.post(insertTAnswer, self.TAnswerInsertParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true) {
+                                    self.$message({
+                                        type: 'success',
+                                        message: '发布成功',
+                                        duration: 1000
+                                    });
+                                }
+                            } else {
+                                self.$message({
+                                    type: 'success',
+                                    message: '发布异常:' + data.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+                /** 分页查询TAnswer -- 存放的是默认的data */
+                queryBasePageHelperTAnswer() {
+                    let self = this;
+                    let pageNum = self.TAnswerQueryBasePageHelperParam.pageNum;
+                    let pageSize = self.TAnswerQueryBasePageHelperParam.pageSize;
+                    axios.post(queryBasePageHelperTAnswer + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAnswerQueryBasePageHelperParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                self.TAnswerQueryBasePageHelperResult = data.content;
+                                self.TAnswerQueryBasePageHelperResult.list.forEach(value => {
+                                    console.info(value);
+                                    value.content = base64Decode(value.content);
+                                })
+                            } else {
+                                alert(data.msg);
+                            }
+                        }).catch(
+                        function (response) {
+                            //失败回调
+                            alert(self.alertError);
+                        })
+                },
+                /** 多条件查询TTag */
+                queryBaseTTag() {
+                    let self = this;
+                    axios.post(queryBaseTTag, self.TTagQueryBaseParam)
+                        .then(function (res) {
+                            let response = res.data;
+                            if (response.code == 0) {
+                                self.TTagResults = response.content;
+                                topHead.TTagResults = response.content;
+                                self.$message({
+                                    type: 'success',
+                                    message: '查询成功',
+                                    duration: 1000
+                                });
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '查询异常' + response.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+
+            }
+        })
+    ;
+
+    function answer() {
+        vue.insertTAnswer();
+    }
+
+</script>
+</body>
+
+</html>

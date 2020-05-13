@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="renderer" content="webkit">
+    <title>发布 - 短书</title>
+    <link rel="stylesheet" type="text/css" href="local/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="local/icon.css">
+    <link href="local/common.css" rel="stylesheet" type="text/css">
+    <link href="local/link.css" rel="stylesheet" type="text/css">
+    <link href="local/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="local/tomorrow.css">
+    <script src="local/wangEditor.js"></script>
+    <script src="local/wangEditorExt.js"></script>
+    <script src="local/plugin.js"></script>
+    <script src="local/jquery.2.js"></script>
+    <script src="local/jquery.form.js"></script>
+    <link rel="stylesheet" href="css/ElementIndex.css">
+    <script src="js/ElementIndex.js"></script>
+</head>
+<body>
+<div class="aw-top-menu-wrap">
+    <div class="container" id="head">
+        <!-- logo -->
+        <div class="aw-logo hidden-xs">
+            <a href="http://wenda.wecenter.com/"></a>
+        </div>
+        <!-- end logo -->
+        <!-- 搜索框 -->
+        <div class="aw-search-box  hidden-xs hidden-sm">
+            <form class="navbar-search" action="http://wenda.wecenter.com/search/" id="global_search_form"
+                  method="post">
+                <label class="oldPwdTip aw-search-query-label"
+                       onclick="$(this).hide();$(&#39;#aw-search-query&#39;).focus();">搜索问题、话题或人...</label> <input
+                    class="form-control search-query" type="text" value="" autocomplete="off" name="q"
+                    id="aw-search-query">
+                <span title="搜索" id="global_search_btns" onclick="$(&#39;#global_search_form&#39;).submit();"><i
+                        class="icon icon-search"></i></span>
+                <div class="aw-dropdown">
+                    <div class="mod-body">
+                        <p class="title">输入关键字进行搜索</p>
+                        <ul class="aw-dropdown-list collapse"></ul>
+                        <p class="search"><span>搜索:</span><a onclick="$(&#39;#global_search_form&#39;).submit();"></a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- end 搜索框 -->
+        <!-- 导航 -->
+        <div class="aw-top-nav navbar">
+            <div class="navbar-header">
+                <button class="navbar-toggle pull-left">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="javaScript:;" @click="routerToTag()">全部</a></li>
+                    <template v-for="(value,index) in TTagResults">
+                        <li>
+                            <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                        </li>
+                        </option>
+                    </template>
+                </ul>
+            </nav>
+        </div>
+        <template v-if="userName == null">
+            <div class="aw-user-nav">
+                <!-- 登陆&注册栏 -->
+                <a class="login btn btn-normal btn-primary" @click="routerToLogin">登录</a>
+                <a class="register btn btn-normal btn-success" @click="routerToLogin">注册</a>
+                <!-- end 登陆&注册栏 -->
+            </div>
+        </template>
+        <template v-else>
+            <!-- 用户栏 -->
+            <div class="aw-user-nav">
+                <!-- 登陆&注册栏 -->
+                <a href="http://wenda.wecenter.com/people/52724" class="aw-user-nav-dropdown">
+                    <img :alt="userName" src="local/avatar-mid-img.png">{{userName}}
+                </a>
+                <div class="aw-dropdown dropdown-list pull-right">
+                    <ul class="aw-dropdown-list">
+                        <li><a href="http://wenda.wecenter.com/inbox/"><i class="icon icon-inbox"></i> 个人主面<span
+                                class="badge badge-important collapse" id="inbox_unread" style="display: none;">0</span></a>
+                        </li>
+                        <li class="hidden-xs"><a href="http://wenda.wecenter.com/setting/profile/"><i
+                                class="icon icon-setting"></i> 设置</a></li>
+                        <li><a href="http://wenda.wecenter.com/logout/"><i class="icon icon-logout"></i> 退出</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end 用户栏 -->
+            <!-- 发起 -->
+            <div class="aw-publish-btn">
+                <a id="header_publish" class="btn-primary" href="javaScript:;"
+                   @click="routerToPublish()"><i
+                        class="icon icon-ask"></i>发起</a>
+            </div>
+            <!-- end 发起 -->
+        </template>
+    </div>
+</div>
+
+<div class="aw-container-wrap">
+    <div class="container aw-publish">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content">
+                    <!-- tab 切换 -->
+                    <ul class="nav nav-tabs aw-nav-tabs active">
+                        <h2 class="hidden-xs"><i class="icon icon-ask"></i> 发起</h2>
+                    </ul>
+                    <!-- end tab 切换 -->
+                    <form action="http://wenda.wecenter.com/publish/ajax/publish_question/publish.html" method="post"
+                          id="question_form" onsubmit="return false;">
+                        <div class="aw-mod aw-mod-publish">
+                            <div class="mod-body">
+                                <h3>问题标题:</h3>
+                                <div class="aw-publish-title" id="body">
+                                    <div>
+                                        <label class="oldPwdTip question_contents-label"></label>
+                                        <input type="text" name="question_content" id="question_contents"
+                                               placeholder="输入问题标题.."
+                                               v-model="TQuestionsInsertParam.title"
+                                               class="form-control">
+                                        <div class="aw-publish-suggest-question collapse">
+                                            <p class="text-color-999">你的问题可能已经有答案</p>
+                                            <ul class="aw-dropdown-list">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <h3>选择类别:</h3>
+                                    <div class="aw-topic-bar active" data-type="publish">
+                                        <div class="aw-edit-topic-box form-inline" style="display: block;">
+                                            <select name="cars" v-model="TQuestionsInsertParam.tag">
+                                                <template v-for="(value,index) in TTagResults">
+                                                    <option v-if="index = 0 " :value="value.tag" selected="selected">
+                                                        {{value.tag}}
+                                                    </option>
+                                                    <option v-else :value="value.tag">{{value.tag}}</option>
+
+                                                </template>
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <h3>问题补充 (选填):</h3>
+                                <div class="aw-mod aw-editor-box">
+                                    <div class="mod-head">
+                                        <div class="wmd-panel">
+                                            <textarea style="display: none;" id="wangcontent" rows="15"
+                                                      name="question_detail"></textarea>
+                                            <div id="wmd-input" id="context">
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod-body">
+                                        <span class="pull-right text-color-999"
+                                              id="question_detail_message">&nbsp;</span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="mod-footer clearfix">
+                                <span class="aw-anonymity">
+                                    <a id="saveDraft" data-type="question">保存草稿</a></span>
+                                <a class="btn btn-large btn-success btn-publish-submit" id="publish_submit"
+                                   onclick="submit()">确认发起</a>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
+                    <!-- 问题发起指南 -->
+                    <div class="aw-mod publish-help">
+                        <div class="mod-head">
+                            <h3>问题发起指南</h3>
+                        </div>
+                        <div class="mod-body">
+                            <p><b>• 问题标题:</b> 请用准确的语言描述您发布的问题思想</p>
+                            <p><b>• 问题补充:</b> 详细补充问题内容, 这里提供富文本</p>
+                            <p><b>• 选择类别:</b> 选择类别用于分类</p>
+                        </div>
+                    </div>
+                    <!-- end 问题发起指南 -->
+                </div>
+                <!-- end 侧边栏 -->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" charset="utf-8" src="local/wangEditor.js"></script>
+<script type="text/javascript" charset="utf-8" src="local/wangEditorExt.js"></script>
+<script type="text/javascript" charset="utf-8" src="local/plugin.js"></script>
+<script type="text/javascript" charset="utf-8" src="vueJs/vue.js"></script>
+<link rel="stylesheet" href="css/ElementIndex.css">
+<script src="js/ElementIndex.js"></script>
+<script type="text/javascript" charset="utf-8" src="vueJs/axios.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="vueJs/api.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var $text1 = $('#wangcontent');
+    var editor = new E('#wmd-input');
+    editor.customConfig.onchange = function (html) {
+        $text1.val(html)
+    };
+    editor.customConfig.onchange = function (html) {
+        $text1.val(html)
+    };
+    editor.customConfig.codeType = {
+        title: "选择代码类型:",
+        type: [
+            "C/C++", "Php", "C#", "Java", "Css", "Sql", "Html", "Bash/Shell"
+        ]
+    };
+    editor.customConfig.uploadImgServer = uploadFile;
+    editor.customConfig.onchangeTimeout = 200;
+    editor.customConfig.uploadImgTimeout = 30000;
+    editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
+    editor.customConfig.uploadFileName = 'files';
+    editor.customConfig.customUploadImg = function (files, insert) {
+        var form = new FormData();
+        files.forEach(file => form.append('files', file, file.name));
+        axios.post(uploadFile, form)
+            .then(function (res) {
+                let response = res.data;
+                if (response.code == 0) {
+
+                    response.content.forEach(url => {
+                        console.info(BASE_URL + url);
+                        insert(BASE_URL + "/" + url);//插入图片
+                    })
+                } else {
+                    console.info(response.msg)
+                }
+            }).catch(
+            function (response) {
+                console.info(response)
+            });
+
+    }
+
+    editor.create();
+    editor.txt.html($text1.val());
+    E.attach.init('#wmd-input', "question");
+    E.viewSource.init(editor);
+</script>
+<script>
+    var topHead = new Vue({
+        el: "#head",
+        data: {
+            userId: null,
+            userName: null,
+            TTagResults: [{
+                id: null,
+                tag: null
+            }]
+        },
+        methods: {
+            routerToLogin() {
+                //跳转携带参数
+                window.open(WEBSTROM_BASE_URL + "/login.html?", '_self');
+            },
+            routerToPublish() {
+                window.open(WEBSTROM_BASE_URL + "/publish.html", '_self');
+            },
+            routerToTag(tag) {
+                //跳转携带参数
+                let queryStr = "";
+                if (tag) {
+                    queryStr = queryStr + "tag=" + tag + "";
+                }
+                window.open(WEBSTROM_BASE_URL + "/index.html?" + queryStr, '_self');
+            },
+        }
+    });
+</script>
+<script>
+    axios.defaults.withCredentials = true;
+    var vue = new Vue({
+        el: "#body",
+        data: {
+            userId: null,
+            userName: null,
+            /** 存储TQuestions插入结果*/
+            TQuestionsInsertParam: {
+                id: null,
+                userName: null,
+                title: null,
+                content: null,
+                tag: null,
+                status: null,
+                deleteFlag: null,
+                blackFlag: null,
+                createTime: null,
+                updateTime: null
+            },
+            TTagQueryBaseParam: {
+                id: null,
+                tag: null
+            },
+            TTagResults: [{
+                id: null,
+                tag: null
+            }]
+        },
+        created() {
+            this.getUserId();
+            this.getUserName();
+            this.queryBaseTTag()
+        },
+        methods: {
+
+            /** 插入TQuestions */
+            insertTQuestions() {
+                let self = this;
+                self.TQuestionsInsertParam.id = uuid();
+                self.TQuestionsInsertParam.userName = self.userName;
+                self.TQuestionsInsertParam.content = base64Encode(editor.txt.html());
+                axios.post(insertTQuestions, self.TQuestionsInsertParam)
+                    .then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content == true) {
+                                self.$message({
+                                    type: 'success',
+                                    message: '发布成功',
+                                    duration: 1000
+                                });
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '发布失败' + response.msg,
+                                    duration: 1000
+                                });
+                            }
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '发布异常' + response.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            },
+            getUserId() {
+                let self = this;
+                axios.get(getUserId, {}).then(function (res) {
+                    let response = res.data;
+                    if (response.code == 0) {
+                        self.userId = response.content;
+                        topHead.userId = response.content;
+
+                        self.$message({
+                            type: 'success',
+                            message: '查询成功',
+                            duration: 1000
+                        });
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '查询异常' + response.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+
+
+            }, getUserName() {
+                let self = this;
+                axios.get(getUserName, {}).then(function (res) {
+                    let response = res.data;
+                    if (response.code == 0) {
+                        self.userName = response.content;
+                        topHead.userName = response.content;
+                        self.$message({
+                            type: 'success',
+                            message: '查询成功',
+                            duration: 1000
+                        });
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '查询异常' + response.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+
+
+            }, /** 多条件查询TTag */
+            queryBaseTTag() {
+                let self = this;
+                axios.post(queryBaseTTag, self.TTagQueryBaseParam)
+                    .then(function (res) {
+                        let response = res.data;
+                        if (response.code == 0) {
+                            self.TTagResults = response.content;
+                            topHead.TTagResults = response.content;
+                            self.$message({
+                                type: 'success',
+                                message: '查询成功',
+                                duration: 1000
+                            });
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '查询异常' + response.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            },
+        }
+    });
+
+    function submit() {
+        vue.insertTQuestions();
+    }
+</script>
+<style type="text/css">
+    .w-e-toolbar {
+        flex-wrap: wrap;
+        -webkit-box-lines: multiple;
+    }
+
+    .w-e-toolbar .w-e-menu:hover {
+        z-index: 10002 !important;
+    }
+
+    .w-e-menu {
+        z-index: 1049;
+    }
+
+    .w-e-menu a {
+        text-decoration: none;
+    }
+
+    .btn_viewSource img {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .markitup-box pre br {
+        display: block
+    }
+</style>
+<div class="aw-footer-wrap">
+    <div class="aw-footer">
+        Copyright © 2020<span class="hidden-xs"> - 潮文工作室 QQ号：2942200183, All Rights Reserved</span>
+    </div>
+</div>
+
+
+</div>
+
+
+</body>
+</html>

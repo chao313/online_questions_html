@@ -1,0 +1,224 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/ElementIndex.css">
+    <script src="vueJs/vue.js"></script>
+    <script src="js/ElementIndex.js"></script>
+    <title>登陆</title>
+</head>
+<body>
+<div id="body">
+    <div class="background">
+        <img src="images/7.jpg" width="100%" height="100%">
+    </div>
+    <div class="front">
+        <el-tabs v-model="activeName" stretch>
+            <!--登录页-->
+            <el-tab-pane label="登录" name="first">
+                <div id="login-coontent">
+                    <br>
+                    <el-form ref="form" :model="form" label-width="100px">
+                        <el-input v-model="form.username" style="width:270px;" size="medium"
+                                  placeholder="请输入账号" prefix-icon="el-icon-user-solid"></el-input>
+                        <br><br>
+                        <el-input v-model="form.password" style="width:270px;" size="medium"
+                                  placeholder="请输入密码" show-password prefix-icon="el-icon-s-goods"
+                        ></el-input>
+                        <br><br>
+                        <el-button type="success" size="mini" style="width:270px;" @click="login">立即登录</el-button>
+                        <br><br>
+                        <el-button type="primary" size="mini" style="width:270px;" @click="routerToIndex()">浏览
+                        </el-button>
+                    </el-form>
+                </div>
+            </el-tab-pane>
+            <!--注册页-->
+            <el-tab-pane label="注册" name="second">
+                <div id="register-content">
+                    <el-form ref="form" :model="form" label-width="100px">
+                        <el-input v-model="TUserInsertParam.name" style="width:270px;" size="medium"
+                                  placeholder="请输入账号" prefix-icon="el-icon-user-solid"></el-input>
+                        <br><br>
+                        <el-input v-model="TUserInsertParam.password" style="width:270px;" size="medium"
+                                  placeholder="请输入密码" show-password prefix-icon="el-icon-s-goods"
+                        ></el-input>
+                        <br><br>
+                        <el-button type="success" size="mini" style="width:270px;" @click="register">立即注册</el-button>
+                    </el-form>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
+
+    </div>
+    <div id="title">短书ShortBook</div>
+    <div id="slogan">每一次思考，都应被记载。</div>
+</div>
+<script src="vueJs/axios.min.js"></script>
+<!--<script src="vueJs/data.js"></script>-->
+<script src="vueJs/api.js"></script>
+<script>
+    axios.defaults.withCredentials = true;
+    var vue = new Vue({
+        el: "#body",
+        data: {
+            activeName: 'first',
+            form: {
+                username: '',
+                password: ''
+            },
+            /** 存储TUser插入结果*/
+            TUserInsertParam: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null
+            }
+        },
+        methods: {
+            glance() {
+
+            },
+            login() {
+                let self = this;
+                axios.get(login, {
+                    params: {
+                        userName: self.form.username,
+                        password: self.form.password
+                    }
+                }).then(function (res) {
+                    let response = res.data;
+                    if (response.code == 0) {
+                        let content = response.content;
+                        if (content == true) {
+                            self.$message({
+                                type: 'success',
+                                message: '登陆成功',
+                                duration: 1000
+                            });
+                            self.routerToIndex();
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '登陆异常' + response.msg,
+                                duration: 1000
+                            });
+                        }
+                    }
+                }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+
+            },
+            /** 注册 */
+            register() {
+                let self = this;
+                self.TUserInsertParam.id = uuid();
+                axios.post(insertTUser, self.TUserInsertParam)
+                    .then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content == true) {
+                                self.$message({
+                                    type: 'success',
+                                    message: '注册成功，请登录',
+                                    duration: 1000
+                                });
+                                self.routerToLogin();
+                            }
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '注册异常' + data.msg,
+                                duration: 2000
+                            });
+                        }
+                    }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            },
+            routerToIndex() {
+                //跳转携带参数
+                window.open(WEBSTROM_BASE_URL + "/index.html?", '_self');
+            },
+            routerToLogin() {
+                //跳转携带参数
+                window.open(WEBSTROM_BASE_URL + "/login.html?", '_self');
+            },
+        }
+    });
+
+
+</script>
+<style>
+    #title {
+        z-index: 1;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 55px;
+        font-style: italic;
+        font-weight: bolder;
+        color: #2C9CAE;
+        text-shadow: white 3px 3px 3px 0;
+        position: absolute;
+        top: 150px;
+        left: 250px;
+    }
+
+    #slogan {
+        z-index: 1;
+        font-family: 楷体;
+        font-size: 50px;
+        font-weight: bolder;
+        color: black;
+        position: absolute;
+        top: 320px;
+        left: 150px;
+    }
+
+    .background {
+        width: 100%;
+        height: 100%; /**宽高100%是为了图片铺满屏幕 */
+        z-index: -1;
+        position: absolute;
+    }
+
+    .front {
+        text-align: center;
+        z-index: 1;
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        top: 150px;
+        left: 800px;
+        background-color: white;
+        opacity: 0.9;
+        filter: alpha(opacity=100);
+        border-radius: 15px
+    }
+</style>
+</body>
+
+</html>
+
+​
