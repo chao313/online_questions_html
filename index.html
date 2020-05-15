@@ -116,7 +116,8 @@
                     <div class="aw-mod aw-explore-list">
                         <div class="mod-body">
                             <div class="aw-common-list">
-                                <template v-for="(value,index) in TQuestionsQueryBasePageHelperResult.list">
+                                <template v-if="TQuestionsQueryBasePageHelperResult.total != null"
+                                          v-for="(value,index) in TQuestionsQueryBasePageHelperResult.list">
                                     <div class="aw-item " data-topic-id="3868,">
                                         <a class="aw-user-name hidden-xs" data-id="45510"
                                            href="" rel="nofollow"><img
@@ -158,15 +159,17 @@
                         <div class="mod-footer">
                             <div class="page-control">
                                 <div class="mt10">
-                                    <!--/** */:page-size 数一页的数量！！！-->
-                                    <el-pagination v-show="TQuestionsQueryBasePageHelperResult.list.length > 0"
-                                                   background
-                                                   @current-change="handleCurrentChange"
-                                                   :current-page.sync="TQuestionsQueryBasePageHelperResult.pageNum"
-                                                   :page-size="TQuestionsQueryBasePageHelperResult.pageSize"
-                                                   layout="total, prev, pager, next, jumper"
-                                                   :total="TQuestionsQueryBasePageHelperResult.total">
-                                    </el-pagination>
+                                    <template v-if="TQuestionsQueryBasePageHelperResult.total != null">
+                                        <!--/** */:page-size 数一页的数量！！！-->
+                                        <el-pagination v-show="TQuestionsQueryBasePageHelperResult.list.length > 0"
+                                                       background
+                                                       @current-change="handleCurrentChange"
+                                                       :current-page.sync="TQuestionsQueryBasePageHelperResult.pageNum"
+                                                       :page-size="TQuestionsQueryBasePageHelperResult.pageSize"
+                                                       layout="total, prev, pager, next, jumper"
+                                                       :total="TQuestionsQueryBasePageHelperResult.total">
+                                        </el-pagination>
+                                    </template>
                                 </div>
                             </div>
                         </div>
