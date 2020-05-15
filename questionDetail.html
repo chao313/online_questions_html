@@ -413,68 +413,6 @@
         Copyright © 2020<span class="hidden-xs"> - 潮文工作室 QQ号：2942200183, All Rights Reserved</span>
     </div>
 </div>
-<script type="text/javascript">
-    var E = window.wangEditor;
-    var $text1 = $('#wangcontent');
-    var editor = new E('#wmd-input');
-    editor.customConfig.onchange = function (html) {
-        $text1.val(html)
-    };
-    editor.customConfig.onchange = function (html) {
-        $text1.val(html)
-    };
-    editor.customConfig.codeType = {
-        title: "选择代码类型:",
-        type: [
-            "C/C++", "Php", "C#", "Java", "Css", "Sql", "Html", "Bash/Shell"
-        ]
-    };
-    editor.customConfig.uploadImgServer = uploadFile;
-    editor.customConfig.onchangeTimeout = 200;
-    editor.customConfig.uploadImgTimeout = 30000;
-    editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
-    editor.customConfig.uploadFileName = 'files';
-    editor.customConfig.customUploadImg = function (files, insert) {
-        var form = new FormData();
-        files.forEach(file => form.append('files', file, file.name));
-        axios.post(uploadFile, form)
-            .then(function (res) {
-                let response = res.data;
-                if (response.code == 0) {
-
-                    response.content.forEach(url => {
-                        console.info(BASE_URL + url);
-                        insert(BASE_URL + "/" + url);//插入图片
-                    })
-                } else {
-                    console.info(response.msg)
-                }
-            }).catch(
-            function (response) {
-                console.info(response)
-            });
-
-    }
-
-    editor.create();
-    editor.txt.html($text1.val());
-    E.attach.init('#wmd-input', "question");
-    E.viewSource.init(editor);
-</script>
-</div>
-<script>
-    var answer = new Vue({
-        el: "#answer",
-        data: {
-            userId: null,
-            userName: null,
-            TTagResults: [{
-                id: null,
-                tag: null
-            }],
-        }
-    });
-</script>
 <script>
     var topHead = new Vue({
         el: "#top",
@@ -823,6 +761,69 @@
     }
 
 </script>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var $text1 = $('#wangcontent');
+    var editor = new E('#wmd-input');
+    editor.customConfig.onchange = function (html) {
+        $text1.val(html)
+    };
+    editor.customConfig.onchange = function (html) {
+        $text1.val(html)
+    };
+    editor.customConfig.codeType = {
+        title: "选择代码类型:",
+        type: [
+            "C/C++", "Php", "C#", "Java", "Css", "Sql", "Html", "Bash/Shell"
+        ]
+    };
+    editor.customConfig.uploadImgServer = uploadFile;
+    editor.customConfig.onchangeTimeout = 200;
+    editor.customConfig.uploadImgTimeout = 30000;
+    editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
+    editor.customConfig.uploadFileName = 'files';
+    editor.customConfig.customUploadImg = function (files, insert) {
+        var form = new FormData();
+        files.forEach(file => form.append('files', file, file.name));
+        axios.post(uploadFile, form)
+            .then(function (res) {
+                let response = res.data;
+                if (response.code == 0) {
+
+                    response.content.forEach(url => {
+                        console.info(BASE_URL + url);
+                        insert(BASE_URL + "/" + url);//插入图片
+                    })
+                } else {
+                    console.info(response.msg)
+                }
+            }).catch(
+            function (response) {
+                console.info(response)
+            });
+
+    }
+
+    editor.create();
+    editor.txt.html($text1.val());
+    E.attach.init('#wmd-input', "question");
+    E.viewSource.init(editor);
+</script>
+</div>
+<script>
+    var answer = new Vue({
+        el: "#answer",
+        data: {
+            userId: null,
+            userName: null,
+            TTagResults: [{
+                id: null,
+                tag: null
+            }],
+        }
+    });
+</script>
+
 </body>
 
 </html>
