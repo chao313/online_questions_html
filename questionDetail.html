@@ -643,7 +643,11 @@
                     }).catch(
                         function (response) {
                             //失败回调
-                            alert(self.alertError);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
                         })
                 },
                 answer() {
@@ -763,12 +767,20 @@
                                     value.content = base64Decode(value.content);
                                 })
                             } else {
-                                alert(data.msg);
+                                self.$message({
+                                    type: 'error',
+                                    message: '查询异常' + data.msg,
+                                    duration: 1000
+                                });
                             }
                         }).catch(
                         function (response) {
                             //失败回调
-                            alert(self.alertError);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
                         })
                 },
                 /** 多条件查询TTag */
