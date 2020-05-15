@@ -22,7 +22,6 @@ window.wangEditor.viewSource = {
         editor.isHTML = false;
         _______SourceEditor[id]=editor;
         toolbar = editor.$toolbarElem[0];
-        $(toolbar).append("<div class='w-e-menu btn_viewSource' title='查看源码' onclick='window.wangEditor.viewSource.run(\""+id+"\")'><img src='/plugins/wc_editor/static/wangeditor/release/source.svg' width='14' height='14'> </div>");
     },
     run: function(id) {
         editor = _______SourceEditor[id];
