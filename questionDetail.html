@@ -121,7 +121,7 @@
                     <div class="aw-mod aw-topic-bar" id="question_topic_editor" data-type="question" data-id="32886">
                         <div class="tag-bar clearfix">
 														<span class="topic-tag" data-id="3868">
-								<a href="" class="text">WeCenter3.5.0</a>
+								<a href="" class="text"><span>{{TQuestionsResult.tag}}</span></a>
 							</span>
 
                         </div>
@@ -161,40 +161,15 @@
 
                         <div class="mod-footer">
                             <div class="meta">
-                                <span class="text-color-999">2020-04-22</span>
-
+                                <span class="text-color-999">{{TQuestionsResult.createTime}}</span>
                                 <a data-id="32886" data-type="question" class="aw-add-comment text-color-999 "
                                    data-comment-count="0"><i class="icon icon-comment"></i>添加评论</a>
-
-                                <a class="text-color-999 aw-invite-replay"><i class="icon icon-invite"></i>邀请 </a>
-
-
                                 <div class="pull-right more-operate">
-                                    <a data-placement="bottom" title="" data-toggle="tooltip"
-                                       data-original-title="感谢提问者" onclick="AWS.User.question_thanks($(this), 32886);"
-                                       class="aw-icon-thank-tips text-color-999"><i class="icon icon-thank"></i>感谢</a>
-
-                                    <!-- <a class="text-color-999"  onclick="AWS.dialog('shareOut', {item_type:'question', item_id:32886});"> -->
                                     <a class="text-color-999 dropdown-toggle" data-toggle="dropdown"
                                        id="question_share">
-                                        <i class="icon icon-share"></i>分享 </a>
-                                    <div class="aw-dropdown shareout pull-right bdsharebuttonbox bdshare-button-style0-16"
-                                         data-bd-bind="1589375458825">
-                                        <ul class="aw-dropdown-list">
-                                            <li><a href="" class="bds_weixin"
-                                                   data-cmd="weixin" title="分享到微信"> 微信</a></li>
-                                            <li><a href="" class="bds_sqq" data-cmd="sqq"
-                                                   title="分享到QQ"> QQ</a></li>
-                                            <li><a href="" class="bds_tsina" data-cmd="tsina"
-                                                   title=""> 微博</a></li>
-                                            <li><a href="" class="bds_qzone" data-cmd="qzone"
-                                                   title="分享到QQ空间">空间</a></li>
-                                        </ul>
-                                    </div>
-
+                                        <i class="icon icon-share"></i>分享</a>
                                     <a href="javascript:;" class="text-color-999"
-                                       onclick="AWS.dialog(&#39;report&#39;, {item_type:&#39;question&#39;, item_id:32886,item_reson:&#39;广告/SPAM,恶意灌水,违规内容,文不对题,重复发问&#39;})"><i
-                                            class="icon icon-report"></i>举报</a></div>
+                                       onclick=""><i class="icon icon-report"></i>举报</a></div>
                             </div>
                         </div>
 
@@ -218,19 +193,16 @@
                                     <li style="display: list-item;">
                                         <a class="aw-user-img pull-left" data-id="52528"
                                            href=""><img class="img" alt=""
-                                                                                              src="local/28_avatar_mid.jpg"></a>
+                                                        src="local/28_avatar_mid.jpg"></a>
                                         <div class="main">
                                             <a class="pull-right btn btn-mini btn-success" data-value="LongDragon"
                                                data-id="52528"
                                                onclick="AWS.User.invite_user($(this),$(this).parents(&#39;li&#39;).find(&#39;img&#39;).attr(&#39;src&#39;));">邀请</a>
-
                                             <a class="aw-user-name" data-id="52528"
                                                href="">LongDragon</a>
-
                                             <p>
-
                                                 在 <span class="topic-tag"><a class="text" data-id="3868"
-                                                                             href="">WeCenter3.5.0</a></span>
+                                                                             href="" 计算机</a></span>
                                                 话题下 获得 4 个赞同 </p>
                                         </div>
                                     </li>
@@ -257,19 +229,11 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- end 相关链接 -->
                     </div>
 
                     <div class="aw-mod aw-question-comment">
                         <div class="mod-head">
                             <ul class="nav nav-tabs aw-nav-tabs active">
-                                <li><a href="">关注的人</a></li>
-                                <li><a href="">时间
-                                    <i class="icon icon-up"></i></a></li>
-                                <li class="active"><a
-                                        href="">票数</a>
-                                </li>
-
                                 <h2 class="hidden-xs">{{TAnswerQueryBasePageHelperResult.total}} 个回复</h2>
                             </ul>
                         </div>
@@ -318,40 +282,22 @@
                             <dl>
                                 <dt class="pull-left aw-border-radius-5">
                                     <a href=""><img alt="技术-安辰"
-                                                                                          src="local/10_avatar_mid.jpg"></a>
+                                                    src="local/avatar-mid-img.png"></a>
                                 </dt>
                                 <dd class="pull-left">
                                     <a class="aw-user-name" href=""
-                                       data-id="45510">技术 - 安辰</a>
+                                       data-id="45510"><span>{{TQuestionsResult.userName}}</span></a>
                                     <i class="icon-v" title="个人认证"></i>
-                                    <a class="icon-inverse follow tooltips icon icon-plus  active"
-                                       onclick="AWS.User.follow($(this), &#39;user&#39;, 45510);"
+                                    <a class=""
+                                       onclick=""
                                        data-original-title="取消关注"></a>
-                                    <p>WeCenter技术</p>
+                                    <p>计算机</p>
                                 </dd>
                             </dl>
                         </div>
                     </div>
                     <!-- end 发起人 -->
 
-                    <!-- 邀请别人回复 -->
-                    <div class="aw-mod email-invite-replay">
-                        <div class="mod-head">
-                            <h3>邮件邀请别人回复</h3>
-                        </div>
-                        <div class="mod-body clearfix">
-                            <!-- 侧边栏邀请box -->
-                            <form method="post"
-                                  action=""
-                                  onsubmit="return false;" id="email_invite_form">
-                                <input class="form-control" type="text" name="email" placeholder="邮件邀请回复...">
-                                <a class="pull-right btn btn-mini btn-success"
-                                   onclick="AWS.ajax_post($(&#39;#email_invite_form&#39;));">邀请</a>
-                            </form>
-                            <!-- end 侧边栏邀请box -->
-                        </div>
-                    </div>
-                    <!-- end 邀请别人回复 -->
 
                     <!-- 推荐内容 -->
                     <div class="aw-mod">
@@ -361,7 +307,7 @@
                         <div class="mod-body font-size-12">
                             <ul>
                                 <li>
-                                    <a href="">WeCenter3.5.0免费学习版发布</a>
+                                    <a href="">Window快捷键学习</a>
                                 </li>
                             </ul>
                         </div>
@@ -375,20 +321,8 @@
                         </div>
                         <div class="mod-body font-size-12">
                             <ul>
-                                <li><a href="">新版编辑器bug集中收集贴</a></li>
-                                <li><a href="">wecenter3.0开发版本尝鲜测试下载</a></li>
-                                <li><a href="">对answion这个版本很失望</a></li>
-                                <li><a href="">WeCenter3.3.3版本发布...</a></li>
-                                <li><a href="">beta版本的细节调整建议（带图示）</a></li>
-                                <li><a href="">WeCenter 3.3.5版本bug反馈贴</a></li>
-                                <li>
-                                    <a href="">{bug反馈}WeCenter 2.5 RC 1[积分规则] 没这个页面  </a>
-                                </li>
-                                <li><a href="">WeCenter3.3.4版本发布, 修复已知手机端BUG</a>
-                                </li>
-                                <li><a href="">赶在1.1正式版前再反馈一下建议</a></li>
-                                <li><a href="">官方会做悬赏功能么？如果做，大概在什么时间货版本做？</a></li>
-                                <li><a href="">WeCenter3.3.5版本发布, 修复反馈的已知BUG</a>
+                                <li><a href="">岁月如歌, 坦然应对</a></li>
+                                <li><a href="">如何优化Windows的启动</a></li>
                                 </li>
                             </ul>
                         </div>
@@ -406,32 +340,6 @@
                                 <li>浏览: <span class="aw-text-color-blue">770</span></li>
                                 <li>关注: <span class="aw-text-color-blue">10</span> 人</li>
 
-                                <li class="aw-border-radius-5" id="focus_users"><a
-                                        href=""><img src="local/99_avatar_mid.jpg"
-                                                                                           class="aw-user-name"
-                                                                                           data-id="11199"
-                                                                                           alt="logclub"></a> <a
-                                        href=""><img
-                                        src="local/avatar-mid-img.png" class="aw-user-name" data-id="23489"
-                                        alt="marco_hsu"></a> <a href=""><img
-                                        src="local/06_avatar_mid.jpg" class="aw-user-name" data-id="36406" alt="一次问答网"></a>
-                                    <a href=""><img src="local/10_avatar_mid.jpg"
-                                                                                          class="aw-user-name"
-                                                                                          data-id="45510"
-                                                                                          alt="技术-安辰"></a> <a
-                                            href=""><img
-                                            src="local/14_avatar_mid.jpg" class="aw-user-name" data-id="49214"
-                                            alt="yanglvshi"></a> <a href=""><img
-                                            src="local/18_avatar_mid.jpg" class="aw-user-name" data-id="49718"
-                                            alt="yangshuohyx"></a> <a href=""><img
-                                            src="local/avatar-mid-img.png" class="aw-user-name" data-id="49969"
-                                            alt="wuyudong"></a> <a href=""><img
-                                            src="local/28_avatar_mid.jpg" class="aw-user-name" data-id="52528"
-                                            alt="LongDragon"></a> <a href=""><img
-                                            src="local/37_avatar_mid.jpg" class="aw-user-name" data-id="52537"
-                                            alt="a707609131"></a> <a href=""><img
-                                            src="local/95_avatar_mid.jpg" class="aw-user-name" data-id="52695"
-                                            alt="gocloud"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -454,11 +362,10 @@
                         <input type="hidden" name="post_hash" value="558d7fa668f8075e3462f6112d02c1f3">
                         <input type="hidden" name="question_id" value="32886">
                         <input type="hidden" name="attach_access_key" value="b2f0a5665b8022ea67b32095afbbc39b">
-                        <div class="mod-head">
-                            <a href="" class="aw-user-name"><img alt="zhong2"
-                                                                                                  src="local/24_avatar_mid.jpg"></a>
-                            <p>
-                                zhong2 </p>
+                        <div class="mod-head" id="answer">
+                            <a href="" class="aw-user-name"><img :alt="userName"
+                                                                 src="local/avatar-mid-img.png"></a>
+                            <p>{{userName}}</p>
                         </div>
                         <div class="mod-body">
                             <div class="aw-mod aw-editor-box">
@@ -556,6 +463,19 @@
 </script>
 </div>
 <script>
+    var answer = new Vue({
+        el: "#answer",
+        data: {
+            userId: null,
+            userName: null,
+            TTagResults: [{
+                id: null,
+                tag: null
+            }],
+        }
+    });
+</script>
+<script>
     var topHead = new Vue({
         el: "#top",
         data: {
@@ -587,6 +507,7 @@
     });
 </script>
 <script>
+    axios.defaults.withCredentials = true;
     var vue = new Vue({
             el: "#body",
             data: {
@@ -736,6 +657,7 @@
                         if (response.code == 0) {
                             self.userId = response.content;
                             topHead.userId = response.content;
+                            answer.userId = response.content;
                             // self.$message({
                             //     type: 'success',
                             //     message: '查询成功',
@@ -766,6 +688,7 @@
                         if (response.code == 0) {
                             self.userName = response.content;
                             topHead.userName = response.content;
+                            answer.userName = response.content;
                             // self.$message({
                             //     type: 'success',
                             //     message: '查询成功',

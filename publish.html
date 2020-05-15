@@ -337,6 +337,8 @@
                 self.TQuestionsInsertParam.id = uuid();
                 self.TQuestionsInsertParam.userName = self.userName;
                 self.TQuestionsInsertParam.content = base64Encode(editor.txt.html());
+                self.TQuestionsInsertParam.createTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                self.TQuestionsInsertParam.updateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
                 axios.post(insertTQuestions, self.TQuestionsInsertParam)
                     .then(function (response) {
                         let data = response.data;
