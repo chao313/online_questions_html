@@ -445,6 +445,19 @@
     });
 </script>
 <script>
+    var answer = new Vue({
+        el: "#answer",
+        data: {
+            userId: null,
+            userName: null,
+            TTagResults: [{
+                id: null,
+                tag: null
+            }],
+        }
+    });
+</script>
+<script>
     axios.defaults.withCredentials = true;
     var vue = new Vue({
             el: "#body",
@@ -480,6 +493,7 @@
                     id: null,
                     userId: null,
                     questionId: null,
+                    questionTitle: null,
                     content: null,
                     deleteFlag: null,
                     status: null,
@@ -660,6 +674,7 @@
                     self.TAnswerInsertParam.id = uuid();
                     self.TAnswerInsertParam.userId = self.userId;
                     self.TAnswerInsertParam.questionId = self.questionId;
+                    self.TAnswerInsertParam.questionTitle = self.TQuestionsResult.title;
                     self.TAnswerInsertParam.content = base64Encode(editor.txt.html());
                     axios.post(insertTAnswer, self.TAnswerInsertParam)
                         .then(function (response) {
@@ -810,19 +825,6 @@
     E.viewSource.init(editor);
 </script>
 </div>
-<script>
-    var answer = new Vue({
-        el: "#answer",
-        data: {
-            userId: null,
-            userName: null,
-            TTagResults: [{
-                id: null,
-                tag: null
-            }],
-        }
-    });
-</script>
 
 </body>
 
