@@ -248,20 +248,20 @@
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5"
                                            href="" data-id="52528"><img
-                                                src="local/28_avatar_mid.jpg" alt=""></a>
+                                                src="local/avatar-mid-img.png" :alt="value.userName"></a>
                                         <!-- end 用户头像 -->
                                         <div class="title">
                                             <p>
                                                 <a class="aw-user-name" href=""
-                                                   data-id="52528">LongDragon</a>
-                                                - <span class="text-color-999">PHPer</span></p>
+                                                   data-id="52528"><span>{{value.userName}}</span></a>
                                             <p class="text-color-999 aw-agree-by">
 
                                             </p>
                                         </div>
+                                        <div v-html="value.content">
+                                        </div>
                                     </div>
-                                    <div v-html="value.content">
-                                    </div>
+
                                 </div>
                             </template>
                         </div>
@@ -281,7 +281,7 @@
                         <div class="mod-body">
                             <dl>
                                 <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img alt="技术-安辰"
+                                    <a href=""><img :alt="TQuestionsResult.userName"
                                                     src="local/avatar-mid-img.png"></a>
                                 </dt>
                                 <dd class="pull-left">
@@ -491,7 +491,7 @@
                 /** 存储TAnswer插入结果*/
                 TAnswerInsertParam: {
                     id: null,
-                    userId: null,
+                    userName: null,
                     questionId: null,
                     questionTitle: null,
                     content: null,
@@ -671,8 +671,16 @@
                 },
                 insertTAnswer() {
                     let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
                     self.TAnswerInsertParam.id = uuid();
-                    self.TAnswerInsertParam.userId = self.userId;
+                    self.TAnswerInsertParam.userName = self.userName;
                     self.TAnswerInsertParam.questionId = self.questionId;
                     self.TAnswerInsertParam.questionTitle = self.TQuestionsResult.title;
                     self.TAnswerInsertParam.content = base64Encode(editor.txt.html());

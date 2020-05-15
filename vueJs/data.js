@@ -415,7 +415,7 @@ var vue = new Vue({
         /** 存储TAnswer多个结果*/
         TAnswerResults:[{
            id: null,
-           userId: null,
+           userName: null,
            questionId: null,
            questionTitle: null,
            content: null,
@@ -429,7 +429,7 @@ var vue = new Vue({
         /** 存储TAnswer单个结果*/
         TAnswerResult:{
           id: null,
-          userId: null,
+          userName: null,
           questionId: null,
           questionTitle: null,
           content: null,
@@ -443,7 +443,7 @@ var vue = new Vue({
         /** 存储TAnswer插入结果*/
         TAnswerInsertParam:{
           id: null,
-          userId: null,
+          userName: null,
           questionId: null,
           questionTitle: null,
           content: null,
@@ -457,7 +457,7 @@ var vue = new Vue({
        /** 存储TAnswer主键更新*/
        TAnswerUpdateByPrimaryKeyParam:{
          source:{
-            userId: null,
+            userName: null,
             questionId: null,
             questionTitle: null,
             content: null,
@@ -477,7 +477,7 @@ var vue = new Vue({
        TAnswerUpdateBaseParam:{
          source:{
            id: null,
-           userId: null,
+           userName: null,
            questionId: null,
            questionTitle: null,
            content: null,
@@ -490,7 +490,7 @@ var vue = new Vue({
          ,
          target:{
           id: null,
-          userId: null,
+          userName: null,
           questionId: null,
           questionTitle: null,
           content: null,
@@ -505,7 +505,7 @@ var vue = new Vue({
        /** 存储TAnswer多条件查询条件*/
        TAnswerQueryBaseParam:{
           id: null,
-          userId: null,
+          userName: null,
           questionId: null,
           questionTitle: null,
           content: null,
@@ -519,7 +519,7 @@ var vue = new Vue({
        /** 存储TAnswer多条件查询条件(分页，去除分页的num和size)*/
        TAnswerQueryBasePageHelperParam:{
           id: null,
-          userId: null,
+          userName: null,
           questionId: null,
           questionTitle: null,
           content: null,
@@ -542,7 +542,7 @@ var vue = new Vue({
           pages: null,
           list: [{
             id: null,
-            userId: null,
+            userName: null,
             questionId: null,
             questionTitle: null,
             content: null,
