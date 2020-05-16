@@ -19,6 +19,44 @@ var getUserName = BASE_URL + '/SessionController/getUserName';
 
 var uploadFile = BASE_URL + '/EditorController/uploadFile';
 
+
+/** TFollowQuestion */
+/** 根据主键更新TFollowQuestion */
+var updateTFollowQuestionByPrimaryKey = BASE_URL + '/TFollowQuestionController/updateByPrimaryKey';
+/** 单条插入TFollowQuestion */
+var insertTFollowQuestion = BASE_URL + '/TFollowQuestionController/insert';
+/** 根据主键删除TFollowQuestion */
+var deleteTFollowQuestionByPrimaryKey = BASE_URL + '/TFollowQuestionController/deleteByPrimaryKey';
+/** 分页查询TFollowQuestion */
+var queryBasePageHelperTFollowQuestion = BASE_URL + '/TFollowQuestionController/queryBasePageHelper';
+/** 根据主键查询TFollowQuestion */
+var queryTFollowQuestionByPrimaryKey = BASE_URL + '/TFollowQuestionController/queryByPrimaryKey';
+/** 多条件查询TFollowQuestion */
+var queryBaseTFollowQuestion = BASE_URL + '/TFollowQuestionController/queryBase';
+/** 批量插入TFollowQuestion */
+var insertsTFollowQuestion = BASE_URL + '/TFollowQuestionController/inserts';
+/** 多条件更新TFollowQuestion */
+var updateBaseTFollowQuestion = BASE_URL + '/TFollowQuestionController/updateBase';
+
+/** TFollowPerson */
+/** 根据主键更新TFollowPerson */
+var updateTFollowPersonByPrimaryKey = BASE_URL + '/TFollowPersonController/updateByPrimaryKey';
+/** 单条插入TFollowPerson */
+var insertTFollowPerson = BASE_URL + '/TFollowPersonController/insert';
+/** 根据主键删除TFollowPerson */
+var deleteTFollowPersonByPrimaryKey = BASE_URL + '/TFollowPersonController/deleteByPrimaryKey';
+/** 分页查询TFollowPerson */
+var queryBasePageHelperTFollowPerson = BASE_URL + '/TFollowPersonController/queryBasePageHelper';
+/** 根据主键查询TFollowPerson */
+var queryTFollowPersonByPrimaryKey = BASE_URL + '/TFollowPersonController/queryByPrimaryKey';
+/** 多条件查询TFollowPerson */
+var queryBaseTFollowPerson = BASE_URL + '/TFollowPersonController/queryBase';
+/** 批量插入TFollowPerson */
+var insertsTFollowPerson = BASE_URL + '/TFollowPersonController/inserts';
+/** 多条件更新TFollowPerson */
+var updateBaseTFollowPerson = BASE_URL + '/TFollowPersonController/updateBase';
+
+
 /** TTag */
 /** 根据主键更新TTag */
 var updateTTagByPrimaryKey = BASE_URL + '/TTagController/updateByPrimaryKey';

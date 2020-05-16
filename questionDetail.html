@@ -135,22 +135,14 @@
                             <input type="hidden" id="share_url" value="">
                             <input type="hidden" id="share_title" value="">
                             <div class="operate clearfix">
-                                <a href="javascript:;" onclick="AWS.User.follow($(this), &#39;question&#39;, 32886);"
-                                   class="follow btn btn-normal btn-success pull-left "><span>关注</span> <em>|</em>
-                                    <b>10</b></a>
-                                <!-- 下拉菜单 -->
-                                <div class="btn-group pull-left">
-                                    <a class="btn btn-gray dropdown-toggle" href="javascript:;">...</a>
-                                    <div class="aw-dropdown pull-right" role="menu" aria-labelledby="dropdownMenu">
-                                        <ul class="aw-dropdown-list">
-                                            <li>
-                                                <a href=""
-                                                   rel="nofollow">修改记录</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- end 下拉菜单 -->
+                                <template v-if="TFollowQuestionResult.userName == null">
+                                    <a href="javascript:;" @click="follow()"
+                                       class="follow btn btn-normal btn-success pull-left "><span>关注</span></a>
+                                </template>
+                                <template v-else>
+                                    <a href="javascript:;" @click="unFollow()"
+                                       class="follow btn btn-normal btn-success active"><span>取消关注</span></a>
+                                </template>
                             </div>
                         </div>
 
@@ -161,9 +153,7 @@
 
                         <div class="mod-footer">
                             <div class="meta">
-                                <span class="text-color-999">{{TQuestionsResult.createTime}}</span>
-                                <a data-id="32886" data-type="question" class="aw-add-comment text-color-999 "
-                                   data-comment-count="0"><i class="icon icon-comment"></i>添加评论</a>
+                                <span class="text-color-999">创建于{{TQuestionsResult.createTime}}</span>
                                 <div class="pull-right more-operate">
                                     <a class="text-color-999 dropdown-toggle" data-toggle="dropdown"
                                        id="question_share">
@@ -464,6 +454,7 @@
             data: {
                 userId: '',
                 questionId: '',
+                userName: null,
                 /** 存储TQuestions插入结果*/
                 TQuestionsInsertParam: {
                     id: null,
@@ -557,7 +548,20 @@
                 TTagResults: [{
                     id: null,
                     tag: null
-                }]
+                }],
+                /** 存储TFollowQuestion单个结果*/
+                TFollowQuestionResult: {
+                    questionId: null,
+                    userName: null,
+                    cteateTime: null
+                }
+                ,
+                /** 存储TFollowQuestion插入结果*/
+                TFollowQuestionInsertParam: {
+                    questionId: null,
+                    userName: null,
+                    cteateTime: null
+                }
 
             },
             created() {
@@ -645,6 +649,7 @@
                             self.userName = response.content;
                             topHead.userName = response.content;
                             answer.userName = response.content;
+                            self.queryTFollowQuestionByPrimaryKey(self.questionId, self.userName);
                             // self.$message({
                             //     type: 'success',
                             //     message: '查询成功',
@@ -684,12 +689,14 @@
                     self.TAnswerInsertParam.questionId = self.questionId;
                     self.TAnswerInsertParam.questionTitle = self.TQuestionsResult.title;
                     self.TAnswerInsertParam.content = base64Encode(editor.txt.html());
+                    self.TAnswerInsertParam.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
                     axios.post(insertTAnswer, self.TAnswerInsertParam)
                         .then(function (response) {
                             let data = response.data;
                             console.log(data);
                             if (data.code == 0) {
                                 if (data.content == true) {
+                                    self.queryBasePageHelperTAnswer();
                                     self.$message({
                                         type: 'success',
                                         message: '发布成功',
@@ -773,6 +780,138 @@
                                 duration: 1000
                             })
                         })
+                },
+                /** 主键查询TFollowQuestion */
+                queryTFollowQuestionByPrimaryKey(questionId, userName) {
+                    let self = this;
+                    axios.get(queryTFollowQuestionByPrimaryKey, {
+                        params: {
+                            questionId: questionId,
+                            userName: userName
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content) {
+                                self.TFollowQuestionResult = data.content;
+                            } else {
+                                self.TFollowQuestionResult.userName = null;
+                                self.TFollowQuestionResult.questionId = null;
+                            }
+                            console.log(self.TFollowQuestionResult);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }).catch(
+                        function (response) {
+                            //失败回调
+                            alert(self.alertError);
+                        })
+                },
+                /** 主键删除TFollowQuestion */
+                deleteTFollowQuestionByPrimaryKey(questionId, userName) {
+                    let self = this;
+                    axios.get(deleteTFollowQuestionByPrimaryKey, {
+                        params: {
+                            questionId: questionId,
+                            userName: userName
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            console.info("questionId" + questionId)
+                            console.info("userName" + userName)
+                            if (data.content == true) {
+                                self.queryTFollowQuestionByPrimaryKey(questionId, userName);
+                                self.$message({
+                                    type: 'success',
+                                    message: '取消关注成功',
+                                    duration: 1000
+                                });
+                            }
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '取消关注成功' + data.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                        function (response) {
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+                /** 插入TFollowQuestion */
+                insertTFollowQuestion() {
+                    let self = this;
+                    axios.post(insertTFollowQuestion, self.TFollowQuestionInsertParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                self.queryTFollowQuestionByPrimaryKey(self.TFollowQuestionInsertParam.questionId, self.TFollowQuestionInsertParam.userName);
+                                if (data.content == true)
+                                    self.$message({
+                                        type: 'success',
+                                        message: '关注成功',
+                                        duration: 1000
+                                    });
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '关注异常' + data.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+
+                /** 关注 */
+                follow() {
+                    this.TFollowQuestionInsertParam.questionId = this.questionId;
+                    this.TFollowQuestionInsertParam.userName = this.userName;
+                    this.TFollowQuestionInsertParam.cteateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                    ;
+                    if (this.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
+                    this.insertTFollowQuestion();
+                    this.queryTFollowQuestionByPrimaryKey(this.questionId, this.userName);
+                },
+                /** 关注 */
+                unFollow() {
+                    this.TFollowQuestionInsertParam.questionId = this.questionId;
+                    this.TFollowQuestionInsertParam.userName = this.userName;
+                    if (this.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
+                    this.deleteTFollowQuestionByPrimaryKey(this.questionId, this.userName);
+
                 },
 
             }
