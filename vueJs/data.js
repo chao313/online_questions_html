@@ -2,7 +2,7 @@ var queryBase = "http://127.0.0.1:8000/demomaster/TTitleController/queryBase";
 var host = "http://127.0.0.1:8000/";
 
 /** 设置后台项目名称 */
-var BASE_URL = host+ '/demomaster';
+var BASE_URL = host + '/demomaster';
 
 
 function queryUrlParam(name) {
@@ -125,6 +125,24 @@ var insertsTSystemParam = BASE_URL + '/TSystemParamController/inserts';
 /** 多条件更新TSystemParam */
 var updateBaseTSystemParam = BASE_URL + '/TSystemParamController/updateBase';
 
+/** TFollowQuestion */
+/** 根据主键更新TFollowQuestion */
+var updateTFollowQuestionByPrimaryKey = BASE_URL + '/TFollowQuestionController/updateByPrimaryKey';
+/** 单条插入TFollowQuestion */
+var insertTFollowQuestion = BASE_URL + '/TFollowQuestionController/insert';
+/** 根据主键删除TFollowQuestion */
+var deleteTFollowQuestionByPrimaryKey = BASE_URL + '/TFollowQuestionController/deleteByPrimaryKey';
+/** 分页查询TFollowQuestion */
+var queryBasePageHelperTFollowQuestion = BASE_URL + '/TFollowQuestionController/queryBasePageHelper';
+/** 根据主键查询TFollowQuestion */
+var queryTFollowQuestionByPrimaryKey = BASE_URL + '/TFollowQuestionController/queryByPrimaryKey';
+/** 多条件查询TFollowQuestion */
+var queryBaseTFollowQuestion = BASE_URL + '/TFollowQuestionController/queryBase';
+/** 批量插入TFollowQuestion */
+var insertsTFollowQuestion = BASE_URL + '/TFollowQuestionController/inserts';
+/** 多条件更新TFollowQuestion */
+var updateBaseTFollowQuestion = BASE_URL + '/TFollowQuestionController/updateBase';
+
 /** TAdminUser */
 /** 根据主键更新TAdminUser */
 var updateTAdminUserByPrimaryKey = BASE_URL + '/TAdminUserController/updateByPrimaryKey';
@@ -143,6 +161,24 @@ var insertsTAdminUser = BASE_URL + '/TAdminUserController/inserts';
 /** 多条件更新TAdminUser */
 var updateBaseTAdminUser = BASE_URL + '/TAdminUserController/updateBase';
 
+/** TFollowPerson */
+/** 根据主键更新TFollowPerson */
+var updateTFollowPersonByPrimaryKey = BASE_URL + '/TFollowPersonController/updateByPrimaryKey';
+/** 单条插入TFollowPerson */
+var insertTFollowPerson = BASE_URL + '/TFollowPersonController/insert';
+/** 根据主键删除TFollowPerson */
+var deleteTFollowPersonByPrimaryKey = BASE_URL + '/TFollowPersonController/deleteByPrimaryKey';
+/** 分页查询TFollowPerson */
+var queryBasePageHelperTFollowPerson = BASE_URL + '/TFollowPersonController/queryBasePageHelper';
+/** 根据主键查询TFollowPerson */
+var queryTFollowPersonByPrimaryKey = BASE_URL + '/TFollowPersonController/queryByPrimaryKey';
+/** 多条件查询TFollowPerson */
+var queryBaseTFollowPerson = BASE_URL + '/TFollowPersonController/queryBase';
+/** 批量插入TFollowPerson */
+var insertsTFollowPerson = BASE_URL + '/TFollowPersonController/inserts';
+/** 多条件更新TFollowPerson */
+var updateBaseTFollowPerson = BASE_URL + '/TFollowPersonController/updateBase';
+
 
 var vue = new Vue({
     el: "#body",
@@ -150,969 +186,1177 @@ var vue = new Vue({
         alertError: "系统错误，请联系管理员！",
         alertSuccess: "操作成功",
 
-        BASE_URL:BASE_URL,
+        BASE_URL: BASE_URL,
 
-        host:host,
+        host: host,
         /** 存储TTag多个结果*/
-        TTagResults:[{
-           id: null,
-           tag: null
+        TTagResults: [{
+            id: null,
+            tag: null
         }]
         ,
         /** 存储TTag单个结果*/
-        TTagResult:{
-          id: null,
-          tag: null
+        TTagResult: {
+            id: null,
+            tag: null
         }
         ,
         /** 存储TTag插入结果*/
-        TTagInsertParam:{
-          id: null,
-          tag: null
+        TTagInsertParam: {
+            id: null,
+            tag: null
         }
         ,
-       /** 存储TTag主键更新*/
-       TTagUpdateByPrimaryKeyParam:{
-         source:{
-            tag: null
-         }
-         ,
-         target:{
-            id: null,
-         }
-       }
-       ,
-       /** 存储TTag更新*/
-       TTagUpdateBaseParam:{
-         source:{
-           id: null,
-           tag: null
-         }
-         ,
-         target:{
-          id: null,
-          tag: null
-         }
-       }
-       ,
-       /** 存储TTag多条件查询条件*/
-       TTagQueryBaseParam:{
-          id: null,
-          tag: null
-       }
-       ,
-       /** 存储TTag多条件查询条件(分页，去除分页的num和size)*/
-       TTagQueryBasePageHelperParam:{
-          id: null,
-          tag: null
-       }
-       ,
-       /** 存储TTag存储多条件查询结果(分页，去除分页的num和size)*/
-       TTagQueryBasePageHelperResult:{
-          pageNum: null,
-          pageSize: null,
-          size: null,
-          orderBy: null,
-          startRow: null,
-          endRow: null,
-          total: null,
-          pages: null,
-          list: [{
-            id: null,
-            tag: null
-          }],
-          firstPage: null,
-          prePage: 0,
-          nextPage: null,
-          lastPage: null,
-          isFirstPage: true,
-          isLastPage: null,
-          hasPreviousPage: null,
-          hasNextPage: null,
-          navigatePages: null,
-          navigatepageNums: []
+        /** 存储TTag主键更新*/
+        TTagUpdateByPrimaryKeyParam: {
+            source: {
+                tag: null
+            }
+            ,
+            target: {
+                id: null,
+            }
         }
-    ,
+        ,
+        /** 存储TTag更新*/
+        TTagUpdateBaseParam: {
+            source: {
+                id: null,
+                tag: null
+            }
+            ,
+            target: {
+                id: null,
+                tag: null
+            }
+        }
+        ,
+        /** 存储TTag多条件查询条件*/
+        TTagQueryBaseParam: {
+            id: null,
+            tag: null
+        }
+        ,
+        /** 存储TTag多条件查询条件(分页，去除分页的num和size)*/
+        TTagQueryBasePageHelperParam: {
+            id: null,
+            tag: null
+        }
+        ,
+        /** 存储TTag存储多条件查询结果(分页，去除分页的num和size)*/
+        TTagQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                id: null,
+                tag: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+        ,
         /** 存储TUser多个结果*/
-        TUserResults:[{
-           id: null,
-           name: null,
-           password: null,
-           salt: null,
-           phone: null,
-           email: null,
-           status: null,
-           createTime: null,
-           updateTime: null,
-           deleteFlag: null,
-           approveStatus: null,
-           blackListUser: null,
-           logo: null
+        TUserResults: [{
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null,
+            deleteFlag: null,
+            approveStatus: null,
+            blackListUser: null,
+            logo: null,
+            pvCount: null
         }]
         ,
         /** 存储TUser单个结果*/
-        TUserResult:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null,
-          deleteFlag: null,
-          approveStatus: null,
-          blackListUser: null,
-          logo: null
+        TUserResult: {
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null,
+            deleteFlag: null,
+            approveStatus: null,
+            blackListUser: null,
+            logo: null,
+            pvCount: null
         }
         ,
         /** 存储TUser插入结果*/
-        TUserInsertParam:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null,
-          deleteFlag: null,
-          approveStatus: null,
-          blackListUser: null,
-          logo: null
+        TUserInsertParam: {
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null,
+            deleteFlag: null,
+            approveStatus: null,
+            blackListUser: null,
+            logo: null,
+            pvCount: null
         }
         ,
-       /** 存储TUser主键更新*/
-       TUserUpdateByPrimaryKeyParam:{
-         source:{
-            id: null,
-            salt: null,
-            phone: null,
-            email: null,
-            status: null,
-            createTime: null,
-            updateTime: null,
-            deleteFlag: null,
-            approveStatus: null,
-            blackListUser: null,
-            logo: null
-         }
-         ,
-         target:{
-            name: null,
-            password: null,
-         }
-       }
-       ,
-       /** 存储TUser更新*/
-       TUserUpdateBaseParam:{
-         source:{
-           id: null,
-           name: null,
-           password: null,
-           salt: null,
-           phone: null,
-           email: null,
-           status: null,
-           createTime: null,
-           updateTime: null,
-           deleteFlag: null,
-           approveStatus: null,
-           blackListUser: null,
-           logo: null
-         }
-         ,
-         target:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null,
-          deleteFlag: null,
-          approveStatus: null,
-          blackListUser: null,
-          logo: null
-         }
-       }
-       ,
-       /** 存储TUser多条件查询条件*/
-       TUserQueryBaseParam:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null,
-          deleteFlag: null,
-          approveStatus: null,
-          blackListUser: null,
-          logo: null
-       }
-       ,
-       /** 存储TUser多条件查询条件(分页，去除分页的num和size)*/
-       TUserQueryBasePageHelperParam:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null,
-          deleteFlag: null,
-          approveStatus: null,
-          blackListUser: null,
-          logo: null
-       }
-       ,
-       /** 存储TUser存储多条件查询结果(分页，去除分页的num和size)*/
-       TUserQueryBasePageHelperResult:{
-          pageNum: null,
-          pageSize: null,
-          size: null,
-          orderBy: null,
-          startRow: null,
-          endRow: null,
-          total: null,
-          pages: null,
-          list: [{
-            id: null,
-            name: null,
-            password: null,
-            salt: null,
-            phone: null,
-            email: null,
-            status: null,
-            createTime: null,
-            updateTime: null,
-            deleteFlag: null,
-            approveStatus: null,
-            blackListUser: null,
-            logo: null
-          }],
-          firstPage: null,
-          prePage: 0,
-          nextPage: null,
-          lastPage: null,
-          isFirstPage: true,
-          isLastPage: null,
-          hasPreviousPage: null,
-          hasNextPage: null,
-          navigatePages: null,
-          navigatepageNums: []
+        /** 存储TUser主键更新*/
+        TUserUpdateByPrimaryKeyParam: {
+            source: {
+                id: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null
+            }
+            ,
+            target: {
+                name: null,
+                password: null,
+            }
         }
-    ,
+        ,
+        /** 存储TUser更新*/
+        TUserUpdateBaseParam: {
+            source: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null
+            }
+            ,
+            target: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null
+            }
+        }
+        ,
+        /** 存储TUser多条件查询条件*/
+        TUserQueryBaseParam: {
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null,
+            deleteFlag: null,
+            approveStatus: null,
+            blackListUser: null,
+            logo: null,
+            pvCount: null
+        }
+        ,
+        /** 存储TUser多条件查询条件(分页，去除分页的num和size)*/
+        TUserQueryBasePageHelperParam: {
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null,
+            deleteFlag: null,
+            approveStatus: null,
+            blackListUser: null,
+            logo: null,
+            pvCount: null
+        }
+        ,
+        /** 存储TUser存储多条件查询结果(分页，去除分页的num和size)*/
+        TUserQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+        ,
         /** 存储TAnswer多个结果*/
-        TAnswerResults:[{
-           id: null,
-           userName: null,
-           questionId: null,
-           questionTitle: null,
-           content: null,
-           deleteFlag: null,
-           status: null,
-           blackFlag: null,
-           time: null,
-           answerId: null
+        TAnswerResults: [{
+            id: null,
+            userName: null,
+            questionId: null,
+            questionTitle: null,
+            content: null,
+            deleteFlag: null,
+            status: null,
+            blackFlag: null,
+            time: null,
+            answerId: null
         }]
         ,
         /** 存储TAnswer单个结果*/
-        TAnswerResult:{
-          id: null,
-          userName: null,
-          questionId: null,
-          questionTitle: null,
-          content: null,
-          deleteFlag: null,
-          status: null,
-          blackFlag: null,
-          time: null,
-          answerId: null
+        TAnswerResult: {
+            id: null,
+            userName: null,
+            questionId: null,
+            questionTitle: null,
+            content: null,
+            deleteFlag: null,
+            status: null,
+            blackFlag: null,
+            time: null,
+            answerId: null
         }
         ,
         /** 存储TAnswer插入结果*/
-        TAnswerInsertParam:{
-          id: null,
-          userName: null,
-          questionId: null,
-          questionTitle: null,
-          content: null,
-          deleteFlag: null,
-          status: null,
-          blackFlag: null,
-          time: null,
-          answerId: null
+        TAnswerInsertParam: {
+            id: null,
+            userName: null,
+            questionId: null,
+            questionTitle: null,
+            content: null,
+            deleteFlag: null,
+            status: null,
+            blackFlag: null,
+            time: null,
+            answerId: null
         }
         ,
-       /** 存储TAnswer主键更新*/
-       TAnswerUpdateByPrimaryKeyParam:{
-         source:{
-            userName: null,
-            questionId: null,
-            questionTitle: null,
-            content: null,
-            deleteFlag: null,
-            status: null,
-            blackFlag: null,
-            time: null,
-            answerId: null
-         }
-         ,
-         target:{
-            id: null,
-         }
-       }
-       ,
-       /** 存储TAnswer更新*/
-       TAnswerUpdateBaseParam:{
-         source:{
-           id: null,
-           userName: null,
-           questionId: null,
-           questionTitle: null,
-           content: null,
-           deleteFlag: null,
-           status: null,
-           blackFlag: null,
-           time: null,
-           answerId: null
-         }
-         ,
-         target:{
-          id: null,
-          userName: null,
-          questionId: null,
-          questionTitle: null,
-          content: null,
-          deleteFlag: null,
-          status: null,
-          blackFlag: null,
-          time: null,
-          answerId: null
-         }
-       }
-       ,
-       /** 存储TAnswer多条件查询条件*/
-       TAnswerQueryBaseParam:{
-          id: null,
-          userName: null,
-          questionId: null,
-          questionTitle: null,
-          content: null,
-          deleteFlag: null,
-          status: null,
-          blackFlag: null,
-          time: null,
-          answerId: null
-       }
-       ,
-       /** 存储TAnswer多条件查询条件(分页，去除分页的num和size)*/
-       TAnswerQueryBasePageHelperParam:{
-          id: null,
-          userName: null,
-          questionId: null,
-          questionTitle: null,
-          content: null,
-          deleteFlag: null,
-          status: null,
-          blackFlag: null,
-          time: null,
-          answerId: null
-       }
-       ,
-       /** 存储TAnswer存储多条件查询结果(分页，去除分页的num和size)*/
-       TAnswerQueryBasePageHelperResult:{
-          pageNum: null,
-          pageSize: null,
-          size: null,
-          orderBy: null,
-          startRow: null,
-          endRow: null,
-          total: null,
-          pages: null,
-          list: [{
-            id: null,
-            userName: null,
-            questionId: null,
-            questionTitle: null,
-            content: null,
-            deleteFlag: null,
-            status: null,
-            blackFlag: null,
-            time: null,
-            answerId: null
-          }],
-          firstPage: null,
-          prePage: 0,
-          nextPage: null,
-          lastPage: null,
-          isFirstPage: true,
-          isLastPage: null,
-          hasPreviousPage: null,
-          hasNextPage: null,
-          navigatePages: null,
-          navigatepageNums: []
+        /** 存储TAnswer主键更新*/
+        TAnswerUpdateByPrimaryKeyParam: {
+            source: {
+                userName: null,
+                questionId: null,
+                questionTitle: null,
+                content: null,
+                deleteFlag: null,
+                status: null,
+                blackFlag: null,
+                time: null,
+                answerId: null
+            }
+            ,
+            target: {
+                id: null,
+            }
         }
-    ,
+        ,
+        /** 存储TAnswer更新*/
+        TAnswerUpdateBaseParam: {
+            source: {
+                id: null,
+                userName: null,
+                questionId: null,
+                questionTitle: null,
+                content: null,
+                deleteFlag: null,
+                status: null,
+                blackFlag: null,
+                time: null,
+                answerId: null
+            }
+            ,
+            target: {
+                id: null,
+                userName: null,
+                questionId: null,
+                questionTitle: null,
+                content: null,
+                deleteFlag: null,
+                status: null,
+                blackFlag: null,
+                time: null,
+                answerId: null
+            }
+        }
+        ,
+        /** 存储TAnswer多条件查询条件*/
+        TAnswerQueryBaseParam: {
+            id: null,
+            userName: null,
+            questionId: null,
+            questionTitle: null,
+            content: null,
+            deleteFlag: null,
+            status: null,
+            blackFlag: null,
+            time: null,
+            answerId: null
+        }
+        ,
+        /** 存储TAnswer多条件查询条件(分页，去除分页的num和size)*/
+        TAnswerQueryBasePageHelperParam: {
+            id: null,
+            userName: null,
+            questionId: null,
+            questionTitle: null,
+            content: null,
+            deleteFlag: null,
+            status: null,
+            blackFlag: null,
+            time: null,
+            answerId: null
+        }
+        ,
+        /** 存储TAnswer存储多条件查询结果(分页，去除分页的num和size)*/
+        TAnswerQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                id: null,
+                userName: null,
+                questionId: null,
+                questionTitle: null,
+                content: null,
+                deleteFlag: null,
+                status: null,
+                blackFlag: null,
+                time: null,
+                answerId: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+        ,
         /** 存储TQuestions多个结果*/
-        TQuestionsResults:[{
-           id: null,
-           userName: null,
-           title: null,
-           content: null,
-           tag: null,
-           status: null,
-           deleteFlag: null,
-           blackFlag: null,
-           createTime: null,
-           updateTime: null
+        TQuestionsResults: [{
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            tag: null,
+            status: null,
+            deleteFlag: null,
+            blackFlag: null,
+            createTime: null,
+            updateTime: null,
+            pvCount: null,
+            isTop: null
         }]
         ,
         /** 存储TQuestions单个结果*/
-        TQuestionsResult:{
-          id: null,
-          userName: null,
-          title: null,
-          content: null,
-          tag: null,
-          status: null,
-          deleteFlag: null,
-          blackFlag: null,
-          createTime: null,
-          updateTime: null
+        TQuestionsResult: {
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            tag: null,
+            status: null,
+            deleteFlag: null,
+            blackFlag: null,
+            createTime: null,
+            updateTime: null,
+            pvCount: null,
+            isTop: null
         }
         ,
         /** 存储TQuestions插入结果*/
-        TQuestionsInsertParam:{
-          id: null,
-          userName: null,
-          title: null,
-          content: null,
-          tag: null,
-          status: null,
-          deleteFlag: null,
-          blackFlag: null,
-          createTime: null,
-          updateTime: null
+        TQuestionsInsertParam: {
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            tag: null,
+            status: null,
+            deleteFlag: null,
+            blackFlag: null,
+            createTime: null,
+            updateTime: null,
+            pvCount: null,
+            isTop: null
         }
         ,
-       /** 存储TQuestions主键更新*/
-       TQuestionsUpdateByPrimaryKeyParam:{
-         source:{
-            userName: null,
-            title: null,
-            content: null,
-            tag: null,
-            status: null,
-            deleteFlag: null,
-            blackFlag: null,
-            createTime: null,
-            updateTime: null
-         }
-         ,
-         target:{
-            id: null,
-         }
-       }
-       ,
-       /** 存储TQuestions更新*/
-       TQuestionsUpdateBaseParam:{
-         source:{
-           id: null,
-           userName: null,
-           title: null,
-           content: null,
-           tag: null,
-           status: null,
-           deleteFlag: null,
-           blackFlag: null,
-           createTime: null,
-           updateTime: null
-         }
-         ,
-         target:{
-          id: null,
-          userName: null,
-          title: null,
-          content: null,
-          tag: null,
-          status: null,
-          deleteFlag: null,
-          blackFlag: null,
-          createTime: null,
-          updateTime: null
-         }
-       }
-       ,
-       /** 存储TQuestions多条件查询条件*/
-       TQuestionsQueryBaseParam:{
-          id: null,
-          userName: null,
-          title: null,
-          content: null,
-          tag: null,
-          status: null,
-          deleteFlag: null,
-          blackFlag: null,
-          createTime: null,
-          updateTime: null
-       }
-       ,
-       /** 存储TQuestions多条件查询条件(分页，去除分页的num和size)*/
-       TQuestionsQueryBasePageHelperParam:{
-          id: null,
-          userName: null,
-          title: null,
-          content: null,
-          tag: null,
-          status: null,
-          deleteFlag: null,
-          blackFlag: null,
-          createTime: null,
-          updateTime: null
-       }
-       ,
-       /** 存储TQuestions存储多条件查询结果(分页，去除分页的num和size)*/
-       TQuestionsQueryBasePageHelperResult:{
-          pageNum: null,
-          pageSize: null,
-          size: null,
-          orderBy: null,
-          startRow: null,
-          endRow: null,
-          total: null,
-          pages: null,
-          list: [{
-            id: null,
-            userName: null,
-            title: null,
-            content: null,
-            tag: null,
-            status: null,
-            deleteFlag: null,
-            blackFlag: null,
-            createTime: null,
-            updateTime: null
-          }],
-          firstPage: null,
-          prePage: 0,
-          nextPage: null,
-          lastPage: null,
-          isFirstPage: true,
-          isLastPage: null,
-          hasPreviousPage: null,
-          hasNextPage: null,
-          navigatePages: null,
-          navigatepageNums: []
+        /** 存储TQuestions主键更新*/
+        TQuestionsUpdateByPrimaryKeyParam: {
+            source: {
+                userName: null,
+                title: null,
+                content: null,
+                tag: null,
+                status: null,
+                deleteFlag: null,
+                blackFlag: null,
+                createTime: null,
+                updateTime: null,
+                pvCount: null,
+                isTop: null
+            }
+            ,
+            target: {
+                id: null,
+            }
         }
-    ,
+        ,
+        /** 存储TQuestions更新*/
+        TQuestionsUpdateBaseParam: {
+            source: {
+                id: null,
+                userName: null,
+                title: null,
+                content: null,
+                tag: null,
+                status: null,
+                deleteFlag: null,
+                blackFlag: null,
+                createTime: null,
+                updateTime: null,
+                pvCount: null,
+                isTop: null
+            }
+            ,
+            target: {
+                id: null,
+                userName: null,
+                title: null,
+                content: null,
+                tag: null,
+                status: null,
+                deleteFlag: null,
+                blackFlag: null,
+                createTime: null,
+                updateTime: null,
+                pvCount: null,
+                isTop: null
+            }
+        }
+        ,
+        /** 存储TQuestions多条件查询条件*/
+        TQuestionsQueryBaseParam: {
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            tag: null,
+            status: null,
+            deleteFlag: null,
+            blackFlag: null,
+            createTime: null,
+            updateTime: null,
+            pvCount: null,
+            isTop: null
+        }
+        ,
+        /** 存储TQuestions多条件查询条件(分页，去除分页的num和size)*/
+        TQuestionsQueryBasePageHelperParam: {
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            tag: null,
+            status: null,
+            deleteFlag: null,
+            blackFlag: null,
+            createTime: null,
+            updateTime: null,
+            pvCount: null,
+            isTop: null
+        }
+        ,
+        /** 存储TQuestions存储多条件查询结果(分页，去除分页的num和size)*/
+        TQuestionsQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                id: null,
+                userName: null,
+                title: null,
+                content: null,
+                tag: null,
+                status: null,
+                deleteFlag: null,
+                blackFlag: null,
+                createTime: null,
+                updateTime: null,
+                pvCount: null,
+                isTop: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+        ,
         /** 存储TQuestionTag多个结果*/
-        TQuestionTagResults:[{
-           id: null,
-           questionId: null,
-           tagId: null
+        TQuestionTagResults: [{
+            id: null,
+            questionId: null,
+            tagId: null
         }]
         ,
         /** 存储TQuestionTag单个结果*/
-        TQuestionTagResult:{
-          id: null,
-          questionId: null,
-          tagId: null
+        TQuestionTagResult: {
+            id: null,
+            questionId: null,
+            tagId: null
         }
         ,
         /** 存储TQuestionTag插入结果*/
-        TQuestionTagInsertParam:{
-          id: null,
-          questionId: null,
-          tagId: null
+        TQuestionTagInsertParam: {
+            id: null,
+            questionId: null,
+            tagId: null
         }
         ,
-       /** 存储TQuestionTag主键更新*/
-       TQuestionTagUpdateByPrimaryKeyParam:{
-         source:{
-            questionId: null,
-            tagId: null
-         }
-         ,
-         target:{
-            id: null,
-         }
-       }
-       ,
-       /** 存储TQuestionTag更新*/
-       TQuestionTagUpdateBaseParam:{
-         source:{
-           id: null,
-           questionId: null,
-           tagId: null
-         }
-         ,
-         target:{
-          id: null,
-          questionId: null,
-          tagId: null
-         }
-       }
-       ,
-       /** 存储TQuestionTag多条件查询条件*/
-       TQuestionTagQueryBaseParam:{
-          id: null,
-          questionId: null,
-          tagId: null
-       }
-       ,
-       /** 存储TQuestionTag多条件查询条件(分页，去除分页的num和size)*/
-       TQuestionTagQueryBasePageHelperParam:{
-          id: null,
-          questionId: null,
-          tagId: null
-       }
-       ,
-       /** 存储TQuestionTag存储多条件查询结果(分页，去除分页的num和size)*/
-       TQuestionTagQueryBasePageHelperResult:{
-          pageNum: null,
-          pageSize: null,
-          size: null,
-          orderBy: null,
-          startRow: null,
-          endRow: null,
-          total: null,
-          pages: null,
-          list: [{
-            id: null,
-            questionId: null,
-            tagId: null
-          }],
-          firstPage: null,
-          prePage: 0,
-          nextPage: null,
-          lastPage: null,
-          isFirstPage: true,
-          isLastPage: null,
-          hasPreviousPage: null,
-          hasNextPage: null,
-          navigatePages: null,
-          navigatepageNums: []
+        /** 存储TQuestionTag主键更新*/
+        TQuestionTagUpdateByPrimaryKeyParam: {
+            source: {
+                questionId: null,
+                tagId: null
+            }
+            ,
+            target: {
+                id: null,
+            }
         }
-    ,
+        ,
+        /** 存储TQuestionTag更新*/
+        TQuestionTagUpdateBaseParam: {
+            source: {
+                id: null,
+                questionId: null,
+                tagId: null
+            }
+            ,
+            target: {
+                id: null,
+                questionId: null,
+                tagId: null
+            }
+        }
+        ,
+        /** 存储TQuestionTag多条件查询条件*/
+        TQuestionTagQueryBaseParam: {
+            id: null,
+            questionId: null,
+            tagId: null
+        }
+        ,
+        /** 存储TQuestionTag多条件查询条件(分页，去除分页的num和size)*/
+        TQuestionTagQueryBasePageHelperParam: {
+            id: null,
+            questionId: null,
+            tagId: null
+        }
+        ,
+        /** 存储TQuestionTag存储多条件查询结果(分页，去除分页的num和size)*/
+        TQuestionTagQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                id: null,
+                questionId: null,
+                tagId: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+        ,
         /** 存储TSystemParam多个结果*/
-        TSystemParamResults:[{
-           paramId: null,
-           paramValue: null,
-           paramDesc: null
+        TSystemParamResults: [{
+            paramId: null,
+            paramValue: null,
+            paramDesc: null
         }]
         ,
         /** 存储TSystemParam单个结果*/
-        TSystemParamResult:{
-          paramId: null,
-          paramValue: null,
-          paramDesc: null
+        TSystemParamResult: {
+            paramId: null,
+            paramValue: null,
+            paramDesc: null
         }
         ,
         /** 存储TSystemParam插入结果*/
-        TSystemParamInsertParam:{
-          paramId: null,
-          paramValue: null,
-          paramDesc: null
+        TSystemParamInsertParam: {
+            paramId: null,
+            paramValue: null,
+            paramDesc: null
         }
         ,
-       /** 存储TSystemParam主键更新*/
-       TSystemParamUpdateByPrimaryKeyParam:{
-         source:{
-            paramValue: null,
-            paramDesc: null
-         }
-         ,
-         target:{
-            paramId: null,
-         }
-       }
-       ,
-       /** 存储TSystemParam更新*/
-       TSystemParamUpdateBaseParam:{
-         source:{
-           paramId: null,
-           paramValue: null,
-           paramDesc: null
-         }
-         ,
-         target:{
-          paramId: null,
-          paramValue: null,
-          paramDesc: null
-         }
-       }
-       ,
-       /** 存储TSystemParam多条件查询条件*/
-       TSystemParamQueryBaseParam:{
-          paramId: null,
-          paramValue: null,
-          paramDesc: null
-       }
-       ,
-       /** 存储TSystemParam多条件查询条件(分页，去除分页的num和size)*/
-       TSystemParamQueryBasePageHelperParam:{
-          paramId: null,
-          paramValue: null,
-          paramDesc: null
-       }
-       ,
-       /** 存储TSystemParam存储多条件查询结果(分页，去除分页的num和size)*/
-       TSystemParamQueryBasePageHelperResult:{
-          pageNum: null,
-          pageSize: null,
-          size: null,
-          orderBy: null,
-          startRow: null,
-          endRow: null,
-          total: null,
-          pages: null,
-          list: [{
-            paramId: null,
-            paramValue: null,
-            paramDesc: null
-          }],
-          firstPage: null,
-          prePage: 0,
-          nextPage: null,
-          lastPage: null,
-          isFirstPage: true,
-          isLastPage: null,
-          hasPreviousPage: null,
-          hasNextPage: null,
-          navigatePages: null,
-          navigatepageNums: []
+        /** 存储TSystemParam主键更新*/
+        TSystemParamUpdateByPrimaryKeyParam: {
+            source: {
+                paramValue: null,
+                paramDesc: null
+            }
+            ,
+            target: {
+                paramId: null,
+            }
         }
-    ,
+        ,
+        /** 存储TSystemParam更新*/
+        TSystemParamUpdateBaseParam: {
+            source: {
+                paramId: null,
+                paramValue: null,
+                paramDesc: null
+            }
+            ,
+            target: {
+                paramId: null,
+                paramValue: null,
+                paramDesc: null
+            }
+        }
+        ,
+        /** 存储TSystemParam多条件查询条件*/
+        TSystemParamQueryBaseParam: {
+            paramId: null,
+            paramValue: null,
+            paramDesc: null
+        }
+        ,
+        /** 存储TSystemParam多条件查询条件(分页，去除分页的num和size)*/
+        TSystemParamQueryBasePageHelperParam: {
+            paramId: null,
+            paramValue: null,
+            paramDesc: null
+        }
+        ,
+        /** 存储TSystemParam存储多条件查询结果(分页，去除分页的num和size)*/
+        TSystemParamQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                paramId: null,
+                paramValue: null,
+                paramDesc: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+        ,
+        /** 存储TFollowQuestion多个结果*/
+        TFollowQuestionResults: [{
+            questionId: null,
+            userName: null,
+            cteateTime: null
+        }]
+        ,
+        /** 存储TFollowQuestion单个结果*/
+        TFollowQuestionResult: {
+            questionId: null,
+            userName: null,
+            cteateTime: null
+        }
+        ,
+        /** 存储TFollowQuestion插入结果*/
+        TFollowQuestionInsertParam: {
+            questionId: null,
+            userName: null,
+            cteateTime: null
+        }
+        ,
+        /** 存储TFollowQuestion主键更新*/
+        TFollowQuestionUpdateByPrimaryKeyParam: {
+            source: {
+                cteateTime: null
+            }
+            ,
+            target: {
+                questionId: null,
+                userName: null,
+            }
+        }
+        ,
+        /** 存储TFollowQuestion更新*/
+        TFollowQuestionUpdateBaseParam: {
+            source: {
+                questionId: null,
+                userName: null,
+                cteateTime: null
+            }
+            ,
+            target: {
+                questionId: null,
+                userName: null,
+                cteateTime: null
+            }
+        }
+        ,
+        /** 存储TFollowQuestion多条件查询条件*/
+        TFollowQuestionQueryBaseParam: {
+            questionId: null,
+            userName: null,
+            cteateTime: null
+        }
+        ,
+        /** 存储TFollowQuestion多条件查询条件(分页，去除分页的num和size)*/
+        TFollowQuestionQueryBasePageHelperParam: {
+            questionId: null,
+            userName: null,
+            cteateTime: null
+        }
+        ,
+        /** 存储TFollowQuestion存储多条件查询结果(分页，去除分页的num和size)*/
+        TFollowQuestionQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                questionId: null,
+                userName: null,
+                cteateTime: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+        ,
         /** 存储TAdminUser多个结果*/
-        TAdminUserResults:[{
-           id: null,
-           name: null,
-           password: null,
-           salt: null,
-           phone: null,
-           email: null,
-           status: null,
-           createTime: null,
-           updateTime: null
+        TAdminUserResults: [{
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null
         }]
         ,
         /** 存储TAdminUser单个结果*/
-        TAdminUserResult:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null
+        TAdminUserResult: {
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null
         }
         ,
         /** 存储TAdminUser插入结果*/
-        TAdminUserInsertParam:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null
+        TAdminUserInsertParam: {
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null
         }
         ,
-       /** 存储TAdminUser主键更新*/
-       TAdminUserUpdateByPrimaryKeyParam:{
-         source:{
-            name: null,
-            password: null,
-            salt: null,
-            phone: null,
-            email: null,
-            status: null,
-            createTime: null,
-            updateTime: null
-         }
-         ,
-         target:{
-            id: null,
-         }
-       }
-       ,
-       /** 存储TAdminUser更新*/
-       TAdminUserUpdateBaseParam:{
-         source:{
-           id: null,
-           name: null,
-           password: null,
-           salt: null,
-           phone: null,
-           email: null,
-           status: null,
-           createTime: null,
-           updateTime: null
-         }
-         ,
-         target:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null
-         }
-       }
-       ,
-       /** 存储TAdminUser多条件查询条件*/
-       TAdminUserQueryBaseParam:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null
-       }
-       ,
-       /** 存储TAdminUser多条件查询条件(分页，去除分页的num和size)*/
-       TAdminUserQueryBasePageHelperParam:{
-          id: null,
-          name: null,
-          password: null,
-          salt: null,
-          phone: null,
-          email: null,
-          status: null,
-          createTime: null,
-          updateTime: null
-       }
-       ,
-       /** 存储TAdminUser存储多条件查询结果(分页，去除分页的num和size)*/
-       TAdminUserQueryBasePageHelperResult:{
-          pageNum: null,
-          pageSize: null,
-          size: null,
-          orderBy: null,
-          startRow: null,
-          endRow: null,
-          total: null,
-          pages: null,
-          list: [{
-            id: null,
-            name: null,
-            password: null,
-            salt: null,
-            phone: null,
-            email: null,
-            status: null,
-            createTime: null,
-            updateTime: null
-          }],
-          firstPage: null,
-          prePage: 0,
-          nextPage: null,
-          lastPage: null,
-          isFirstPage: true,
-          isLastPage: null,
-          hasPreviousPage: null,
-          hasNextPage: null,
-          navigatePages: null,
-          navigatepageNums: []
+        /** 存储TAdminUser主键更新*/
+        TAdminUserUpdateByPrimaryKeyParam: {
+            source: {
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null
+            }
+            ,
+            target: {
+                id: null,
+            }
         }
-    
+        ,
+        /** 存储TAdminUser更新*/
+        TAdminUserUpdateBaseParam: {
+            source: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null
+            }
+            ,
+            target: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null
+            }
+        }
+        ,
+        /** 存储TAdminUser多条件查询条件*/
+        TAdminUserQueryBaseParam: {
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null
+        }
+        ,
+        /** 存储TAdminUser多条件查询条件(分页，去除分页的num和size)*/
+        TAdminUserQueryBasePageHelperParam: {
+            id: null,
+            name: null,
+            password: null,
+            salt: null,
+            phone: null,
+            email: null,
+            status: null,
+            createTime: null,
+            updateTime: null
+        }
+        ,
+        /** 存储TAdminUser存储多条件查询结果(分页，去除分页的num和size)*/
+        TAdminUserQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+        ,
+        /** 存储TFollowPerson多个结果*/
+        TFollowPersonResults: [{
+            userNameFollow: null,
+            userName: null,
+            cteateTime: null
+        }]
+        ,
+        /** 存储TFollowPerson单个结果*/
+        TFollowPersonResult: {
+            userNameFollow: null,
+            userName: null,
+            cteateTime: null
+        }
+        ,
+        /** 存储TFollowPerson插入结果*/
+        TFollowPersonInsertParam: {
+            userNameFollow: null,
+            userName: null,
+            cteateTime: null
+        }
+        ,
+        /** 存储TFollowPerson主键更新*/
+        TFollowPersonUpdateByPrimaryKeyParam: {
+            source: {
+                cteateTime: null
+            }
+            ,
+            target: {
+                userNameFollow: null,
+                userName: null,
+            }
+        }
+        ,
+        /** 存储TFollowPerson更新*/
+        TFollowPersonUpdateBaseParam: {
+            source: {
+                userNameFollow: null,
+                userName: null,
+                cteateTime: null
+            }
+            ,
+            target: {
+                userNameFollow: null,
+                userName: null,
+                cteateTime: null
+            }
+        }
+        ,
+        /** 存储TFollowPerson多条件查询条件*/
+        TFollowPersonQueryBaseParam: {
+            userNameFollow: null,
+            userName: null,
+            cteateTime: null
+        }
+        ,
+        /** 存储TFollowPerson多条件查询条件(分页，去除分页的num和size)*/
+        TFollowPersonQueryBasePageHelperParam: {
+            userNameFollow: null,
+            userName: null,
+            cteateTime: null
+        }
+        ,
+        /** 存储TFollowPerson存储多条件查询结果(分页，去除分页的num和size)*/
+        TFollowPersonQueryBasePageHelperResult: {
+            pageNum: null,
+            pageSize: null,
+            size: null,
+            orderBy: null,
+            startRow: null,
+            endRow: null,
+            total: null,
+            pages: null,
+            list: [{
+                userNameFollow: null,
+                userName: null,
+                cteateTime: null
+            }],
+            firstPage: null,
+            prePage: 0,
+            nextPage: null,
+            lastPage: null,
+            isFirstPage: true,
+            isLastPage: null,
+            hasPreviousPage: null,
+            hasNextPage: null,
+            navigatePages: null,
+            navigatepageNums: []
+        }
+
     },
     created() {
-     /** 初始化 */
+        /** 初始化 */
     },
     methods: {
-            /** 处理queryByPrimaryKey */
+        /** 处理queryByPrimaryKey */
 
-            /** 主键更新TTag */
-            updateTTagByPrimaryKey() {
-              let self = this;
-              axios.post(updateTTagByPrimaryKey, self.TTagUpdateByPrimaryKeyParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键更新TTag */
+        updateTTagByPrimaryKey() {
+            let self = this;
+            axios.post(updateTTagByPrimaryKey, self.TTagUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 插入TTag */
-            insertTTag() {
-              let self = this;
-              axios.post(insertTTag, self.TTagInsertParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 插入TTag */
+        insertTTag() {
+            let self = this;
+            axios.post(insertTTag, self.TTagInsertParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("insert 成功");
+                        if (data.content == true)
+                            alert("insert 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键删除TTag */
-            deleteTTagByPrimaryKey(id) {
-              let self = this;
-              axios.post(deleteTTagByPrimaryKey,  {
-                  params: {
-                id:id
-                  }
-             }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
-                    } else {
-                         alert(data.msg);
-                    }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+        /** 主键删除TTag */
+        deleteTTagByPrimaryKey(id) {
+            let self = this;
+            axios.post(deleteTTagByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 分页查询TTag -- 存放的是默认的data */
-            queryBasePageHelperTTag(pageNum,pageSize) {
-              let self = this;
-              axios.post(queryBasePageHelperTTag+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TTagQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TTag -- 存放的是默认的data */
+        queryBasePageHelperTTag(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTTag + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TTagQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TTagQueryBasePageHelperResult = data.content;
@@ -1120,64 +1364,64 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
-           /** 分页查询TTag  --  存放的是指定的data.sub */
-            queryBasePageHelperTTagSub(pageNum,pageSize,sub) {
-              let self = this;
-              axios.post(queryBasePageHelperTTag+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TTagQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TTag  --  存放的是指定的data.sub */
+        queryBasePageHelperTTagSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTTag + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TTagQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                        self.$set(self.TTagQueryBasePageHelperResult,sub,data.content);
+                        self.$set(self.TTagQueryBasePageHelperResult, sub, data.content);
                         console.log(self.TTagQueryBasePageHelperResult);
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
-
-
-            /** 主键查询TTag */
-            queryTTagByPrimaryKey(id) {
-              let self = this;
-              axios.get(queryTTagByPrimaryKey, {
-                  params: {
-                id:id
-                  }
-              }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                        self.TTagResult = data.content;
-                        console.log(self.TTagResult);
-                    } else {
-                        alert(data.msg);
-                    }
-              }).catch(
-                    function (response) {
+                }).catch(
+                function (response) {
                     //失败回调
-                     alert(self.alertError);
-              })
-            },
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 多条件查询TTag */
-            queryBaseTTag() {
-              let self = this;
-              axios.post(queryBaseTTag, self.TTagQueryBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键查询TTag */
+        queryTTagByPrimaryKey(id) {
+            let self = this;
+            axios.get(queryTTagByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TTagResult = data.content;
+                    console.log(self.TTagResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TTag */
+        queryBaseTTag() {
+            let self = this;
+            axios.post(queryBaseTTag, self.TTagQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TTagResults = data.content;
@@ -1185,106 +1429,108 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-
-            /** 多条件更新TTag */
-            updateBaseTTag() {
-              let self = this;
-              axios.post(updateBaseTTag, self.TTagUpdateBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 多条件更新TTag */
+        updateBaseTTag() {
+            let self = this;
+            axios.post(updateBaseTTag, self.TTagUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-           },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键更新TUser */
-            updateTUserByPrimaryKey() {
-              let self = this;
-              axios.post(updateTUserByPrimaryKey, self.TUserUpdateByPrimaryKeyParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键更新TUser */
+        updateTUserByPrimaryKey() {
+            let self = this;
+            axios.post(updateTUserByPrimaryKey, self.TUserUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 插入TUser */
-            insertTUser() {
-              let self = this;
-              axios.post(insertTUser, self.TUserInsertParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 插入TUser */
+        insertTUser() {
+            let self = this;
+            axios.post(insertTUser, self.TUserInsertParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("insert 成功");
+                        if (data.content == true)
+                            alert("insert 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键删除TUser */
-            deleteTUserByPrimaryKey(name,password) {
-              let self = this;
-              axios.post(deleteTUserByPrimaryKey,  {
-                  params: {
-                name:name,
-                password:password
-                  }
-             }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
-                    } else {
-                         alert(data.msg);
-                    }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+        /** 主键删除TUser */
+        deleteTUserByPrimaryKey(name, password) {
+            let self = this;
+            axios.post(deleteTUserByPrimaryKey, {
+                params: {
+                    name: name,
+                    password: password
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 分页查询TUser -- 存放的是默认的data */
-            queryBasePageHelperTUser(pageNum,pageSize) {
-              let self = this;
-              axios.post(queryBasePageHelperTUser+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TUserQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TUser -- 存放的是默认的data */
+        queryBasePageHelperTUser(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTUser + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TUserQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TUserQueryBasePageHelperResult = data.content;
@@ -1292,65 +1538,65 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
-           /** 分页查询TUser  --  存放的是指定的data.sub */
-            queryBasePageHelperTUserSub(pageNum,pageSize,sub) {
-              let self = this;
-              axios.post(queryBasePageHelperTUser+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TUserQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TUser  --  存放的是指定的data.sub */
+        queryBasePageHelperTUserSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTUser + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TUserQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                        self.$set(self.TUserQueryBasePageHelperResult,sub,data.content);
+                        self.$set(self.TUserQueryBasePageHelperResult, sub, data.content);
                         console.log(self.TUserQueryBasePageHelperResult);
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
-
-
-            /** 主键查询TUser */
-            queryTUserByPrimaryKey(name,password) {
-              let self = this;
-              axios.get(queryTUserByPrimaryKey, {
-                  params: {
-                name:name,
-                password:password
-                  }
-              }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                        self.TUserResult = data.content;
-                        console.log(self.TUserResult);
-                    } else {
-                        alert(data.msg);
-                    }
-              }).catch(
-                    function (response) {
+                }).catch(
+                function (response) {
                     //失败回调
-                     alert(self.alertError);
-              })
-            },
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 多条件查询TUser */
-            queryBaseTUser() {
-              let self = this;
-              axios.post(queryBaseTUser, self.TUserQueryBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键查询TUser */
+        queryTUserByPrimaryKey(name, password) {
+            let self = this;
+            axios.get(queryTUserByPrimaryKey, {
+                params: {
+                    name: name,
+                    password: password
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TUserResult = data.content;
+                    console.log(self.TUserResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TUser */
+        queryBaseTUser() {
+            let self = this;
+            axios.post(queryBaseTUser, self.TUserQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TUserResults = data.content;
@@ -1358,105 +1604,107 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-
-            /** 多条件更新TUser */
-            updateBaseTUser() {
-              let self = this;
-              axios.post(updateBaseTUser, self.TUserUpdateBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 多条件更新TUser */
+        updateBaseTUser() {
+            let self = this;
+            axios.post(updateBaseTUser, self.TUserUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-           },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键更新TAnswer */
-            updateTAnswerByPrimaryKey() {
-              let self = this;
-              axios.post(updateTAnswerByPrimaryKey, self.TAnswerUpdateByPrimaryKeyParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键更新TAnswer */
+        updateTAnswerByPrimaryKey() {
+            let self = this;
+            axios.post(updateTAnswerByPrimaryKey, self.TAnswerUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 插入TAnswer */
-            insertTAnswer() {
-              let self = this;
-              axios.post(insertTAnswer, self.TAnswerInsertParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 插入TAnswer */
+        insertTAnswer() {
+            let self = this;
+            axios.post(insertTAnswer, self.TAnswerInsertParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("insert 成功");
+                        if (data.content == true)
+                            alert("insert 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键删除TAnswer */
-            deleteTAnswerByPrimaryKey(id) {
-              let self = this;
-              axios.post(deleteTAnswerByPrimaryKey,  {
-                  params: {
-                id:id
-                  }
-             }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
-                    } else {
-                         alert(data.msg);
-                    }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+        /** 主键删除TAnswer */
+        deleteTAnswerByPrimaryKey(id) {
+            let self = this;
+            axios.post(deleteTAnswerByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 分页查询TAnswer -- 存放的是默认的data */
-            queryBasePageHelperTAnswer(pageNum,pageSize) {
-              let self = this;
-              axios.post(queryBasePageHelperTAnswer+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TAnswerQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TAnswer -- 存放的是默认的data */
+        queryBasePageHelperTAnswer(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTAnswer + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAnswerQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TAnswerQueryBasePageHelperResult = data.content;
@@ -1464,64 +1712,64 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
-           /** 分页查询TAnswer  --  存放的是指定的data.sub */
-            queryBasePageHelperTAnswerSub(pageNum,pageSize,sub) {
-              let self = this;
-              axios.post(queryBasePageHelperTAnswer+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TAnswerQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TAnswer  --  存放的是指定的data.sub */
+        queryBasePageHelperTAnswerSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTAnswer + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAnswerQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                        self.$set(self.TAnswerQueryBasePageHelperResult,sub,data.content);
+                        self.$set(self.TAnswerQueryBasePageHelperResult, sub, data.content);
                         console.log(self.TAnswerQueryBasePageHelperResult);
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
-
-
-            /** 主键查询TAnswer */
-            queryTAnswerByPrimaryKey(id) {
-              let self = this;
-              axios.get(queryTAnswerByPrimaryKey, {
-                  params: {
-                id:id
-                  }
-              }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                        self.TAnswerResult = data.content;
-                        console.log(self.TAnswerResult);
-                    } else {
-                        alert(data.msg);
-                    }
-              }).catch(
-                    function (response) {
+                }).catch(
+                function (response) {
                     //失败回调
-                     alert(self.alertError);
-              })
-            },
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 多条件查询TAnswer */
-            queryBaseTAnswer() {
-              let self = this;
-              axios.post(queryBaseTAnswer, self.TAnswerQueryBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键查询TAnswer */
+        queryTAnswerByPrimaryKey(id) {
+            let self = this;
+            axios.get(queryTAnswerByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TAnswerResult = data.content;
+                    console.log(self.TAnswerResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TAnswer */
+        queryBaseTAnswer() {
+            let self = this;
+            axios.post(queryBaseTAnswer, self.TAnswerQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TAnswerResults = data.content;
@@ -1529,105 +1777,107 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-
-            /** 多条件更新TAnswer */
-            updateBaseTAnswer() {
-              let self = this;
-              axios.post(updateBaseTAnswer, self.TAnswerUpdateBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 多条件更新TAnswer */
+        updateBaseTAnswer() {
+            let self = this;
+            axios.post(updateBaseTAnswer, self.TAnswerUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-           },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键更新TQuestions */
-            updateTQuestionsByPrimaryKey() {
-              let self = this;
-              axios.post(updateTQuestionsByPrimaryKey, self.TQuestionsUpdateByPrimaryKeyParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键更新TQuestions */
+        updateTQuestionsByPrimaryKey() {
+            let self = this;
+            axios.post(updateTQuestionsByPrimaryKey, self.TQuestionsUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 插入TQuestions */
-            insertTQuestions() {
-              let self = this;
-              axios.post(insertTQuestions, self.TQuestionsInsertParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 插入TQuestions */
+        insertTQuestions() {
+            let self = this;
+            axios.post(insertTQuestions, self.TQuestionsInsertParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("insert 成功");
+                        if (data.content == true)
+                            alert("insert 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键删除TQuestions */
-            deleteTQuestionsByPrimaryKey(id) {
-              let self = this;
-              axios.post(deleteTQuestionsByPrimaryKey,  {
-                  params: {
-                id:id
-                  }
-             }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
-                    } else {
-                         alert(data.msg);
-                    }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+        /** 主键删除TQuestions */
+        deleteTQuestionsByPrimaryKey(id) {
+            let self = this;
+            axios.post(deleteTQuestionsByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 分页查询TQuestions -- 存放的是默认的data */
-            queryBasePageHelperTQuestions(pageNum,pageSize) {
-              let self = this;
-              axios.post(queryBasePageHelperTQuestions+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TQuestionsQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TQuestions -- 存放的是默认的data */
+        queryBasePageHelperTQuestions(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTQuestions + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TQuestionsQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TQuestionsQueryBasePageHelperResult = data.content;
@@ -1635,64 +1885,64 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
-           /** 分页查询TQuestions  --  存放的是指定的data.sub */
-            queryBasePageHelperTQuestionsSub(pageNum,pageSize,sub) {
-              let self = this;
-              axios.post(queryBasePageHelperTQuestions+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TQuestionsQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TQuestions  --  存放的是指定的data.sub */
+        queryBasePageHelperTQuestionsSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTQuestions + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TQuestionsQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                        self.$set(self.TQuestionsQueryBasePageHelperResult,sub,data.content);
+                        self.$set(self.TQuestionsQueryBasePageHelperResult, sub, data.content);
                         console.log(self.TQuestionsQueryBasePageHelperResult);
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
-
-
-            /** 主键查询TQuestions */
-            queryTQuestionsByPrimaryKey(id) {
-              let self = this;
-              axios.get(queryTQuestionsByPrimaryKey, {
-                  params: {
-                id:id
-                  }
-              }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                        self.TQuestionsResult = data.content;
-                        console.log(self.TQuestionsResult);
-                    } else {
-                        alert(data.msg);
-                    }
-              }).catch(
-                    function (response) {
+                }).catch(
+                function (response) {
                     //失败回调
-                     alert(self.alertError);
-              })
-            },
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 多条件查询TQuestions */
-            queryBaseTQuestions() {
-              let self = this;
-              axios.post(queryBaseTQuestions, self.TQuestionsQueryBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键查询TQuestions */
+        queryTQuestionsByPrimaryKey(id) {
+            let self = this;
+            axios.get(queryTQuestionsByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TQuestionsResult = data.content;
+                    console.log(self.TQuestionsResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TQuestions */
+        queryBaseTQuestions() {
+            let self = this;
+            axios.post(queryBaseTQuestions, self.TQuestionsQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TQuestionsResults = data.content;
@@ -1700,105 +1950,107 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-
-            /** 多条件更新TQuestions */
-            updateBaseTQuestions() {
-              let self = this;
-              axios.post(updateBaseTQuestions, self.TQuestionsUpdateBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 多条件更新TQuestions */
+        updateBaseTQuestions() {
+            let self = this;
+            axios.post(updateBaseTQuestions, self.TQuestionsUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-           },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键更新TQuestionTag */
-            updateTQuestionTagByPrimaryKey() {
-              let self = this;
-              axios.post(updateTQuestionTagByPrimaryKey, self.TQuestionTagUpdateByPrimaryKeyParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键更新TQuestionTag */
+        updateTQuestionTagByPrimaryKey() {
+            let self = this;
+            axios.post(updateTQuestionTagByPrimaryKey, self.TQuestionTagUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 插入TQuestionTag */
-            insertTQuestionTag() {
-              let self = this;
-              axios.post(insertTQuestionTag, self.TQuestionTagInsertParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 插入TQuestionTag */
+        insertTQuestionTag() {
+            let self = this;
+            axios.post(insertTQuestionTag, self.TQuestionTagInsertParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("insert 成功");
+                        if (data.content == true)
+                            alert("insert 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键删除TQuestionTag */
-            deleteTQuestionTagByPrimaryKey(id) {
-              let self = this;
-              axios.post(deleteTQuestionTagByPrimaryKey,  {
-                  params: {
-                id:id
-                  }
-             }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
-                    } else {
-                         alert(data.msg);
-                    }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+        /** 主键删除TQuestionTag */
+        deleteTQuestionTagByPrimaryKey(id) {
+            let self = this;
+            axios.post(deleteTQuestionTagByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 分页查询TQuestionTag -- 存放的是默认的data */
-            queryBasePageHelperTQuestionTag(pageNum,pageSize) {
-              let self = this;
-              axios.post(queryBasePageHelperTQuestionTag+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TQuestionTagQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TQuestionTag -- 存放的是默认的data */
+        queryBasePageHelperTQuestionTag(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTQuestionTag + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TQuestionTagQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TQuestionTagQueryBasePageHelperResult = data.content;
@@ -1806,64 +2058,64 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
-           /** 分页查询TQuestionTag  --  存放的是指定的data.sub */
-            queryBasePageHelperTQuestionTagSub(pageNum,pageSize,sub) {
-              let self = this;
-              axios.post(queryBasePageHelperTQuestionTag+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TQuestionTagQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TQuestionTag  --  存放的是指定的data.sub */
+        queryBasePageHelperTQuestionTagSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTQuestionTag + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TQuestionTagQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                        self.$set(self.TQuestionTagQueryBasePageHelperResult,sub,data.content);
+                        self.$set(self.TQuestionTagQueryBasePageHelperResult, sub, data.content);
                         console.log(self.TQuestionTagQueryBasePageHelperResult);
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
-
-
-            /** 主键查询TQuestionTag */
-            queryTQuestionTagByPrimaryKey(id) {
-              let self = this;
-              axios.get(queryTQuestionTagByPrimaryKey, {
-                  params: {
-                id:id
-                  }
-              }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                        self.TQuestionTagResult = data.content;
-                        console.log(self.TQuestionTagResult);
-                    } else {
-                        alert(data.msg);
-                    }
-              }).catch(
-                    function (response) {
+                }).catch(
+                function (response) {
                     //失败回调
-                     alert(self.alertError);
-              })
-            },
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 多条件查询TQuestionTag */
-            queryBaseTQuestionTag() {
-              let self = this;
-              axios.post(queryBaseTQuestionTag, self.TQuestionTagQueryBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键查询TQuestionTag */
+        queryTQuestionTagByPrimaryKey(id) {
+            let self = this;
+            axios.get(queryTQuestionTagByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TQuestionTagResult = data.content;
+                    console.log(self.TQuestionTagResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TQuestionTag */
+        queryBaseTQuestionTag() {
+            let self = this;
+            axios.post(queryBaseTQuestionTag, self.TQuestionTagQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TQuestionTagResults = data.content;
@@ -1871,105 +2123,107 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-
-            /** 多条件更新TQuestionTag */
-            updateBaseTQuestionTag() {
-              let self = this;
-              axios.post(updateBaseTQuestionTag, self.TQuestionTagUpdateBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 多条件更新TQuestionTag */
+        updateBaseTQuestionTag() {
+            let self = this;
+            axios.post(updateBaseTQuestionTag, self.TQuestionTagUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-           },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键更新TSystemParam */
-            updateTSystemParamByPrimaryKey() {
-              let self = this;
-              axios.post(updateTSystemParamByPrimaryKey, self.TSystemParamUpdateByPrimaryKeyParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键更新TSystemParam */
+        updateTSystemParamByPrimaryKey() {
+            let self = this;
+            axios.post(updateTSystemParamByPrimaryKey, self.TSystemParamUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 插入TSystemParam */
-            insertTSystemParam() {
-              let self = this;
-              axios.post(insertTSystemParam, self.TSystemParamInsertParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 插入TSystemParam */
+        insertTSystemParam() {
+            let self = this;
+            axios.post(insertTSystemParam, self.TSystemParamInsertParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("insert 成功");
+                        if (data.content == true)
+                            alert("insert 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键删除TSystemParam */
-            deleteTSystemParamByPrimaryKey(paramId) {
-              let self = this;
-              axios.post(deleteTSystemParamByPrimaryKey,  {
-                  params: {
-                paramId:paramId
-                  }
-             }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
-                    } else {
-                         alert(data.msg);
-                    }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+        /** 主键删除TSystemParam */
+        deleteTSystemParamByPrimaryKey(paramId) {
+            let self = this;
+            axios.post(deleteTSystemParamByPrimaryKey, {
+                params: {
+                    paramId: paramId
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 分页查询TSystemParam -- 存放的是默认的data */
-            queryBasePageHelperTSystemParam(pageNum,pageSize) {
-              let self = this;
-              axios.post(queryBasePageHelperTSystemParam+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TSystemParamQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TSystemParam -- 存放的是默认的data */
+        queryBasePageHelperTSystemParam(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTSystemParam + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TSystemParamQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TSystemParamQueryBasePageHelperResult = data.content;
@@ -1977,64 +2231,64 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
-           /** 分页查询TSystemParam  --  存放的是指定的data.sub */
-            queryBasePageHelperTSystemParamSub(pageNum,pageSize,sub) {
-              let self = this;
-              axios.post(queryBasePageHelperTSystemParam+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TSystemParamQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TSystemParam  --  存放的是指定的data.sub */
+        queryBasePageHelperTSystemParamSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTSystemParam + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TSystemParamQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                        self.$set(self.TSystemParamQueryBasePageHelperResult,sub,data.content);
+                        self.$set(self.TSystemParamQueryBasePageHelperResult, sub, data.content);
                         console.log(self.TSystemParamQueryBasePageHelperResult);
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
-
-
-            /** 主键查询TSystemParam */
-            queryTSystemParamByPrimaryKey(paramId) {
-              let self = this;
-              axios.get(queryTSystemParamByPrimaryKey, {
-                  params: {
-                paramId:paramId
-                  }
-              }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                        self.TSystemParamResult = data.content;
-                        console.log(self.TSystemParamResult);
-                    } else {
-                        alert(data.msg);
-                    }
-              }).catch(
-                    function (response) {
+                }).catch(
+                function (response) {
                     //失败回调
-                     alert(self.alertError);
-              })
-            },
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 多条件查询TSystemParam */
-            queryBaseTSystemParam() {
-              let self = this;
-              axios.post(queryBaseTSystemParam, self.TSystemParamQueryBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键查询TSystemParam */
+        queryTSystemParamByPrimaryKey(paramId) {
+            let self = this;
+            axios.get(queryTSystemParamByPrimaryKey, {
+                params: {
+                    paramId: paramId
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TSystemParamResult = data.content;
+                    console.log(self.TSystemParamResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TSystemParam */
+        queryBaseTSystemParam() {
+            let self = this;
+            axios.post(queryBaseTSystemParam, self.TSystemParamQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TSystemParamResults = data.content;
@@ -2042,105 +2296,282 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-
-            /** 多条件更新TSystemParam */
-            updateBaseTSystemParam() {
-              let self = this;
-              axios.post(updateBaseTSystemParam, self.TSystemParamUpdateBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 多条件更新TSystemParam */
+        updateBaseTSystemParam() {
+            let self = this;
+            axios.post(updateBaseTSystemParam, self.TSystemParamUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-           },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键更新TAdminUser */
-            updateTAdminUserByPrimaryKey() {
-              let self = this;
-              axios.post(updateTAdminUserByPrimaryKey, self.TAdminUserUpdateByPrimaryKeyParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键更新TFollowQuestion */
+        updateTFollowQuestionByPrimaryKey() {
+            let self = this;
+            axios.post(updateTFollowQuestionByPrimaryKey, self.TFollowQuestionUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 插入TAdminUser */
-            insertTAdminUser() {
-              let self = this;
-              axios.post(insertTAdminUser, self.TAdminUserInsertParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 插入TFollowQuestion */
+        insertTFollowQuestion() {
+            let self = this;
+            axios.post(insertTFollowQuestion, self.TFollowQuestionInsertParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("insert 成功");
+                        if (data.content == true)
+                            alert("insert 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 主键删除TAdminUser */
-            deleteTAdminUserByPrimaryKey(id) {
-              let self = this;
-              axios.post(deleteTAdminUserByPrimaryKey,  {
-                  params: {
-                id:id
-                  }
-             }).then(function (response) {
-                   let data = response.data;
+        /** 主键删除TFollowQuestion */
+        deleteTFollowQuestionByPrimaryKey(questionId, userName) {
+            let self = this;
+            axios.post(deleteTFollowQuestionByPrimaryKey, {
+                params: {
+                    questionId: questionId,
+                    userName: userName
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 分页查询TFollowQuestion -- 存放的是默认的data */
+        queryBasePageHelperTFollowQuestion(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTFollowQuestion + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowQuestionQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        self.TFollowQuestionQueryBasePageHelperResult = data.content;
+                        console.log(self.TFollowQuestionQueryBasePageHelperResult);
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })},
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+        /** 分页查询TFollowQuestion  --  存放的是指定的data.sub */
+        queryBasePageHelperTFollowQuestionSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTFollowQuestion + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowQuestionQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.$set(self.TFollowQuestionQueryBasePageHelperResult, sub, data.content);
+                        console.log(self.TFollowQuestionQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 分页查询TAdminUser -- 存放的是默认的data */
-            queryBasePageHelperTAdminUser(pageNum,pageSize) {
-              let self = this;
-              axios.post(queryBasePageHelperTAdminUser+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TAdminUserQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键查询TFollowQuestion */
+        queryTFollowQuestionByPrimaryKey(questionId, userName) {
+            let self = this;
+            axios.get(queryTFollowQuestionByPrimaryKey, {
+                params: {
+                    questionId: questionId,
+                    userName: userName
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TFollowQuestionResult = data.content;
+                    console.log(self.TFollowQuestionResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TFollowQuestion */
+        queryBaseTFollowQuestion() {
+            let self = this;
+            axios.post(queryBaseTFollowQuestion, self.TFollowQuestionQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.TFollowQuestionResults = data.content;
+                        console.log(self.TFollowQuestionResults);
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件更新TFollowQuestion */
+        updateBaseTFollowQuestion() {
+            let self = this;
+            axios.post(updateBaseTFollowQuestion, self.TFollowQuestionUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        if (data.content == true)
+                            alert("delete 成功");
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 主键更新TAdminUser */
+        updateTAdminUserByPrimaryKey() {
+            let self = this;
+            axios.post(updateTAdminUserByPrimaryKey, self.TAdminUserUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        if (data.content == true)
+                            alert("delete 成功");
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 插入TAdminUser */
+        insertTAdminUser() {
+            let self = this;
+            axios.post(insertTAdminUser, self.TAdminUserInsertParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        if (data.content == true)
+                            alert("insert 成功");
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 主键删除TAdminUser */
+        deleteTAdminUserByPrimaryKey(id) {
+            let self = this;
+            axios.post(deleteTAdminUserByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 分页查询TAdminUser -- 存放的是默认的data */
+        queryBasePageHelperTAdminUser(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTAdminUser + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAdminUserQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TAdminUserQueryBasePageHelperResult = data.content;
@@ -2148,64 +2579,64 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
-           /** 分页查询TAdminUser  --  存放的是指定的data.sub */
-            queryBasePageHelperTAdminUserSub(pageNum,pageSize,sub) {
-              let self = this;
-              axios.post(queryBasePageHelperTAdminUser+"?pageNum="+pageNum+"&pageSize="+pageSize, self.TAdminUserQueryBasePageHelperParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 分页查询TAdminUser  --  存放的是指定的data.sub */
+        queryBasePageHelperTAdminUserSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTAdminUser + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAdminUserQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                        self.$set(self.TAdminUserQueryBasePageHelperResult,sub,data.content);
+                        self.$set(self.TAdminUserQueryBasePageHelperResult, sub, data.content);
                         console.log(self.TAdminUserQueryBasePageHelperResult);
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
-
-
-            /** 主键查询TAdminUser */
-            queryTAdminUserByPrimaryKey(id) {
-              let self = this;
-              axios.get(queryTAdminUserByPrimaryKey, {
-                  params: {
-                id:id
-                  }
-              }).then(function (response) {
-                   let data = response.data;
-                    console.log(data);
-                    if (data.code == 0) {
-                        self.TAdminUserResult = data.content;
-                        console.log(self.TAdminUserResult);
-                    } else {
-                        alert(data.msg);
-                    }
-              }).catch(
-                    function (response) {
+                }).catch(
+                function (response) {
                     //失败回调
-                     alert(self.alertError);
-              })
-            },
+                    alert(self.alertError);
+                })
+        },
 
 
-            /** 多条件查询TAdminUser */
-            queryBaseTAdminUser() {
-              let self = this;
-              axios.post(queryBaseTAdminUser, self.TAdminUserQueryBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 主键查询TAdminUser */
+        queryTAdminUserByPrimaryKey(id) {
+            let self = this;
+            axios.get(queryTAdminUserByPrimaryKey, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TAdminUserResult = data.content;
+                    console.log(self.TAdminUserResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TAdminUser */
+        queryBaseTAdminUser() {
+            let self = this;
+            axios.post(queryBaseTAdminUser, self.TAdminUserQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
                         self.TAdminUserResults = data.content;
@@ -2213,34 +2644,208 @@ var vue = new Vue({
                     } else {
                         alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-            },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
-
-            /** 多条件更新TAdminUser */
-            updateBaseTAdminUser() {
-              let self = this;
-              axios.post(updateBaseTAdminUser, self.TAdminUserUpdateBaseParam)
-              .then(function (response) {
-                   let data = response.data;
+        /** 多条件更新TAdminUser */
+        updateBaseTAdminUser() {
+            let self = this;
+            axios.post(updateBaseTAdminUser, self.TAdminUserUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
-                         if(data.content == true)
-                         alert("delete 成功");
+                        if (data.content == true)
+                            alert("delete 成功");
                     } else {
-                         alert(data.msg);
+                        alert(data.msg);
                     }
-              }).catch(
-              function (response) {
-                  //失败回调
-                  alert(self.alertError);
-              })
-           },
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 主键更新TFollowPerson */
+        updateTFollowPersonByPrimaryKey() {
+            let self = this;
+            axios.post(updateTFollowPersonByPrimaryKey, self.TFollowPersonUpdateByPrimaryKeyParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        if (data.content == true)
+                            alert("delete 成功");
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 插入TFollowPerson */
+        insertTFollowPerson() {
+            let self = this;
+            axios.post(insertTFollowPerson, self.TFollowPersonInsertParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        if (data.content == true)
+                            alert("insert 成功");
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 主键删除TFollowPerson */
+        deleteTFollowPersonByPrimaryKey(userNameFollow, userName) {
+            let self = this;
+            axios.post(deleteTFollowPersonByPrimaryKey, {
+                params: {
+                    userNameFollow: userNameFollow,
+                    userName: userName
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    if (data.content == true)
+                        alert("delete 成功");
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 分页查询TFollowPerson -- 存放的是默认的data */
+        queryBasePageHelperTFollowPerson(pageNum, pageSize) {
+            let self = this;
+            axios.post(queryBasePageHelperTFollowPerson + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowPersonQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.TFollowPersonQueryBasePageHelperResult = data.content;
+                        console.log(self.TFollowPersonQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+        /** 分页查询TFollowPerson  --  存放的是指定的data.sub */
+        queryBasePageHelperTFollowPersonSub(pageNum, pageSize, sub) {
+            let self = this;
+            axios.post(queryBasePageHelperTFollowPerson + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowPersonQueryBasePageHelperParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.$set(self.TFollowPersonQueryBasePageHelperResult, sub, data.content);
+                        console.log(self.TFollowPersonQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 主键查询TFollowPerson */
+        queryTFollowPersonByPrimaryKey(userNameFollow, userName) {
+            let self = this;
+            axios.get(queryTFollowPersonByPrimaryKey, {
+                params: {
+                    userNameFollow: userNameFollow,
+                    userName: userName
+                }
+            }).then(function (response) {
+                let data = response.data;
+                console.log(data);
+                if (data.code == 0) {
+                    self.TFollowPersonResult = data.content;
+                    console.log(self.TFollowPersonResult);
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件查询TFollowPerson */
+        queryBaseTFollowPerson() {
+            let self = this;
+            axios.post(queryBaseTFollowPerson, self.TFollowPersonQueryBaseParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.TFollowPersonResults = data.content;
+                        console.log(self.TFollowPersonResults);
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
+
+
+        /** 多条件更新TFollowPerson */
+        updateBaseTFollowPerson() {
+            let self = this;
+            axios.post(updateBaseTFollowPerson, self.TFollowPersonUpdateBaseParam)
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        if (data.content == true)
+                            alert("delete 成功");
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                function (response) {
+                    //失败回调
+                    alert(self.alertError);
+                })
+        },
 
 
     }

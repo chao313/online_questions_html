@@ -75,8 +75,10 @@
                 </a>
                 <div class="aw-dropdown dropdown-list pull-right">
                     <ul class="aw-dropdown-list">
-                        <li><a href=""><i class="icon icon-inbox"></i> 个人主面<span
-                                class="badge badge-important collapse" id="inbox_unread" style="display: none;">0</span></a>
+                        <li><a href="javaScript:;" @click="routerToPerson(userName)"><i class="icon icon-inbox"></i>
+                            个人主面<span
+                                    class="badge badge-important collapse" id="inbox_unread"
+                                    style="display: none;">0</span></a>
                         </li>
                         <li class="hidden-xs"><a href=""><i
                                 class="icon icon-setting"></i> 设置</a></li>
@@ -144,8 +146,9 @@
 
                                             <p>
                                                 <a class="aw-question-tags"
-                                                   href=""><span>{{value.tag}}</span></a>
-                                                • <a href="" class="aw-user-name"
+                                                   href="javaScript:;"><span>{{value.tag}}</span></a>
+                                                • <a href="javaScript:;" @click="routerToPerson(value.userName)"
+                                                     class="aw-question-tags"
                                                      data-id="52695"><span>{{value.userName}}</span></a>
                                                 <span class="text-color-999">发布问题 • 10 人关注 • 9 个回复 • 763 次浏览 • {{value.createTime}} 创建				</span>
                                                 <span class="text-color-999 related-topic collapse"> • 来自相关话题</span>
@@ -294,6 +297,12 @@
             routerToPublish() {
                 window.open(WEBSTROM_BASE_URL + "/publish.html", '_self');
             },
+            routerToPerson(userNameView) {
+                //跳转携带参数
+                let queryStr = "";
+                queryStr = queryStr + "userNameView=" + userNameView + "";
+                window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
+            }
         }
     });
 </script>
@@ -426,6 +435,12 @@
                 let queryStr = "";
                 queryStr = queryStr + "id=" + id + "";
                 window.open(WEBSTROM_BASE_URL + "/questionDetail.html?" + queryStr, '_self');
+            },
+            routerToPerson(userNameView) {
+                //跳转携带参数
+                let queryStr = "";
+                queryStr = queryStr + "userNameView=" + userNameView + "";
+                window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
             },
             getUserId() {
                 let self = this;

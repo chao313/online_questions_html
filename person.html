@@ -141,9 +141,11 @@
                                         class="badge">{{TFollowQuestionQueryBasePageHelperResult.total}}</span></a>
                                 </li>
                                 <li><a href="#contents_followes" data-toggle="tab">关注的人<span
-                                        class="badge">104</span></a></li>
+                                        class="badge">{{TFollowPersonQueryBasePageHelperResultFollows.total}}</span></a>
+                                </li>
                                 <li><a href="#contents_followed" data-toggle="tab">被人关注<span
-                                        class="badge">104</span></a></li>
+                                        class="badge">{{TFollowPersonQueryBasePageHelperResultFollowed.total}}</span></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -305,620 +307,54 @@
                             <div class="tab-pane" id="contents_followes">
                                 <!-- 自定义切换 -->
                                 <div class="aw-mod">
-                                    <div class="aw-tabs text-center">
-                                        <ul>
-                                            <li class="active"><a>关注的人</a></li>
-                                            <li><a>关注者</a></li>
-                                            <li><a>关注的话题</a></li>
-                                        </ul>
-                                    </div>
                                     <div class="mod-body">
                                         <div class="aw-tab-content">
                                             <div class="aw-mod aw-user-center-follow-mod">
                                                 <div class="mod-body">
                                                     <ul id="contents_user_follows" class="clearfix">
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="49009"
-                                                                   href="http://wenda.wecenter.com/people/49009">
-                                                                    <img src="local/09_avatar_mid.jpg" alt="一花一木">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/49009">一花一木</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt">
-                                                                    开发定制，联系QQ963115536</p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">5</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">9</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">7</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="9991"
-                                                                   href="http://wenda.wecenter.com/people/9991">
-                                                                    <img src="local/91_avatar_mid.jpg" alt="jat">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/9991">jat</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">141</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">257</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">94</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="2"
-                                                                   href="http://wenda.wecenter.com/people/2">
-                                                                    <img src="local/02_avatar_mid.jpg" alt="zhengqiang">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/2">zhengqiang</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt">WeCenter 产品经理</p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">2321</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">3569</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">1479</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="5167"
-                                                                   href="http://wenda.wecenter.com/people/5167">
-                                                                    <img src="local/67_avatar_mid.jpg" alt="kk">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/5167">kk</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt">WeCenter开发组</p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">468</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">527</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">215</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="12297"
-                                                                   href="http://wenda.wecenter.com/people/12297">
-                                                                    <img src="local/97_avatar_mid.jpg" alt="MrDoubleX">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/12297">MrDoubleX</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="25797"
-                                                                   href="http://wenda.wecenter.com/people/25797">
-                                                                    <img src="local/97_avatar_mid(1).jpg" alt="final">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/25797">final</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt">WeCenter 官方</p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">94</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">250</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">89</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="10"
-                                                                   href="http://wenda.wecenter.com/people/10">
-                                                                    <img src="local/10_avatar_mid.jpg" alt="yanc">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/10">yanc</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt">do do design</p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">57</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">166</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">19</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="49"
-                                                                   href="http://wenda.wecenter.com/people/49">
-                                                                    <img src="local/49_avatar_mid.jpg" alt="AWSupport">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/49">AWSupport</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">650</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">878</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">428</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <input type="hidden" class="ajax_result0" value="8">
-                                                        <input type="hidden" class="per_page" value="10">
+                                                        <template
+                                                                v-if="TFollowPersonQueryBasePageHelperResultFollows.total != null"
+                                                                v-for="(value,index) in TFollowPersonQueryBasePageHelperResultFollows.list">
+
+                                                            <li>
+                                                                <div class="mod-head">
+                                                                    <a class="aw-user-img pull-left aw-border-radius-5"
+                                                                       data-id="49009"
+                                                                       href="">
+                                                                        <img src="local/avatar-mid-img.png"
+                                                                             :alt="value.userNameFollow">
+                                                                    </a>
+                                                                    <p>
+                                                                        <a href="javaScript:;"
+                                                                           @click="routerToPerson(value.userNameFollow)"><span>{{value.userNameFollow}}</span></a>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="mod-body">
+                                                                    <p class="text-color-999 aw-hide-txt">
+                                                                        开发定制，联系QQ963115536</p>
+                                                                </div>
+                                                            </li>
+                                                        </template>
                                                     </ul>
-                                                </div>
-                                                <div class="mod-footer">
-                                                    <!-- 加载更多内容 -->
-                                                    <a class="aw-load-more-content disabled" id="bp_user_follows_more"
-                                                       data-page="1">
-                                                        <span>没有更多了</span>
-                                                    </a>
-                                                    <!-- end 加载更多内容 -->
                                                 </div>
                                             </div>
-                                            <div class="aw-mod aw-user-center-follow-mod collapse">
-                                                <div class="mod-body">
-                                                    <ul class="clearfix" id="contents_user_fans">
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52739"
-                                                                   href="http://wenda.wecenter.com/people/52739">
-                                                                    <img src="local/avatar-mid-img.png" alt="小虎_11">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52739">小虎_11</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52738"
-                                                                   href="http://wenda.wecenter.com/people/52738">
-                                                                    <img src="local/avatar-mid-img.png" alt="udpc">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52738">udpc</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="47016"
-                                                                   href="http://wenda.wecenter.com/people/47016">
-                                                                    <img src="local/16_avatar_mid.jpg" alt="hifone">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/47016">hifone</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52737"
-                                                                   href="http://wenda.wecenter.com/people/52737">
-                                                                    <img src="local/avatar-mid-img.png" alt="vanzan">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52737">vanzan</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52736"
-                                                                   href="http://wenda.wecenter.com/people/52736">
-                                                                    <img src="local/avatar-mid-img.png" alt="安  然">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52736">安  然</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52735"
-                                                                   href="http://wenda.wecenter.com/people/52735">
-                                                                    <img src="local/avatar-mid-img.png"
-                                                                         alt="xiaocuicui">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52735">xiaocuicui</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52734"
-                                                                   href="http://wenda.wecenter.com/people/52734">
-                                                                    <img src="local/avatar-mid-img.png"
-                                                                         alt="雨燕30791518">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52734">雨燕30791518</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt">导师【3 0 7 9 1 5 1 8
-                                                                    】〓【 码 8 0 1 8 8 1 8 0】 .网 纸h c t 9 0 4 . c o m　 </p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52733"
-                                                                   href="http://wenda.wecenter.com/people/52733">
-                                                                    <img src="local/avatar-mid-img.png" alt="mikesheep">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52733">mikesheep</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52732"
-                                                                   href="http://wenda.wecenter.com/people/52732">
-                                                                    <img src="local/avatar-mid-img.png" alt="嘿！别来无恙">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52732">嘿！别来无恙</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-user-img pull-left aw-border-radius-5"
-                                                                   data-id="52731"
-                                                                   href="http://wenda.wecenter.com/people/52731">
-                                                                    <img src="local/avatar-mid-img.png"
-                                                                         alt="test654321">
-                                                                </a>
-                                                                <p>
-                                                                    <a href="http://wenda.wecenter.com/people/52731">test654321</a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-body">
-                                                                <p class="text-color-999 aw-hide-txt"></p>
-                                                            </div>
-                                                            <div class="mod-footer meta">
-                                                                <span><i class="icon icon-prestige"></i>威望 <em
-                                                                        class="aw-text-color-green">0</em></span>
-                                                                <span><i class="icon icon-agree"></i>赞同 <em
-                                                                        class="aw-text-color-orange">0</em></span>
-                                                                <!-- <span><i class="icon icon-thank"></i>感谢 <em class="aw-text-color-orange">0</em></span> -->
-                                                            </div>
-                                                        </li>
-                                                        <input type="hidden" class="ajax_result0" value="10">
-                                                        <input type="hidden" class="per_page" value="10">
-                                                    </ul>
-                                                </div>
-                                                <div class="mod-footer">
-                                                    <!-- 加载更多内容 -->
-                                                    <a class="aw-load-more-content" id="bp_user_fans_more"
-                                                       data-page="1">
-                                                        <span>更多</span>
-                                                    </a>
-                                                    <!-- end 加载更多内容 -->
-                                                </div>
-                                            </div>
-                                            <div class="aw-mod aw-user-center-follow-mod collapse">
-                                                <div class="mod-body">
-                                                    <ul id="contents_user_topics" class="clearfix">
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="78"
-                                                                   href="http://wenda.wecenter.com/topic/78">
-                                                                    <img src="local/topic-mid-img.png" alt="意见与建议">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="78"
-                                                                      href="http://wenda.wecenter.com/topic/78"><span>意见与建议</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    37 个讨论 •
-                                                                    25 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="3868"
-                                                                   href="http://wenda.wecenter.com/topic/3868">
-                                                                    <img src="local/topic-mid-img.png"
-                                                                         alt="WeCenter3.5.0">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="3868"
-                                                                      href="http://wenda.wecenter.com/topic/3868"><span>WeCenter3.5.0</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    5 个讨论 •
-                                                                    2 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="3851"
-                                                                   href="http://wenda.wecenter.com/topic/3851">
-                                                                    <img src="local/topic-mid-img.png"
-                                                                         alt="WeCenter小程序">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="3851"
-                                                                      href="http://wenda.wecenter.com/topic/3851"><span>WeCenter小程序</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    3 个讨论 •
-                                                                    2 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="3865"
-                                                                   href="http://wenda.wecenter.com/topic/3865">
-                                                                    <img src="local/topic-mid-img.png"
-                                                                         alt="WeCenter3.3.5">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="3865"
-                                                                      href="http://wenda.wecenter.com/topic/3865"><span>WeCenter3.3.5</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    3 个讨论 •
-                                                                    2 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="3853"
-                                                                   href="http://wenda.wecenter.com/topic/3853">
-                                                                    <img src="local/topic-mid-img.png"
-                                                                         alt="WeCenter3.3.3">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="3853"
-                                                                      href="http://wenda.wecenter.com/topic/3853"><span>WeCenter3.3.3</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    2 个讨论 •
-                                                                    1 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="3856"
-                                                                   href="http://wenda.wecenter.com/topic/3856">
-                                                                    <img src="local/topic-mid-img.png"
-                                                                         alt="WeCenter3.3.4">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="3856"
-                                                                      href="http://wenda.wecenter.com/topic/3856"><span>WeCenter3.3.4</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    2 个讨论 •
-                                                                    1 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="3857"
-                                                                   href="http://wenda.wecenter.com/topic/3857">
-                                                                    <img src="local/topic-mid-img.png" alt="优惠活动">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="3857"
-                                                                      href="http://wenda.wecenter.com/topic/3857"><span>优惠活动</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    2 个讨论 •
-                                                                    1 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="3850"
-                                                                   href="http://wenda.wecenter.com/topic/3850">
-                                                                    <img src="local/topic-mid-img.png" alt="官网APP">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="3850"
-                                                                      href="http://wenda.wecenter.com/topic/3850"><span>官网APP</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    1 个讨论 •
-                                                                    1 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="mod-head">
-                                                                <a class="aw-topic-img pull-left aw-border-radius-5"
-                                                                   data-id="3858"
-                                                                   href="http://wenda.wecenter.com/topic/3858">
-                                                                    <img src="local/topic-mid-img.png" alt="WeCenter活动">
-                                                                </a>
-                                                                <p><a class="aw-topic-name" data-id="3858"
-                                                                      href="http://wenda.wecenter.com/topic/3858"><span>WeCenter活动</span></a>
-                                                                </p>
-                                                            </div>
-                                                            <div class="mod-footer">
-                                                                <p class="aw-user-center-follow-meta">
-                                                                    1 个讨论 •
-                                                                    1 个关注 </p>
-                                                            </div>
-                                                        </li>
-                                                        <input type="hidden" class="ajax_result0" value="9">
-                                                        <input type="hidden" class="per_page" value="10">
-                                                    </ul>
-                                                </div>
-                                                <div class="mod-footer">
-                                                    <!-- 加载更多内容 -->
-                                                    <a class="aw-load-more-content disabled" id="bp_user_topics_more"
-                                                       data-page="1">
-                                                        <span>没有更多了</span>
-                                                    </a>
-                                                    <!-- end 加载更多内容 -->
+                                            <div class="mod-footer">
+                                                <div class="page-control">
+                                                    <div class="mt10">
+                                                        <template
+                                                                v-if="TFollowPersonQueryBasePageHelperResultFollows.total != null">
+                                                            <!--/** */:page-size 数一页的数量！！！-->
+                                                            <el-pagination
+                                                                    v-show="TFollowPersonQueryBasePageHelperResultFollows.list.length > 0"
+                                                                    background
+                                                                    @current-change="handleCurrentChangeTPersonFollows"
+                                                                    :current-page.sync="TFollowPersonQueryBasePageHelperResultFollows.pageNum"
+                                                                    :page-size="TFollowPersonQueryBasePageHelperResultFollows.pageSize"
+                                                                    layout="total, prev, pager, next, jumper"
+                                                                    :total="TFollowPersonQueryBasePageHelperResultFollows.total">
+                                                            </el-pagination>
+                                                        </template>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -926,152 +362,69 @@
                                 </div>
                                 <!-- end 自定义切换 -->
                             </div>
+                            <!--被人关注-->
                             <div class="tab-pane" id="contents_followed">
+                                <!-- 自定义切换 -->
                                 <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3>最新动态</h3>
-                                    </div>
                                     <div class="mod-body">
-                                        <div id="contents_user_actions">
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">3 天前</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 回答了问题:</em>
+                                        <div class="aw-tab-content">
+                                            <div class="aw-mod aw-user-center-follow-mod">
+                                                <div class="mod-body">
+                                                    <ul class="clearfix">
+                                                        <template
+                                                                v-if="TFollowPersonQueryBasePageHelperResultFollowed.total != null"
+                                                                v-for="(value,index) in TFollowPersonQueryBasePageHelperResultFollowed.list">
 
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32904">希望官方看重移动端页面的布局</a>
-
-                                                </p>
+                                                            <li>
+                                                                <div class="mod-head">
+                                                                    <a class="aw-user-img pull-left aw-border-radius-5"
+                                                                       data-id="49009"
+                                                                       href="">
+                                                                        <img src="local/avatar-mid-img.png"
+                                                                             :alt="value.userNameFollow">
+                                                                    </a>
+                                                                    <p>
+                                                                        <a href="javaScript:;"
+                                                                           @click="routerToPerson(value.userName)"><span>{{value.userName}}</span></a>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="mod-body">
+                                                                    <p class="text-color-999 aw-hide-txt">
+                                                                        开发定制，联系QQ963115536</p>
+                                                                </div>
+                                                            </li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">4 天前</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 回答了问题:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32906">wecenter安装后按下主页上的按钮，结果都是403，而且网址是类似http:...</a>
-
-                                                </p>
+                                            <div class="mod-footer">
+                                                <div class="page-control">
+                                                    <div class="mt10">
+                                                        <template
+                                                                v-if="TFollowPersonQueryBasePageHelperResultFollowed.total != null">
+                                                            <!--/** */:page-size 数一页的数量！！！-->
+                                                            <el-pagination
+                                                                    v-show="TFollowPersonQueryBasePageHelperResultFollowed.list.length > 0"
+                                                                    background
+                                                                    @current-change="handleCurrentChangeTPersonFollowed"
+                                                                    :current-page.sync="TFollowPersonQueryBasePageHelperResultFollowed.pageNum"
+                                                                    :page-size="TFollowPersonQueryBasePageHelperResultFollowed.pageSize"
+                                                                    layout="total, prev, pager, next, jumper"
+                                                                    :total="TFollowPersonQueryBasePageHelperResultFollowed.total">
+                                                            </el-pagination>
+                                                        </template>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">4 天前</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 回答了问题:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32905">写了几个符合amp协议的网页，放在新建的amp文件夹目录下，发现404，无法找到</a>
-
-                                                </p>
-                                            </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">6 天前</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a>
-                                                        赞同了该文章:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/1746">1.0正式版发布之后，应该是官方开发人员的一个冷静期和插件开发、模板开发的火热期...</a>
-
-                                                </p>
-                                            </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-05-05</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 回答了问题:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32898">编辑器 编辑回复 框无法正常显示</a>
-
-                                                </p>
-                                            </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-05-05</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 回答了问题:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32896">我想要添加一个自定义的页面（ 网站后台 - 内容设置 - 页面管理 - 添加页面），但是设置...</a>
-
-                                                </p>
-                                            </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-04-27</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 回答了问题:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32895">后台登录超时后再次登录，跳转地址404</a>
-
-                                                </p>
-                                            </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-04-26</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 回答了问题:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32893">为什么在管理后台添加前端菜单，点击提示404</a>
-
-                                                </p>
-                                            </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-04-23</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a>
-                                                        评论了该文章:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/article/1743">Wecenter 3.5.0侧边栏名人名言插件首发</a>
-
-                                                </p>
-                                            </div>
-                                            <div class="aw-item">
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-04-22</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 回答了问题:</em>
-
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32888">刚升级完3.5，问题和文章发布页面错误怎么办？</a>
-
-                                                </p>
-                                            </div>
-                                            <input type="hidden" class="ajax_result0" value="10">
-                                            <input type="hidden" class="per_page" value="10">
                                         </div>
                                     </div>
-                                    <div class="mod-footer">
-                                        <!-- 加载更多内容 -->
-                                        <a class="aw-load-more-content" id="bp_user_actions_more" data-page="1">
-                                            <span>更多</span>
-                                        </a>
-                                        <!-- end 加载更多内容 -->
-                                    </div>
                                 </div>
+                                <!-- end 自定义切换 -->
+
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar">
                     <div class="aw-mod people-following">
@@ -1448,16 +801,52 @@
                     userNameFollow: null,
                     userName: null,
                     cteateTime: null
-                },
-                /** 存储TFollowPerson多条件查询条件(分页，去除分页的num和size)*/
-                TFollowPersonQueryBasePageHelperParam: {
+                }
+                , /** 存储TFollowPerson多条件查询条件(分页，去除分页的num和size)*/
+                TFollowPersonQueryBasePageHelperParamFollows: {
                     userNameFollow: null,
                     userName: null,
-                    cteateTime: null
+                    cteateTime: null,
+                    pageNum: 1,
+                    pageSize: 10
+                },
+                /** 存储TFollowPerson多条件查询条件(分页，去除分页的num和size)*/
+                TFollowPersonQueryBasePageHelperParamFollowed: {
+                    userNameFollow: null,
+                    userName: null,
+                    cteateTime: null,
+                    pageNum: 1,
+                    pageSize: 10
                 }
                 ,
                 /** 存储TFollowPerson存储多条件查询结果(分页，去除分页的num和size)*/
-                TFollowPersonQueryBasePageHelperResult: {
+                TFollowPersonQueryBasePageHelperResultFollows: {
+                    pageNum: null,
+                    pageSize: null,
+                    size: null,
+                    orderBy: null,
+                    startRow: null,
+                    endRow: null,
+                    total: null,
+                    pages: null,
+                    list: [{
+                        userNameFollow: null,
+                        userName: null,
+                        cteateTime: null
+                    }],
+                    firstPage: null,
+                    prePage: 0,
+                    nextPage: null,
+                    lastPage: null,
+                    isFirstPage: true,
+                    isLastPage: null,
+                    hasPreviousPage: null,
+                    hasNextPage: null,
+                    navigatePages: null,
+                    navigatepageNums: []
+                },
+                /** 存储TFollowPerson存储多条件查询结果(分页，去除分页的num和size)*/
+                TFollowPersonQueryBasePageHelperResultFollowed: {
                     pageNum: null,
                     pageSize: null,
                     size: null,
@@ -1497,7 +886,6 @@
                 this.queryBasePageHelperTAnswer(this.TAnswerQueryBasePageHelperParam.pageNum, this.TAnswerQueryBasePageHelperParam.pageSize);
                 this.TFollowQuestionQueryBasePageHelperParam.userName = userNameView;
                 this.queryBasePageHelperTFollowQuestion(this.TFollowQuestionQueryBasePageHelperParam.pageNum, this.TFollowQuestionQueryBasePageHelperParam.pageSize);
-
                 this.getUserId();
                 this.queryBaseTTag();
                 this.getUserName();
@@ -1576,6 +964,13 @@
                             self.userName = response.content;
                             topHead.userName = response.content;
                             self.queryTFollowPersonByPrimaryKey(self.userNameView, self.userName)
+                            /**查询关注的人*/
+                            self.TFollowPersonQueryBasePageHelperParamFollows.userName = self.userName;
+                            self.queryBasePageHelperTFollowPersonFollows(self.TFollowPersonQueryBasePageHelperParamFollows.pageNum, self.TFollowPersonQueryBasePageHelperParamFollows.pageSize)
+                            /**查询被关注的人*/
+                            self.TFollowPersonQueryBasePageHelperParamFollowed.userNameFollow = self.userName;
+                            self.queryBasePageHelperTFollowPersonFollowed(self.TFollowPersonQueryBasePageHelperParamFollowed.pageNum, self.TFollowPersonQueryBasePageHelperParamFollowed.pageSize)
+
 
                             // self.$message({
                             //     type: 'success',
@@ -1896,15 +1291,14 @@
 
 
                 /** 分页查询TFollowPerson -- 存放的是默认的data */
-                queryBasePageHelperTFollowPerson(pageNum, pageSize) {
+                queryBasePageHelperTFollowPersonFollows(pageNum, pageSize) {
                     let self = this;
-                    axios.post(queryBasePageHelperTFollowPerson + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowPersonQueryBasePageHelperParam)
+                    axios.post(queryBasePageHelperTFollowPerson + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowPersonQueryBasePageHelperParamFollows)
                         .then(function (response) {
                             let data = response.data;
                             console.log(data);
                             if (data.code == 0) {
-                                self.TFollowPersonQueryBasePageHelperResult = data.content;
-                                console.log(self.TFollowPersonQueryBasePageHelperResult);
+                                self.TFollowPersonQueryBasePageHelperResultFollows = data.content;
                             } else {
                                 self.$message({
                                     type: 'error',
@@ -1922,6 +1316,45 @@
                                 duration: 1000
                             })
                         })
+                },
+                handleCurrentChangeTPersonFollows(currentChange) {
+                    let self = this;
+                    self.TFollowPersonQueryBasePageHelperParamFollows.pageNum = self.TFollowPersonQueryBasePageHelperResultFollows.pageNum;
+                    self.TFollowPersonQueryBasePageHelperParamFollows.pageSize = self.TFollowPersonQueryBasePageHelperResultFollows.pageSize;
+                    self.queryBasePageHelperTQuestions(self.TFollowPersonQueryBasePageHelperParamFollows.pageNum, self.TFollowPersonQueryBasePageHelperParamFollows.pageSize);
+                },
+                /** 分页查询TFollowPerson -- 存放的是默认的data */
+                queryBasePageHelperTFollowPersonFollowed(pageNum, pageSize) {
+                    let self = this;
+                    axios.post(queryBasePageHelperTFollowPerson + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowPersonQueryBasePageHelperParamFollowed)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                self.TFollowPersonQueryBasePageHelperResultFollowed = data.content;
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '查询异常' + data.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            console.error(response);
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+                handleCurrentChangeTPersonFollowed(currentChange) {
+                    let self = this;
+                    self.TFollowPersonQueryBasePageHelperParamFollowed.pageNum = self.TFollowPersonQueryBasePageHelperResultFollowed.pageNum;
+                    self.TFollowPersonQueryBasePageHelperParamFollowed.pageSize = self.TFollowPersonQueryBasePageHelperResultFollowed.pageSize;
+                    self.queryBasePageHelperTFollowPersonFollowed(self.TFollowPersonQueryBasePageHelperParamFollowed.pageNum, self.TFollowPersonQueryBasePageHelperParamFollowed.pageSize);
                 },
                 /** 主键查询TFollowPerson */
                 queryTFollowPersonByPrimaryKey(userNameFollow, userName) {
@@ -1991,7 +1424,12 @@
                     this.deleteTFollowPersonByPrimaryKey(this.userNameView, this.userName);
 
                 },
-
+                routerToPerson(userNameView) {
+                    //跳转携带参数
+                    let queryStr = "";
+                    queryStr = queryStr + "userNameView=" + userNameView + "";
+                    window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
+                }
             }
         })
     ;
