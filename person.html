@@ -115,13 +115,20 @@
                         <div class="mod-head">
                             <img src="local/avatar-mid-img.png" :alt="userNameView">
                             <span class="pull-right operate">
-                                                           <a href="javascript:;"
-                                                              class="follow btn btn-normal btn-success active"
-                                                              onclick="AWS.User.follow($(this), &#39;user&#39;, 45510);"><span>取消关注</span></a>
-                                                            </span>
+                                <template v-if="TFollowPersonResult.userName == null">
+                                    <a href="javascript:;" @click="follow()"
+                                       class="follow btn btn-normal btn-success pull-left "><span>关注</span></a>
+                                </template>
+                                <template v-else>
+                                    <a href="javascript:;" @click="unFollow()"
+                                       class="follow btn btn-normal btn-success active"><span>取消关注</span></a>
+                                </template>
+                            </span>
                             <h1>{{userNameView}}<i></i></h1>
                             <p class="aw-user-flag">
                             </p>
+
+
                         </div>
                         <div class="mod-footer">
                             <ul class="nav nav-tabs aw-nav-tabs">
@@ -1422,6 +1429,60 @@
                     createTime: null,
                     updateTime: null
                 }],
+                /** 存储TFollowPerson多个结果*/
+                TFollowPersonResults: [{
+                    userNameFollow: null,
+                    userName: null,
+                    cteateTime: null
+                }]
+                ,
+                /** 存储TFollowPerson单个结果*/
+                TFollowPersonResult: {
+                    userNameFollow: null,
+                    userName: null,
+                    cteateTime: null
+                }
+                ,
+                /** 存储TFollowPerson插入结果*/
+                TFollowPersonInsertParam: {
+                    userNameFollow: null,
+                    userName: null,
+                    cteateTime: null
+                },
+                /** 存储TFollowPerson多条件查询条件(分页，去除分页的num和size)*/
+                TFollowPersonQueryBasePageHelperParam: {
+                    userNameFollow: null,
+                    userName: null,
+                    cteateTime: null
+                }
+                ,
+                /** 存储TFollowPerson存储多条件查询结果(分页，去除分页的num和size)*/
+                TFollowPersonQueryBasePageHelperResult: {
+                    pageNum: null,
+                    pageSize: null,
+                    size: null,
+                    orderBy: null,
+                    startRow: null,
+                    endRow: null,
+                    total: null,
+                    pages: null,
+                    list: [{
+                        userNameFollow: null,
+                        userName: null,
+                        cteateTime: null
+                    }],
+                    firstPage: null,
+                    prePage: 0,
+                    nextPage: null,
+                    lastPage: null,
+                    isFirstPage: true,
+                    isLastPage: null,
+                    hasPreviousPage: null,
+                    hasNextPage: null,
+                    navigatePages: null,
+                    navigatepageNums: []
+                }
+
 
             },
             created() {
@@ -1436,6 +1497,7 @@
                 this.queryBasePageHelperTAnswer(this.TAnswerQueryBasePageHelperParam.pageNum, this.TAnswerQueryBasePageHelperParam.pageSize);
                 this.TFollowQuestionQueryBasePageHelperParam.userName = userNameView;
                 this.queryBasePageHelperTFollowQuestion(this.TFollowQuestionQueryBasePageHelperParam.pageNum, this.TFollowQuestionQueryBasePageHelperParam.pageSize);
+
                 this.getUserId();
                 this.queryBaseTTag();
                 this.getUserName();
@@ -1513,6 +1575,7 @@
                         if (response.code == 0) {
                             self.userName = response.content;
                             topHead.userName = response.content;
+                            self.queryTFollowPersonByPrimaryKey(self.userNameView, self.userName)
 
                             // self.$message({
                             //     type: 'success',
@@ -1750,6 +1813,183 @@
                                 duration: 1000
                             })
                         })
+                },
+                /** 插入TFollowPerson */
+                insertTFollowPerson() {
+                    let self = this;
+                    axios.post(insertTFollowPerson, self.TFollowPersonInsertParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true)
+                                    self.queryTFollowPersonByPrimaryKey(self.userNameView, self.userName);
+                                self.$message({
+                                    type: 'success',
+                                    message: '关注成功',
+                                    duration: 1000
+                                });
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '关注异常' + data.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            console.error(response);
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+
+
+                /** 主键删除TFollowPerson */
+                deleteTFollowPersonByPrimaryKey(userNameFollow, userName) {
+                    let self = this;
+                    axios.get(deleteTFollowPersonByPrimaryKey, {
+                        params: {
+                            userNameFollow: userNameFollow,
+                            userName: userName
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content == true) {
+                                self.queryTFollowPersonByPrimaryKey(self.userNameView, self.userName);
+                                self.$message({
+                                    type: 'success',
+                                    message: '取消关注成功',
+                                    duration: 1000
+                                });
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '取消关注失败',
+                                    duration: 1000
+                                });
+                            }
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '取消关注异常' + data.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                        function (response) {
+                            console.error(response);
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+
+
+                /** 分页查询TFollowPerson -- 存放的是默认的data */
+                queryBasePageHelperTFollowPerson(pageNum, pageSize) {
+                    let self = this;
+                    axios.post(queryBasePageHelperTFollowPerson + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowPersonQueryBasePageHelperParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                self.TFollowPersonQueryBasePageHelperResult = data.content;
+                                console.log(self.TFollowPersonQueryBasePageHelperResult);
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '查询异常' + data.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            console.error(response);
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+                /** 主键查询TFollowPerson */
+                queryTFollowPersonByPrimaryKey(userNameFollow, userName) {
+                    let self = this;
+                    axios.get(queryTFollowPersonByPrimaryKey, {
+                        params: {
+                            userNameFollow: userNameFollow,
+                            userName: userName
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+
+                            if (data.content) {
+                                self.TFollowPersonResult = data.content;
+                            } else {
+                                self.TFollowPersonResult.userNameFollow = null;
+                                self.TFollowPersonResult.userName = null;
+                            }
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '查询异常' + data.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                        function (response) {
+                            console.error(response);
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+                /** 关注 */
+                follow() {
+                    this.TFollowPersonInsertParam.userNameFollow = this.userNameView;
+                    this.TFollowPersonInsertParam.userName = this.userName;
+                    this.TFollowPersonInsertParam.cteateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                    ;
+                    if (this.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
+                    this.insertTFollowPerson();
+                },
+                /** 取消关注 */
+                unFollow() {
+                    this.TFollowPersonInsertParam.userNameView = this.userNameView;
+                    this.TFollowPersonInsertParam.userName = this.userName;
+                    if (this.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
+                    this.deleteTFollowPersonByPrimaryKey(this.userNameView, this.userName);
+
                 },
 
             }
