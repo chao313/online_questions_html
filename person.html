@@ -168,13 +168,39 @@
                                                             <h4 class="aw-hide-txt">
                                                                 <a href="javascript:;"
                                                                    @click="routerToQuestionDetail(value.id)"><span>{{value.title}}</span></a>
+                                                                <template v-if="value.status == 0">
+                                                                    <a href="javascript:;"
+                                                                       class="aw-question-tags hidden-xs contribute"><span>待发布</span></a>
+                                                                </template>
+                                                                <template v-else-if="value.status == 1">
+                                                                    <a href="javascript:;"
+                                                                       class="aw-question-tags hidden-xs contribute"><span>已发布</span></a>
+                                                                </template>
+                                                                <template v-else-if="value.status == 2">
+                                                                    <a href="javascript:;"
+                                                                       class="aw-question-tags hidden-xs contribute"><span>已终结</span></a>
+                                                                </template>
+                                                                <a href="javascript:;"
+                                                                   @click="routerToQuestionDetail(value.id)"
+                                                                   class="aw-question-tags pull-right hidden-xs contribute"><span>查看</span></a>
+                                                                <a href="javascript:;"
+                                                                   @click="routerToPublish(value.id)"
+                                                                   class="aw-question-tags pull-right hidden-xs contribute"><span>修改</span></a>
+
+                                                                <a href="javascript:;"
+                                                                   @click="updateTQuestionsByPrimaryKey(1, value.id)"
+                                                                   class="aw-question-tags-op-green pull-right hidden-xs contribute"><span>发布</span></a>
+                                                                <a href="javascript:;"
+                                                                   @click="updateTQuestionsByPrimaryKey(2, value.id)"
+                                                                   class="aw-question-tags-op-red pull-right hidden-xs contribute"><span>终结</span></a>
                                                             </h4>
                                                         </div>
                                                         <div class="mod-body">
                                                             <p class="text-color-999">
                                                                 <a href=""
                                                                    class="aw-question-tags"><span>{{value.tag}}</span></a>
-                                                                849 次浏览 • 11 个关注 • {{value.createTime}}</p>
+                                                                849 次浏览 • 11 个关注 • {{value.createTime}}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -870,6 +896,26 @@
                     hasNextPage: null,
                     navigatePages: null,
                     navigatepageNums: []
+                },
+                /** 存储TQuestions主键更新*/
+                TQuestionsUpdateByPrimaryKeyParam: {
+                    source: {
+                        userName: null,
+                        title: null,
+                        content: null,
+                        tag: null,
+                        status: null,
+                        deleteFlag: null,
+                        blackFlag: null,
+                        createTime: null,
+                        updateTime: null,
+                        pvCount: null,
+                        isTop: null
+                    }
+                    ,
+                    target: {
+                        id: null,
+                    }
                 }
 
 
@@ -1134,11 +1180,11 @@
                     queryStr = queryStr + "id=" + id + "";
                     window.open(WEBSTROM_BASE_URL + "/questionDetail.html?" + queryStr, '_self');
                 },
-                routerToQuestionDetail(id) {
+                routerToPublish(questionId) {
                     //跳转携带参数
                     let queryStr = "";
-                    queryStr = queryStr + "id=" + id + "";
-                    window.open(WEBSTROM_BASE_URL + "/questionDetail.html?" + queryStr, '_self');
+                    queryStr = queryStr + "questionId=" + questionId + "";
+                    window.open(WEBSTROM_BASE_URL + "/publish.html?" + queryStr, '_self');
                 },
                 /** 分页查询TFollowQuestion -- 存放的是默认的data */
                 queryBasePageHelperTFollowQuestion(pageNum, pageSize) {
@@ -1429,7 +1475,58 @@
                     let queryStr = "";
                     queryStr = queryStr + "userNameView=" + userNameView + "";
                     window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
-                }
+                },
+                /** 主键更新TQuestions */
+                updateTQuestionsByPrimaryKey(status, questionId) {
+                    let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
+                    self.TQuestionsUpdateByPrimaryKeyParam.source.status = status;
+                    self.TQuestionsUpdateByPrimaryKeyParam.target.id = questionId;
+                    axios.post(updateTQuestionsByPrimaryKey, self.TQuestionsUpdateByPrimaryKeyParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true) {
+                                    /*刷新数据*/
+                                    self.queryBasePageHelperTQuestions(self.TQuestionsQueryBasePageHelperParam.pageNum, self.TQuestionsQueryBasePageHelperParam.pageSize);
+                                    self.$message({
+                                        type: 'success',
+                                        message: '操作成功',
+                                        duration: 1000
+                                    });
+                                } else {
+                                    self.$message({
+                                        type: 'error',
+                                        message: '操作失败' + response.msg,
+                                        duration: 1000
+                                    });
+                                }
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '操作异常' + response.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            //失败回调
+                            console.error(response);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
             }
         })
     ;

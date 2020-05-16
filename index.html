@@ -400,6 +400,7 @@
             /** 分页查询TQuestions -- 存放的是默认的data */
             queryBasePageHelperTQuestions(pageNum, pageSize) {
                 let self = this;
+                this.TQuestionsQueryBasePageHelperParam.status = 1;//查找状态为发布的问题
                 axios.post(queryBasePageHelperTQuestions + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TQuestionsQueryBasePageHelperParam)
                     .then(function (response) {
                         let data = response.data;

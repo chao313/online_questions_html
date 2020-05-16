@@ -181,7 +181,7 @@
 
                             <div class="mod-footer clearfix">
                                 <span class="aw-anonymity">
-                                    <a id="saveDraft" data-type="question">保存草稿</a></span>
+                                    <a id="saveDraft" data-type="question" onclick="save()">保存草稿</a></span>
                                 <a class="btn btn-large btn-success btn-publish-submit" id="publish_submit"
                                    onclick="submit()">确认发起</a>
 
@@ -302,6 +302,7 @@
         data: {
             userId: null,
             userName: null,
+            questionId: null,
             /** 存储TQuestions插入结果*/
             TQuestionsInsertParam: {
                 id: null,
@@ -322,18 +323,92 @@
             TTagResults: [{
                 id: null,
                 tag: null
-            }]
+            }],
+            /** 存储TQuestions单个结果*/
+            TQuestionsResult: {
+                id: null,
+                userId: null,
+                title: null,
+                content: null,
+                status: null,
+                deleteFlag: null,
+                blackFlag: null,
+                createTime: null,
+                updateTime: null
+            },
+            /** 存储TQuestions主键更新*/
+            TQuestionsUpdateByPrimaryKeyParam: {
+                source: {
+                    userName: null,
+                    title: null,
+                    content: null,
+                    tag: null,
+                    status: null,
+                    deleteFlag: null,
+                    blackFlag: null,
+                    createTime: null,
+                    updateTime: null,
+                    pvCount: null,
+                    isTop: null
+                }
+                ,
+                target: {
+                    id: null,
+                }
+            }
         },
         created() {
+            var questionId = queryUrlParam('questionId')
+            if (questionId) {
+                this.questionId = questionId;
+                this.TQuestionsInsertParam.id = questionId;
+                this.queryTQuestionsByPrimaryKey(questionId);
+            }
             this.getUserId();
             this.getUserName();
             this.queryBaseTTag()
+
+
         },
         methods: {
-
+            /** 主键查询TQuestions */
+            queryTQuestionsByPrimaryKey(id) {
+                let self = this;
+                axios.get(queryTQuestionsByPrimaryKey, {
+                    params: {
+                        id: id
+                    }
+                }).then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.TQuestionsInsertParam = data.content;
+                        self.TQuestionsInsertParam.content = base64Decode(data.content.content)
+                        editor.txt.html(self.TQuestionsInsertParam.content);
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                    function (response) {
+                        //失败回调
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            },
             /** 插入TQuestions */
             insertTQuestions() {
                 let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 self.TQuestionsInsertParam.id = uuid();
                 self.TQuestionsInsertParam.userName = self.userName;
                 self.TQuestionsInsertParam.content = base64Encode(editor.txt.html());
@@ -347,25 +422,77 @@
                             if (data.content == true) {
                                 self.$message({
                                     type: 'success',
-                                    message: '发布成功',
+                                    message: '操作成功',
                                     duration: 1000
                                 });
                             } else {
                                 self.$message({
                                     type: 'error',
-                                    message: '发布失败' + response.msg,
+                                    message: '操作失败' + response.msg,
                                     duration: 1000
                                 });
                             }
                         } else {
                             self.$message({
                                 type: 'error',
-                                message: '发布异常' + response.msg,
+                                message: '操作异常' + response.msg,
                                 duration: 1000
                             });
                         }
                     }).catch(
                     function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            },
+            /** 主键更新TQuestions */
+            updateTQuestionsByPrimaryKey() {
+                let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
+                self.TQuestionsInsertParam.content = base64Encode(editor.txt.html());
+                self.TQuestionsInsertParam.updateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                /**转换*/
+                self.TQuestionsUpdateByPrimaryKeyParam.source = self.TQuestionsInsertParam;
+                self.TQuestionsUpdateByPrimaryKeyParam.target.id = self.TQuestionsInsertParam.id;
+                axios.post(updateTQuestionsByPrimaryKey, self.TQuestionsUpdateByPrimaryKeyParam)
+                    .then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content == true) {
+                                self.$message({
+                                    type: 'success',
+                                    message: '操作成功',
+                                    duration: 1000
+                                });
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '操作失败' + response.msg,
+                                    duration: 1000
+                                });
+                            }
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '操作异常' + response.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                    function (response) {
+                        //失败回调
+                        console.error(response);
                         self.$message({
                             type: 'error',
                             message: '网络异常，请检查服务',
@@ -465,8 +592,30 @@
         }
     });
 
+    /**
+     * 发布
+     */
     function submit() {
-        vue.insertTQuestions();
+        vue.TQuestionsInsertParam.status = 1;
+        if (vue.TQuestionsInsertParam.id) {
+            /**如果id不为空 -> 更新*/
+            vue.updateTQuestionsByPrimaryKey();
+        } else {
+            vue.insertTQuestions();
+        }
+    }
+
+    /**
+     * 存为草稿
+     */
+    function save() {
+        vue.TQuestionsInsertParam.status = 0;
+        if (vue.TQuestionsInsertParam.id) {
+            /**如果id不为空 -> 更新*/
+            vue.updateTQuestionsByPrimaryKey();
+        } else {
+            vue.insertTQuestions();
+        }
     }
 </script>
 <style type="text/css">

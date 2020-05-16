@@ -80,8 +80,8 @@
                 createTime: null,
                 updateTime: null,
                 deleteFlag: null,
-                approveStatus: null,
-                blackListUser: null,
+                approveStatus: 0,
+                blackListUser: 0,
                 logo: null
             }
         },
@@ -110,10 +110,16 @@
                         } else {
                             self.$message({
                                 type: 'error',
-                                message: '登陆异常' + response.msg,
+                                message: '登陆异常:' + response.msg,
                                 duration: 1000
                             });
                         }
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '登陆异常:' + response.msg,
+                            duration: 3000
+                        });
                     }
                 }).catch(
                     function (response) {
