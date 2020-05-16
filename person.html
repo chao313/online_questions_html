@@ -15,6 +15,7 @@
     <link href="local/user.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="local/tomorrow.css">
     <script src="local/jquery.2.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="local/jquery.form.js" type="text/javascript"></script>
 </head>
 <body>
@@ -124,17 +125,18 @@
                         </div>
                         <div class="mod-footer">
                             <ul class="nav nav-tabs aw-nav-tabs">
-                                <li class="active"><a href="http://wenda.wecenter.com/#questions" id="page_questions"
-                                                      data-toggle="tab">发问<span class="badge">{{TQuestionsQueryBasePageHelperResult.total}}</span></a>
+                                <li class="active">
+                                    <a href="#contents_questions" data-toggle="tab">发问<span class="badge">{{TQuestionsQueryBasePageHelperResult.total}}</span></a>
                                 </li>
-                                <li class=""><a href="http://wenda.wecenter.com/#answers" id="page_answers"
-                                                data-toggle="tab">回复<span class="badge">104</span></a></li>
-                                <li class=""><a href="http://wenda.wecenter.com/#answers" id="page_answers2"
-                                                data-toggle="tab">关注问题<span class="badge">104</span></a></li>
-                                <li class=""><a href="http://wenda.wecenter.com/#answers" id="page_answers3"
-                                                data-toggle="tab">关注的人<span class="badge">104</span></a></li>
-                                <li class=""><a href="http://wenda.wecenter.com/#answers" id="page_answers4"
-                                                data-toggle="tab">被人关注<span class="badge">104</span></a></li>
+                                <li><a href="#contents_answers" data-toggle="tab">回复<span
+                                        class="badge">{{TAnswerQueryBasePageHelperResult.total}}</span></a></li>
+                                <li><a href="#contents_followed_question" data-toggle="tab">关注问题<span
+                                        class="badge">{{TFollowQuestionQueryBasePageHelperResult.total}}</span></a>
+                                </li>
+                                <li><a href="#contents_followes" data-toggle="tab">关注的人<span
+                                        class="badge">104</span></a></li>
+                                <li><a href="#contents_followed" data-toggle="tab">被人关注<span
+                                        class="badge">104</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -142,130 +144,13 @@
 
                     <div class="aw-user-center-tab">
                         <div class="tab-content">
-                            <div class="tab-pane" id="overview">
-                                <!-- 回复 -->
+                            <div class="tab-pane active" id="contents_questions">
                                 <div class="aw-mod">
                                     <div class="mod-head">
-                                        <h3><a class="pull-right aw-more-content" href="javascript:;"
-                                               onclick="$(&#39;#page_answers&#39;).click();">更多 »</a>回复</h3>
-                                    </div>
-                                    <div class="mod-body">
-                                        <div class="aw-profile-answer-list">
-                                            <template v-if="TQuestionsQueryBasePageHelperResult.total != null"
-                                                      v-for="(value,index) in TQuestionsQueryBasePageHelperResult.list">
-                                                <div class="aw-item">
-                                                    <div class="mod-head">
-                                                        <h4>
-                                                            <a href="http://wenda.wecenter.com/question/32886"><span>{{value.title}}</span></a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                    <span class="aw-border-radius-5 count pull-left"><i
-                                                            class="icon icon-agree"></i></span>
-                                                        <p class="aw-hide-txt"></p>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end 回复 -->
-
-                                <!-- 发问 -->
-                                <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3><a class="pull-right aw-more-content" href="javascript:;"
-                                               onclick="$(&#39;#page_questions&#39;).click();">更多 »</a>发问</h3>
+                                        <h2></h2>
                                     </div>
                                     <div class="mod-body">
                                         <div class="aw-profile-publish-list">
-                                            <div class="aw-item">
-                                                <div class="mod-head">
-                                                    <h4>
-                                                        <a href="http://wenda.wecenter.com/question/32886">WeCenter3.5.0版本Bug集中反馈贴 ?</a>
-                                                    </h4>
-                                                </div>
-                                                <div class="mod-body">
-                                                    <span class="aw-border-radius-5 count pull-left"><i
-                                                            class="icon icon-reply"></i>10</span>
-                                                    <p class="aw-hide-txt">849 次浏览 &nbsp;• 11 个关注 &nbsp; •
-                                                        2020-04-22</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end 发问 -->
-
-                                <!-- 最新动态 -->
-                                <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3><a class="pull-right aw-more-content" href="javascript:;"
-                                               onclick="$(&#39;#page_actions&#39;).click();">更多 »</a>动态</h3>
-                                    </div>
-                                    <div class="mod-body">
-                                        <ul>
-                                            <li>
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-04-22</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 发起了问题,</em>
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32886">WeCenter3.5.0版本Bug集中反馈贴 ?</a>
-                                                </p>
-                                            </li>
-                                            <li>
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-04-20</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 发起了问题,</em>
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32883">WeCenter3.5.0免费学习版发布</a>
-                                                </p>
-                                            </li>
-                                            <li>
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-03-27</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 发起了问题,</em>
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32867">WeCenter 3.3.5版本bug反馈贴</a>
-                                                </p>
-                                            </li>
-                                            <li>
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-03-02</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 发起了问题,</em>
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32836">修复3.3.5因remove_xss导致的下载附件出错修复文件</a>
-                                                </p>
-                                            </li>
-                                            <li>
-                                                <p>
-                                                    <span class="pull-right text-color-999">2020-02-20</span>
-                                                    <em class="pull-left"><a
-                                                            href="http://wenda.wecenter.com/people/45510"
-                                                            class="aw-user-name" data-id="45510">技术 - 安辰</a> 发起了问题,</em>
-                                                    <a class="aw-hide-txt"
-                                                       href="http://wenda.wecenter.com/question/32808">WeCenter3.3.5版本发布, 修复反馈的已知BUG</a>
-                                                </p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane active" id="questions">
-                                <div class="aw-mod">
-                                    <div class="mod-head">
-                                        <h3>发问</h3>
-                                    </div>
-                                    <div class="mod-body">
-                                        <div class="aw-profile-publish-list" id="contents_user_actions_questions">
                                             <template v-if="TQuestionsQueryBasePageHelperResult.total != null"
                                                       v-for="(value,index) in TQuestionsQueryBasePageHelperResult.list">
                                                 <div class="aw-item">
@@ -309,476 +194,108 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="answers">
+                            <div class="tab-pane" id="contents_answers">
                                 <div class="aw-mod">
                                     <div class="mod-head">
-                                        <h3>回复</h3>
+                                        <h3></h3>
                                     </div>
                                     <div class="mod-body">
-                                        <div class="aw-profile-answer-list" id="contents_user_actions_answers">
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32904">希望官方看重移动端页面的布局</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">移动端是有计划重新调整的，目前已着手进行重新编写手机端的计划</p>
-                                                        <p class="text-color-999">3 天前</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32906">wecenter安装后按下主页上的按钮，结果都是403，而且网址是类似http://localhost/?/home</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">
-                                                            带有？是因为你未开启伪静态1、403问题，需要检查你本地的环境配置；网站目录指定的是否正确2、伪静态问题，需要到后台开启伪静态，并在服务器中配置伪静态规则；伪静态规则，可查看http://wenda.wecenter.com/article/1737</p>
-                                                        <p class="text-color-999">4 天前</p>
+                                        <div class="aw-profile-answer-list">
+                                            <template v-if="TAnswerQueryBasePageHelperResult.total != null"
+                                                      v-for="(value,index) in TAnswerQueryBasePageHelperResult.list">
+                                                <div class="aw-item">
+                                                    <div class="aw-mod">
+                                                        <div class="mod-head">
+                                                            <h4 class="aw-hide-txt">
+                                                                <a href="javascript:;"
+                                                                   @click="routerToQuestionDetail(value.questionId)">
+                                                                    <span>{{value.questionTitle}}</span>
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="mod-body">
+                                                            <span class="aw-border-radius-5 count pull-left">回复</span>
+                                                            <p class="text-color-999">
+                                                            <p v-html="value.content"></p></p>
+                                                            <p class="text-color-999">{{value.time}}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32905">写了几个符合amp协议的网页，放在新建的amp文件夹目录下，发现404，无法找到</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999">
-                                                            1、静态页面不可以通过https://mydomain.com/?/的方式访问，静态页面并未走wecenter系统，因此路由并未生效2、直接放到网站根目录amp目录下；访问地址为https://mydomain.com/amp/amptest1.html</p>
-                                                        <p class="text-color-999">4 天前</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32898">编辑器 编辑回复 框无法正常显示</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999">
-                                                            使用的WeCenter版本是多少？另外打开浏览器控制台看下是否有报错信息</p>
-                                                        <p class="text-color-999">2020-05-05 13:19</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32896">我想要添加一个自定义的页面（ 网站后台 - 内容设置 - 页面管理 - 添加页面），但是设置完成后，显示404 not found</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>2</span>
-                                                        <p class="text-color-999">新建页面完成后，需要启用页面</p>
-                                                        <p class="text-color-999">2020-05-05 07:50</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32895">后台登录超时后再次登录，跳转地址404</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999">
-                                                            能否具体说一下你的环境，是二级目录安装还是一级目录？是开启了伪静态还是未开启？</p>
-                                                        <p class="text-color-999">2020-04-27 09:46</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32893">为什么在管理后台添加前端菜单，点击提示404</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>2</span>
-                                                        <p class="text-color-999">3.5之前的版本添加单页至导航会出现404问题，请升级至3.5。</p>
-                                                        <p class="text-color-999">2020-04-26 15:22</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32888">刚升级完3.5，问题和文章发布页面错误怎么办？</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>3</span>
-                                                        <p class="text-color-999">升级到3.5.0的用户，请先卸载编辑器，然后重新安装下</p>
-                                                        <p class="text-color-999">2020-04-22 14:25</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32887">3.5用户头像, 管理员头像, 分类图标无法更改</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">未安装或开启 ImageMagick拓展</p>
-                                                        <p class="text-color-999">2020-04-22 14:23</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32885">反馈关于3.5版本的两个问题</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">
-                                                            这两个其实是一个问题，问题原因如下：1、系统通知消息插件未正常安装，或安装sql执行失败；您在后台插件管理处看到的系统消息插件应该是开启状态2、请重新到应用市场下载3.5.0版本的系统消息插件</p>
-                                                        <p class="text-color-999">2020-04-22 08:25</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="hidden" class="ajax_result0" value="10">
-                                            <input type="hidden" class="per_page" value="10">
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32882">关于数据调用的问题</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999">
-                                                            这些信息在users表可以直接调用，调用对应被调用的用户notification_unread
-                                                            未读系统通知inbox_unread&nbsp; 未读短信息answer_count 回答数量</p>
-                                                        <p class="text-color-999">2020-04-20 13:47</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32884">新版本如何进行覆盖升级</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999"></p>
-                                                        <p class="text-color-999">2020-04-20 13:40</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32876">请问首页源代码中这段是什么意思呢？</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">全局公用js定义</p>
-                                                        <p class="text-color-999">2020-04-14 11:59</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32879">安装504</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999">
-                                                            wecenter安装环境最低要求：php5.6+mysql5.3+检查下环境是否满足条件</p>
-                                                        <p class="text-color-999">2020-04-12 11:18</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32872">WeCenter_v3.3.0不可以注册和登陆</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">按下键盘D可以看到具体报错信息，截图或私聊我看下具体报错信息</p>
-                                                        <p class="text-color-999">2020-03-31 09:03</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32871">开启了伪静态，电脑端打不开其它页面，手机端访问不了，404错误，后台也进不去了。</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>5</span>
-                                                        <p class="text-color-999">具体是访问哪个链接报404？</p>
-                                                        <p class="text-color-999">2020-03-31 09:03</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32868">字段question_content_fulltext和title_fulltext分别是什么意思？每个字段对应的文字内容是如何产生的？</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">问题1：question_content_fulltext&nbsp;
-                                                            是问题标题全局检索字段title_fulltext&nbsp;是文章全局检索字段两个字段是用来搜索的时候使用的而question_content&nbsp;是正常显示问题标题用的问题2：为...</p>
-                                                        <p class="text-color-999">2020-03-29 11:21</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32866">为什么标题字符限制为255？</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>9</span>
-                                                        <p class="text-color-999">内容标题一般是不允许太长的，255是对应数据库字段长度</p>
-                                                        <p class="text-color-999">2020-03-27 08:51</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32857">新注册用于关注热门用户，一直不变化，怎么办？</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">能否具体描述下问题</p>
-                                                        <p class="text-color-999">2020-03-16 19:58</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/question/32859">活动页面想要添加一个筛选功能 ，地址筛选功能，请问后端php怎么写？</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>3</span>
-                                                        <p class="text-color-999">这个可能无法通过语言能够描述，或者告诉您该怎么做；</p>
-                                                        <p class="text-color-999">2020-03-15 21:18</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="hidden" class="ajax_result1" value="10">
-                                            <input type="hidden" class="per_page" value="10">
+                                            </template>
                                         </div>
                                     </div>
                                     <div class="mod-footer">
                                         <!-- 加载更多内容 -->
-                                        <a class="aw-load-more-content" id="bp_user_actions_answers_more" data-page="2">
-                                            <span>更多</span>
-                                        </a>
+                                        <div class="page-control">
+                                            <div class="mt10">
+                                                <template v-if="TAnswerQueryBasePageHelperResult.total != null">
+                                                    <!--/** */:page-size 数一页的数量！！！-->
+                                                    <el-pagination
+                                                            v-show="TAnswerQueryBasePageHelperResult.list.length > 0"
+                                                            background
+                                                            @current-change="handleCurrentChangeAnswer"
+                                                            :current-page.sync="TAnswerQueryBasePageHelperResult.pageNum"
+                                                            :page-size="TAnswerQueryBasePageHelperResult.pageSize"
+                                                            layout="total, prev, pager, next, jumper"
+                                                            :total="TAnswerQueryBasePageHelperResult.total">
+                                                    </el-pagination>
+                                                </template>
+                                            </div>
+                                        </div>
                                         <!-- end 加载更多内容 -->
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="articles">
+                            <div class="tab-pane" id="contents_followed_question">
                                 <div class="aw-mod">
                                     <div class="mod-head">
-                                        <h3>文章</h3>
+                                        <h3></h3>
                                     </div>
                                     <div class="mod-body">
-                                        <div class="aw-profile-publish-list" id="contents_user_actions_articles">
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/article/1739">WeCenter3.5.0 + 插件开发说明文档</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999">0 个评论 • 567 次浏览 • 2020-04-20</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/article/1734">WeCenter配置支付宝扫码支付教程</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>3</span>
-                                                        <p class="text-color-999">3 个评论 • 257 次浏览 • 2020-04-03</p>
+                                        <div class="aw-profile-publish-list">
+                                            <template v-if="TFollowQuestionQueryBasePageHelperResult.total != null"
+                                                      v-for="(value,index) in FollowQuestionList">
+                                                <div class="aw-item">
+                                                    <div class="aw-mod">
+                                                        <div class="mod-head">
+                                                            <h4 class="aw-hide-txt">
+                                                                <a href="javascript:;"
+                                                                   @click="routerToQuestionDetail(value.id)"><span>{{value.title}}</span></a>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="mod-body">
+                                                            <p class="text-color-999">
+                                                                <a href=""
+                                                                   class="aw-question-tags"><span>{{value.tag}}</span></a>
+                                                                849 次浏览 • 11 个关注 • {{value.createTime}}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/article/1730">关于第三方开发者发布的应用或模板上传到应用市场规范要求</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999">5 个评论 • 631 次浏览 • 2020-03-08</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/article/1713">WeCenter 3.3.4 XSS过滤补丁包</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">2 个评论 • 317 次浏览 • 2020-01-17</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/article/1700">双11，WeCenter钜惠狂欢 - 双11特别回馈优惠活动</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>0</span>
-                                                        <p class="text-color-999">7 个评论 • 1600 次浏览 • 2019-11-11</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/article/1555">涨知识！全新培训模式：知识付费问答之路</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>1</span>
-                                                        <p class="text-color-999">0 个评论 • 752 次浏览 • 2018-07-05</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="aw-item">
-                                                <div class="aw-mod">
-                                                    <div class="mod-head">
-                                                        <h4 class="aw-hide-txt">
-                                                            <a href="http://wenda.wecenter.com/article/1553">官网看到的常见问题汇总链接，搬运过来做个记录</a>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="mod-body">
-                                                        <span class="aw-border-radius-5 count pull-left"><i
-                                                                class="icon icon-agree"></i>2</span>
-                                                        <p class="text-color-999">4 个评论 • 909 次浏览 • 2018-07-03</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="hidden" class="ajax_result0" value="7">
-                                            <input type="hidden" class="per_page" value="10">
+                                            </template>
                                         </div>
                                     </div>
                                     <div class="mod-footer">
                                         <!-- 加载更多内容 -->
-                                        <a class="aw-load-more-content disabled" id="bp_user_actions_articles_more"
-                                           data-page="1">
-                                            <span>没有更多了</span>
-                                        </a>
-                                        <!-- end 加载更多内容 -->
+                                        <div class="page-control">
+                                            <div class="mt10">
+                                                <template v-if="TFollowQuestionQueryBasePageHelperResult.total != null">
+                                                    <!--/** */:page-size 数一页的数量！！！-->
+                                                    <el-pagination
+                                                            v-show="TFollowQuestionQueryBasePageHelperResult.list.length > 0"
+                                                            background
+                                                            @current-change="handleCurrentChange"
+                                                            :current-page.sync="TFollowQuestionQueryBasePageHelperResult.pageNum"
+                                                            :page-size="TFollowQuestionQueryBasePageHelperResult.pageSize"
+                                                            layout="total, prev, pager, next, jumper"
+                                                            :total="TFollowQuestionQueryBasePageHelperResult.total">
+                                                    </el-pagination>
+                                                </template>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="focus">
+                            <div class="tab-pane" id="contents_followes">
                                 <!-- 自定义切换 -->
                                 <div class="aw-mod">
                                     <div class="aw-tabs text-center">
@@ -1402,7 +919,7 @@
                                 </div>
                                 <!-- end 自定义切换 -->
                             </div>
-                            <div class="tab-pane" id="actions">
+                            <div class="tab-pane" id="contents_followed">
                                 <div class="aw-mod">
                                     <div class="mod-head">
                                         <h3>最新动态</h3>
@@ -1845,7 +1362,66 @@
                 TTagResults: [{
                     id: null,
                     tag: null
-                }]
+                }],
+                /** 存储TFollowQuestion多个结果*/
+                TFollowQuestionResults: [{
+                    questionId: null,
+                    userName: null,
+                    cteateTime: null
+                }],
+                /** 存储TFollowQuestion多条件查询条件*/
+                TFollowQuestionQueryBaseParam: {
+                    questionId: null,
+                    userName: null,
+                    cteateTime: null
+                }
+                ,
+                /** 存储TFollowQuestion多条件查询条件(分页，去除分页的num和size)*/
+                TFollowQuestionQueryBasePageHelperParam: {
+                    questionId: null,
+                    userName: null,
+                    cteateTime: null,
+                    pageNum: 1,
+                    pageSize: 10
+                }
+                ,
+                /** 存储TFollowQuestion存储多条件查询结果(分页，去除分页的num和size)*/
+                TFollowQuestionQueryBasePageHelperResult: {
+                    pageNum: null,
+                    pageSize: null,
+                    size: null,
+                    orderBy: null,
+                    startRow: null,
+                    endRow: null,
+                    total: null,
+                    pages: null,
+                    list: [{
+                        questionId: null,
+                        userName: null,
+                        cteateTime: null
+                    }],
+                    firstPage: null,
+                    prePage: 0,
+                    nextPage: null,
+                    lastPage: null,
+                    isFirstPage: true,
+                    isLastPage: null,
+                    hasPreviousPage: null,
+                    hasNextPage: null,
+                    navigatePages: null,
+                    navigatepageNums: []
+                },
+                FollowQuestionList: [{
+                    id: null,
+                    userId: null,
+                    title: null,
+                    content: null,
+                    status: null,
+                    deleteFlag: null,
+                    blackFlag: null,
+                    createTime: null,
+                    updateTime: null
+                }],
 
             },
             created() {
@@ -1853,11 +1429,13 @@
                  * 1.接收外界参数
                  */
                 var userNameView = queryUrlParam('userNameView');
-                var userNameView = 'aaaaaa123';
                 this.userNameView = userNameView;
                 this.TQuestionsQueryBasePageHelperParam.userName = userNameView;
                 this.queryBasePageHelperTQuestions(this.TQuestionsQueryBasePageHelperParam.pageNum, this.TQuestionsQueryBasePageHelperParam.pageSize);
+                this.TAnswerQueryBasePageHelperParam.userName = userNameView;
                 this.queryBasePageHelperTAnswer(this.TAnswerQueryBasePageHelperParam.pageNum, this.TAnswerQueryBasePageHelperParam.pageSize);
+                this.TFollowQuestionQueryBasePageHelperParam.userName = userNameView;
+                this.queryBasePageHelperTFollowQuestion(this.TFollowQuestionQueryBasePageHelperParam.pageNum, this.TFollowQuestionQueryBasePageHelperParam.pageSize);
                 this.getUserId();
                 this.queryBaseTTag();
                 this.getUserName();
@@ -1934,6 +1512,8 @@
                         let response = res.data;
                         if (response.code == 0) {
                             self.userName = response.content;
+                            topHead.userName = response.content;
+
                             // self.$message({
                             //     type: 'success',
                             //     message: '查询成功',
@@ -2001,7 +1581,6 @@
                             if (data.code == 0) {
                                 self.TAnswerQueryBasePageHelperResult = data.content;
                                 self.TAnswerQueryBasePageHelperResult.list.forEach(value => {
-                                    console.info(value);
                                     value.content = base64Decode(value.content);
                                 })
                             } else {
@@ -2096,6 +1675,81 @@
                     let queryStr = "";
                     queryStr = queryStr + "id=" + id + "";
                     window.open(WEBSTROM_BASE_URL + "/questionDetail.html?" + queryStr, '_self');
+                },
+                routerToQuestionDetail(id) {
+                    //跳转携带参数
+                    let queryStr = "";
+                    queryStr = queryStr + "id=" + id + "";
+                    window.open(WEBSTROM_BASE_URL + "/questionDetail.html?" + queryStr, '_self');
+                },
+                /** 分页查询TFollowQuestion -- 存放的是默认的data */
+                queryBasePageHelperTFollowQuestion(pageNum, pageSize) {
+                    console.log("queryBasePageHelperTFollowQuestion");
+                    let self = this;
+                    axios.post(queryBasePageHelperTFollowQuestion + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TFollowQuestionQueryBasePageHelperParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            if (data.code == 0) {
+                                self.TFollowQuestionQueryBasePageHelperResult = data.content;
+                                self.FollowQuestionList = [];
+                                data.content.list.forEach(value => {
+                                    if (value.questionId) {
+                                        self.localQueryTQuestionsByPrimaryKey(value.questionId);
+                                    }
+                                })
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '查询异常' + data.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            //失败回调
+                            console.info("queryBasePageHelperTFollowQuestion 网络异常");
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+                handleCurrentChangeTFollowQuestion(currentChange) {
+                    let self = this;
+                    self.TFollowQuestionQueryBasePageHelperParam.pageNum = self.TFollowQuestionQueryBasePageHelperResult.pageNum;
+                    self.TFollowQuestionQueryBasePageHelperParam.pageSize = self.TFollowQuestionQueryBasePageHelperResult.pageSize;
+                    self.queryBasePageHelperTQuestions(self.TFollowQuestionQueryBasePageHelperParam.pageNum, self.TFollowQuestionQueryBasePageHelperParam.pageSize);
+                },
+                /** 主键查询TQuestions */
+                localQueryTQuestionsByPrimaryKey(id) {
+                    console.info("queryTQuestionsByPrimaryKey");
+                    let self = this;
+                    axios.get(queryTQuestionsByPrimaryKey, {
+                        params: {
+                            id: id
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            console.info("queryTQuestionsByPrimaryKey");
+                            data.content.content = base64Decode(data.content.content)
+                            console.info("queryTQuestionsByPrimaryKey2");
+                            self.FollowQuestionList.push(data.content);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }).catch(
+                        function (response) {
+                            console.info("localQueryTQuestionsByPrimaryKey 网络异常" + response);
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
                 },
 
             }
