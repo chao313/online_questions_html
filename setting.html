@@ -78,18 +78,17 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <a href="" class="aw-user-nav-dropdown">
-                    <img :alt="userName" src="local/avatar-mid-img.png">{{userName}}
+                    <img :alt="userName" :src="path(TUserResult.logo)">{{userName}}
                 </a>
                 <div class="aw-dropdown dropdown-list pull-right">
                     <ul class="aw-dropdown-list">
-                        <li><a href="javaScript:;" @click="routerToPerson(userName)"><i class="icon icon-inbox"></i>
+                        <li><a href="javaScript:;" @click="routerToPerson(userName)">
                             个人主面<span
-                                    class="badge badge-important collapse" id="inbox_unread"
-                                    style="display: none;">0</span></a>
+                                class="badge badge-important collapse" id="inbox_unread"
+                                style="display: none;">0</span></a>
                         </li>
-                        <li class="hidden-xs"><a href=""><i
-                                class="icon icon-setting"></i> 设置</a></li>
-                        <li><a href=""><i class="icon icon-logout"></i> 退出</a></li>
+                        <li><a href="javaScript:;" @click="routerToSetting()">设置</a></li>
+                        <li><a href="javaScript:;" @click="loginOut()">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -130,13 +129,19 @@
                                     <form id="setting_form" method="post">
                                         <div class="mod-body">
                                             <dl>
+                                                <dt>用户名称:</dt>
+                                                <dd>{{TUserResult.name}}
+                                                </dd>
+                                            </dl>
+                                            <dl>
                                                 <dt>邮箱:</dt>
-                                                <dd>m18888106873@163.com
+                                                <dd>{{TUserResult.email}}
                                                 </dd>
                                             </dl>
                                             <dl>
                                                 <dt><label>介绍:</label></dt>
                                                 <dd class="introduce"><input class="form-control" name="signature"
+                                                                             v-model="TUserResult.signature"
                                                                              maxlength="128" type="text" value=""></dd>
                                             </dl>
                                             <!-- 上传头像 -->
@@ -144,7 +149,7 @@
                                                 <dl>
                                                     <dt class="pull-left"><img class="aw-border-radius-5" width="100"
                                                                                height="100"
-                                                                               src="local/avatar-mid-img.png"
+                                                                               :src="path(TUserResult.logo)"
                                                                                alt="" id="avatar_src"></dt>
                                                     <dd class="pull-left">
                                                         <h5>头像设置</h5>
@@ -175,20 +180,27 @@
                                             <li>
                                                 <label for="input-qq">注册时间:</label>
                                                 <input class="form-control" type="text" id="input-qq" name="qq"
-                                                       value="" disabled>
+                                                       v-model="TUserResult.createTime" disabled>
                                             </li>
                                             <li>
                                                 <label for="input-mobile">手机号码:</label>
                                                 <input class="form-control" type="text" id="input-mobile" name="mobile"
-                                                       value="">
+                                                       v-model="TUserResult.phone">
                                             </li>
                                             <li>
                                                 <label for="input-common-email">logo:</label>
                                                 <input class="form-control" type="text" id="input-common-email"
-                                                       name="common_email" value="" disabled>
+                                                       v-model="TUserResult.logo" name="common_email" value="" disabled>
                                             </li>
+                                            <li class="pull-right">
+                                                <a class="btn btn-success"
+                                                   href="javaScript:;" @click="save()">
+                                                    保存</a>
+                                            </li>
+
                                         </ul>
                                     </div>
+
                                 </div>
                                 <!-- end 联系方式 -->
 
@@ -213,6 +225,7 @@
 <script type="text/javascript" charset="utf-8" src="vueJs/axios.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="vueJs/api.js"></script>
 <script>
+    axios.defaults.withCredentials = true;
     var topHead = new Vue({
         el: "#top",
         data: {
@@ -221,7 +234,38 @@
             TTagResults: [{
                 id: null,
                 tag: null
-            }]
+            }],
+            TUserResult: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null,
+                signature: null
+            },
+        },
+        computed: {
+            path() {
+                return function (value) {
+
+                    if (value == null) {
+                        return 'local/avatar-mid-img.png';
+                    } else {
+
+                        return BASE_URL + "/" + value;
+                    }
+
+                }
+            }
         },
         methods: {
             routerToLogin() {
@@ -243,6 +287,45 @@
                 let queryStr = "";
                 queryStr = queryStr + "userNameView=" + userNameView + "";
                 window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
+            },
+            routerToSetting() {
+                //跳转携带参数
+                window.open(WEBSTROM_BASE_URL + "/setting.html?", '_self');
+            },
+            loginOut() {
+                let self = this;
+                axios.get(loginOut, {}).then(function (res) {
+                    let response = res.data;
+                    if (response.code == 0) {
+                        if (response.content == true) {
+                            self.$message({
+                                type: 'success',
+                                message: '退出成功',
+                                duration: 1000
+                            });
+                            self.routerToTag();
+                        } else {
+                            self.$message({
+                                type: 'success',
+                                message: '退出失败',
+                                duration: 1000
+                            });
+                        }
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '退出异常' + response.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
             }
         }
     });
@@ -291,27 +374,43 @@
                 approveStatus: null,
                 blackListUser: null,
                 logo: null,
-                pvCount: null
+                pvCount: null,
+                signature: null
             },
-            /** 存储TUser多条件查询条件*/
-            TUserQueryBaseParam: {
-                id: null,
-                name: null,
-                password: null,
-                salt: null,
-                phone: null,
-                email: null,
-                status: null,
-                createTime: null,
-                updateTime: null,
-                deleteFlag: null,
-                approveStatus: null,
-                blackListUser: null,
-                logo: null,
-                pvCount: null
+            /** 存储TUser主键更新*/
+            TUserUpdateByPrimaryKeyParam: {
+                source: {
+                    id: null,
+                    password: null,
+                    salt: null,
+                    phone: null,
+                    email: null,
+                    status: null,
+                    createTime: null,
+                    updateTime: null,
+                    deleteFlag: null,
+                    approveStatus: null,
+                    blackListUser: null,
+                    logo: null,
+                    pvCount: null,
+                    signature: null
+                }
+                ,
+                target: {
+                    name: null,
+                }
             }
-
         },
+        computed: {
+            path() {
+                return function (value) {
+
+                    return BASE_URL + "/" + value;
+
+                }
+            }
+        }
+        ,
         created() {
             this.uploadFile = uploadFile;
             this.getUserId();
@@ -357,6 +456,7 @@
                     if (response.code == 0) {
                         self.userName = response.content;
                         topHead.userName = response.content;
+                        self.queryTUserByPrimaryKey(self.userName);//查询用户详细信息
                         // self.$message({
                         //     type: 'success',
                         //     message: '查询成功',
@@ -411,6 +511,7 @@
                     })
             },
             easyUpload() {
+                let self = this;
                 var input = document.createElement("input");
                 input.type = "file";
                 input.click();
@@ -426,48 +527,83 @@
                         if (xhr.readyState == 4 && xhr.status == 200) {
                             var resultObj = JSON.parse(xhr.responseText);
                             console.info(resultObj);
+                            self.TUserResult.logo = resultObj.content[0];
                         }
                     }
                 }
             },
-            /** 多条件查询TUser */
-            queryBaseTUser() {
+            /** 主键查询TUser */
+            queryTUserByPrimaryKey(name) {
                 let self = this;
-                axios.post(queryBaseTUser, self.TUserQueryBaseParam)
-                    .then(function (response) {
-                        let data = response.data;
-                        console.log(data);
-                        if (data.code == 0) {
-                            self.TUserResults = data.content;
-                            console.log(self.TUserResults);
-                        } else {
-                            alert(data.msg);
-                        }
-                    }).catch(
+                axios.get(queryTUserByPrimaryKey, {
+                    params: {
+                        name: name
+                    }
+                }).then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.TUserResult = data.content;
+                        topHead.TUserResult = data.content;
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '获取用户信息异常:' + data.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
                     function (response) {
-                        //失败回调
-                        alert(self.alertError);
+                        console.info(response);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常',
+                            duration: 1000
+                        });
                     })
             },
-            /** 多条件更新TUser */
-            updateBaseTUser() {
+
+            /** 主键更新TUser */
+            updateTUserByPrimaryKey() {
                 let self = this;
-                axios.post(updateBaseTUser, self.TUserUpdateBaseParam)
+                axios.post(updateTUserByPrimaryKey, self.TUserUpdateByPrimaryKeyParam)
                     .then(function (response) {
                         let data = response.data;
                         console.log(data);
                         if (data.code == 0) {
                             if (data.content == true)
-                                alert("delete 成功");
+                                self.$message({
+                                    type: 'success',
+                                    message: '更新成功:',
+                                    duration: 1000
+                                });
                         } else {
-                            alert(data.msg);
+                            self.$message({
+                                type: 'error',
+                                message: '更新异常:' + data.msg,
+                                duration: 1000
+                            });
                         }
                     }).catch(
                     function (response) {
-                        //失败回调
-                        alert(self.alertError);
+                        console.info(response);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常',
+                            duration: 1000
+                        });
                     })
             },
+            save() {
+                let self = this;
+                self.TUserUpdateByPrimaryKeyParam.source.updateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                self.TUserUpdateByPrimaryKeyParam.source.signature = self.TUserResult.signature;
+                self.TUserUpdateByPrimaryKeyParam.source.phone = self.TUserResult.phone;
+                self.TUserUpdateByPrimaryKeyParam.source.logo = self.TUserResult.logo;
+                self.TUserUpdateByPrimaryKeyParam.target.name = self.TUserResult.name;
+                self.updateTUserByPrimaryKey();
+            }
+
         }
     });
 
