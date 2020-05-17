@@ -15,9 +15,17 @@ var getUserId = BASE_URL + '/SessionController/getUserId';
 /* 获取用户的Name */
 var getUserName = BASE_URL + '/SessionController/getUserName';
 
-/*后台的URL*/
-
+/* 配合富文本的文件url */
 var uploadFile = BASE_URL + '/EditorController/uploadFile';
+
+/* 获取验证码url */
+var getCheckCode = BASE_URL + '/EmailController/getCheckCode';
+
+/* 验证验证码url */
+var validCheckCode = BASE_URL + '/EmailController/validCheckCode';
+
+/* 密码找回url */
+var forgetPassword = BASE_URL + '/EmailController/forgetPassword';
 
 
 /** TFollowQuestion */
