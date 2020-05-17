@@ -321,17 +321,16 @@
                         <div class="mod-body">
                             <dl>
                                 <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img :alt="TQuestionsResult.userName"
-                                                    src="local/avatar-mid-img.png"></a>
+                                    <a href=""><img :alt="TUserResultQuestion.name"
+                                                    :src="path(TUserResultQuestion.logo)"></a>
                                 </dt>
                                 <dd class="pull-left">
                                     <a class="aw-user-name" href=""
-                                       data-id="45510"><span>{{TQuestionsResult.userName}}</span></a>
-                                    <i class="icon-v" title="个人认证"></i>
+                                       data-id="45510"><span>{{TUserResultQuestion.name}}</span></a>
                                     <a class=""
                                        onclick=""
                                        data-original-title="取消关注"></a>
-                                    <p>计算机</p>
+                                    <p>{{TUserResultQuestion.signature}}</p>
                                 </dd>
                             </dl>
                         </div>
@@ -348,26 +347,13 @@
                             <ul>
                                 <li>
                                     <a href="">Window快捷键学习</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- end 推荐内容 -->
-
-                    <!-- 相关问题 -->
-                    <div class="aw-mod">
-                        <div class="mod-head">
-                            <h3>相关问题</h3>
-                        </div>
-                        <div class="mod-body font-size-12">
-                            <ul>
                                 <li><a href="">岁月如歌, 坦然应对</a></li>
                                 <li><a href="">如何优化Windows的启动</a></li>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <!-- end 相关问题 -->
+                    <!-- end 推荐内容 -->
 
                     <!-- 问题状态 -->
                     <div class="aw-mod question-status">
@@ -376,9 +362,8 @@
                         </div>
                         <div class="mod-body">
                             <ul>
-                                <li>最新活动: <span class="aw-text-color-blue">5 天前</span></li>
-                                <li>浏览: <span class="aw-text-color-blue">770</span></li>
-                                <li>关注: <span class="aw-text-color-blue">10</span> 人</li>
+                                <li>创建时间: <span class="aw-text-color-blue">{{TQuestionsResult.createTime}}</span></li>
+                                <li>类别: <span class="aw-text-color-blue">{{TQuestionsResult.tag}}</span></li>
                             </ul>
                         </div>
                     </div>
@@ -403,7 +388,7 @@
                         <input type="hidden" name="attach_access_key" value="b2f0a5665b8022ea67b32095afbbc39b">
                         <div class="mod-head" id="answer">
                             <a href="" class="aw-user-name"><img :alt="userName"
-                                                                 src="local/avatar-mid-img.png"></a>
+                                                                 :src="path(TUserResult.logo)"></a>
                             <p>{{userName}}</p>
                         </div>
                         <div class="mod-body">
@@ -568,6 +553,36 @@
                 id: null,
                 tag: null
             }],
+            TUserResult: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null,
+                signature: null
+            },
+        },
+        computed: {
+            path() {
+                return function (value) {
+
+                    if (value == null) {
+                        return 'local/avatar-mid-img.png';
+                    } else {
+
+                        return BASE_URL + "/" + value;
+                    }
+                }
+            }
         },
         methods: {}
     });
@@ -712,7 +727,41 @@
                 blackFlag: null,
                 time: null,
                 answerId: null
-            }
+            },
+            TUserResult: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null,
+                signature: null
+            },
+            TUserResultQuestion: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null,
+                signature: null
+            },
         },
         computed: {
             base64Decode() {
@@ -720,6 +769,17 @@
 
                     return base64Decode(value);
 
+                }
+            },
+            path() {
+                return function (value) {
+
+                    if (value == null) {
+                        return 'local/avatar-mid-img.png';
+                    } else {
+
+                        return BASE_URL + "/" + value;
+                    }
                 }
             }
         }
@@ -753,7 +813,8 @@
                     if (data.code == 0) {
                         self.TQuestionsResult = data.content;
                         self.TQuestionsResult.content = base64Decode(data.content.content)
-                        console.log(self.TQuestionsResult);
+                        self.queryTUserByPrimaryKeyQuestion(self.TQuestionsResult.userName)
+
                     } else {
                         alert(data.msg);
                     }
@@ -766,10 +827,6 @@
                             duration: 1000
                         })
                     })
-            }
-            ,
-            answer() {
-
             }
             ,
             getUserId() {
@@ -1060,7 +1117,7 @@
                 this.TFollowQuestionInsertParam.cteateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
                 ;
                 if (this.userName == null) {
-                    self.$message({
+                    this.$message({
                         type: 'error',
                         message: '用户未登陆',
                         duration: 1000
@@ -1272,6 +1329,38 @@
                     console.log(data);
                     if (data.code == 0) {
                         topHead.TUserResult = data.content;
+                        answer.TUserResult = data.content;
+                        self.TUserResult = data.content;
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '获取用户信息异常:' + data.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
+                    function (response) {
+                        console.info(response);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常',
+                            duration: 1000
+                        });
+                    })
+
+            },
+            /** 主键查询TUser */
+            queryTUserByPrimaryKeyQuestion(name) {
+                let self = this;
+                axios.get(queryTUserByPrimaryKey, {
+                    params: {
+                        name: name
+                    }
+                }).then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.TUserResultQuestion = data.content;
                     } else {
                         self.$message({
                             type: 'error',

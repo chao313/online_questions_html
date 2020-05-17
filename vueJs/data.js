@@ -17,6 +17,42 @@ function queryUrlParam(name) {
 
 /** 后台的URL */
 
+/**  */
+/** 根据主键更新 */
+var updateByPrimaryKey = BASE_URL + '/Controller/updateByPrimaryKey';
+/** 单条插入 */
+var insert = BASE_URL + '/Controller/insert';
+/** 根据主键删除 */
+var deleteByPrimaryKey = BASE_URL + '/Controller/deleteByPrimaryKey';
+/** 分页查询 */
+var queryBasePageHelper = BASE_URL + '/Controller/queryBasePageHelper';
+/** 根据主键查询 */
+var queryByPrimaryKey = BASE_URL + '/Controller/queryByPrimaryKey';
+/** 多条件查询 */
+var queryBase = BASE_URL + '/Controller/queryBase';
+/** 批量插入 */
+var inserts = BASE_URL + '/Controller/inserts';
+/** 多条件更新 */
+var updateBase = BASE_URL + '/Controller/updateBase';
+
+/** VQuestionUserAnswerFollow */
+/** 根据主键更新VQuestionUserAnswerFollow */
+var updateVQuestionUserAnswerFollowByPrimaryKey = BASE_URL + '/VQuestionUserAnswerFollowController/updateByPrimaryKey';
+/** 单条插入VQuestionUserAnswerFollow */
+var insertVQuestionUserAnswerFollow = BASE_URL + '/VQuestionUserAnswerFollowController/insert';
+/** 根据主键删除VQuestionUserAnswerFollow */
+var deleteVQuestionUserAnswerFollowByPrimaryKey = BASE_URL + '/VQuestionUserAnswerFollowController/deleteByPrimaryKey';
+/** 分页查询VQuestionUserAnswerFollow */
+var queryBasePageHelperVQuestionUserAnswerFollow = BASE_URL + '/VQuestionUserAnswerFollowController/queryBasePageHelper';
+/** 根据主键查询VQuestionUserAnswerFollow */
+var queryVQuestionUserAnswerFollowByPrimaryKey = BASE_URL + '/VQuestionUserAnswerFollowController/queryByPrimaryKey';
+/** 多条件查询VQuestionUserAnswerFollow */
+var queryBaseVQuestionUserAnswerFollow = BASE_URL + '/VQuestionUserAnswerFollowController/queryBase';
+/** 批量插入VQuestionUserAnswerFollow */
+var insertsVQuestionUserAnswerFollow = BASE_URL + '/VQuestionUserAnswerFollowController/inserts';
+/** 多条件更新VQuestionUserAnswerFollow */
+var updateBaseVQuestionUserAnswerFollow = BASE_URL + '/VQuestionUserAnswerFollowController/updateBase';
+
 /** TTag */
 /** 根据主键更新TTag */
 var updateTTagByPrimaryKey = BASE_URL + '/TTagController/updateByPrimaryKey';
@@ -52,6 +88,24 @@ var queryBaseVReportUserUser = BASE_URL + '/VReportUserUserController/queryBase'
 var insertsVReportUserUser = BASE_URL + '/VReportUserUserController/inserts';
 /** 多条件更新VReportUserUser */
 var updateBaseVReportUserUser = BASE_URL + '/VReportUserUserController/updateBase';
+
+/** VQuestionAnswerSum */
+/** 根据主键更新VQuestionAnswerSum */
+var updateVQuestionAnswerSumByPrimaryKey = BASE_URL + '/VQuestionAnswerSumController/updateByPrimaryKey';
+/** 单条插入VQuestionAnswerSum */
+var insertVQuestionAnswerSum = BASE_URL + '/VQuestionAnswerSumController/insert';
+/** 根据主键删除VQuestionAnswerSum */
+var deleteVQuestionAnswerSumByPrimaryKey = BASE_URL + '/VQuestionAnswerSumController/deleteByPrimaryKey';
+/** 分页查询VQuestionAnswerSum */
+var queryBasePageHelperVQuestionAnswerSum = BASE_URL + '/VQuestionAnswerSumController/queryBasePageHelper';
+/** 根据主键查询VQuestionAnswerSum */
+var queryVQuestionAnswerSumByPrimaryKey = BASE_URL + '/VQuestionAnswerSumController/queryByPrimaryKey';
+/** 多条件查询VQuestionAnswerSum */
+var queryBaseVQuestionAnswerSum = BASE_URL + '/VQuestionAnswerSumController/queryBase';
+/** 批量插入VQuestionAnswerSum */
+var insertsVQuestionAnswerSum = BASE_URL + '/VQuestionAnswerSumController/inserts';
+/** 多条件更新VQuestionAnswerSum */
+var updateBaseVQuestionAnswerSum = BASE_URL + '/VQuestionAnswerSumController/updateBase';
 
 /** VReportQuestionQuestition */
 /** 根据主键更新VReportQuestionQuestition */
@@ -179,6 +233,24 @@ var insertsVReportAnswerAnswer = BASE_URL + '/VReportAnswerAnswerController/inse
 /** 多条件更新VReportAnswerAnswer */
 var updateBaseVReportAnswerAnswer = BASE_URL + '/VReportAnswerAnswerController/updateBase';
 
+/** VHotQuestion */
+/** 根据主键更新VHotQuestion */
+var updateVHotQuestionByPrimaryKey = BASE_URL + '/VHotQuestionController/updateByPrimaryKey';
+/** 单条插入VHotQuestion */
+var insertVHotQuestion = BASE_URL + '/VHotQuestionController/insert';
+/** 根据主键删除VHotQuestion */
+var deleteVHotQuestionByPrimaryKey = BASE_URL + '/VHotQuestionController/deleteByPrimaryKey';
+/** 分页查询VHotQuestion */
+var queryBasePageHelperVHotQuestion = BASE_URL + '/VHotQuestionController/queryBasePageHelper';
+/** 根据主键查询VHotQuestion */
+var queryVHotQuestionByPrimaryKey = BASE_URL + '/VHotQuestionController/queryByPrimaryKey';
+/** 多条件查询VHotQuestion */
+var queryBaseVHotQuestion = BASE_URL + '/VHotQuestionController/queryBase';
+/** 批量插入VHotQuestion */
+var insertsVHotQuestion = BASE_URL + '/VHotQuestionController/inserts';
+/** 多条件更新VHotQuestion */
+var updateBaseVHotQuestion = BASE_URL + '/VHotQuestionController/updateBase';
+
 /** TQuestionTag */
 /** 根据主键更新TQuestionTag */
 var updateTQuestionTagByPrimaryKey = BASE_URL + '/TQuestionTagController/updateByPrimaryKey';
@@ -250,6 +322,24 @@ var queryBaseTReportAnswer = BASE_URL + '/TReportAnswerController/queryBase';
 var insertsTReportAnswer = BASE_URL + '/TReportAnswerController/inserts';
 /** 多条件更新TReportAnswer */
 var updateBaseTReportAnswer = BASE_URL + '/TReportAnswerController/updateBase';
+
+/** VQuestionFollowSum */
+/** 根据主键更新VQuestionFollowSum */
+var updateVQuestionFollowSumByPrimaryKey = BASE_URL + '/VQuestionFollowSumController/updateByPrimaryKey';
+/** 单条插入VQuestionFollowSum */
+var insertVQuestionFollowSum = BASE_URL + '/VQuestionFollowSumController/insert';
+/** 根据主键删除VQuestionFollowSum */
+var deleteVQuestionFollowSumByPrimaryKey = BASE_URL + '/VQuestionFollowSumController/deleteByPrimaryKey';
+/** 分页查询VQuestionFollowSum */
+var queryBasePageHelperVQuestionFollowSum = BASE_URL + '/VQuestionFollowSumController/queryBasePageHelper';
+/** 根据主键查询VQuestionFollowSum */
+var queryVQuestionFollowSumByPrimaryKey = BASE_URL + '/VQuestionFollowSumController/queryByPrimaryKey';
+/** 多条件查询VQuestionFollowSum */
+var queryBaseVQuestionFollowSum = BASE_URL + '/VQuestionFollowSumController/queryBase';
+/** 批量插入VQuestionFollowSum */
+var insertsVQuestionFollowSum = BASE_URL + '/VQuestionFollowSumController/inserts';
+/** 多条件更新VQuestionFollowSum */
+var updateBaseVQuestionFollowSum = BASE_URL + '/VQuestionFollowSumController/updateBase';
 
 /** TUser */
 /** 根据主键更新TUser */
@@ -351,6 +441,337 @@ var vue = new Vue({
         BASE_URL:BASE_URL,
 
         host:host,
+        /** 存储多个结果*/
+        Results:[{
+        }]
+        ,
+        /** 存储单个结果*/
+        Result:{
+        }
+        ,
+        /** 存储插入结果*/
+        InsertParam:{
+        }
+        ,
+       /** 存储主键更新*/
+       UpdateByPrimaryKeyParam:{
+         source:{
+         }
+         ,
+         target:{
+         }
+       }
+       ,
+       /** 存储更新*/
+       UpdateBaseParam:{
+         source:{
+         }
+         ,
+         target:{
+         }
+       }
+       ,
+       /** 存储多条件查询条件*/
+       QueryBaseParam:{
+       }
+       ,
+       /** 存储多条件查询条件(分页，去除分页的num和size)*/
+       QueryBasePageHelperParam:{
+       }
+       ,
+       /** 存储存储多条件查询结果(分页，去除分页的num和size)*/
+       QueryBasePageHelperResult:{
+          pageNum: null,
+          pageSize: null,
+          size: null,
+          orderBy: null,
+          startRow: null,
+          endRow: null,
+          total: null,
+          pages: null,
+          list: [{
+          }],
+          firstPage: null,
+          prePage: 0,
+          nextPage: null,
+          lastPage: null,
+          isFirstPage: true,
+          isLastPage: null,
+          hasPreviousPage: null,
+          hasNextPage: null,
+          navigatePages: null,
+          navigatepageNums: []
+        }
+    ,
+        /** 存储VQuestionUserAnswerFollow多个结果*/
+        VQuestionUserAnswerFollowResults:[{
+           id: null,
+           userName: null,
+           title: null,
+           content: null,
+           isTop: null,
+           pvCount: null,
+           updateTime: null,
+           createTime: null,
+           blackFlag: null,
+           deleteFlag: null,
+           status: null,
+           isSave: null,
+           tag: null,
+           id0: null,
+           name: null,
+           status0: null,
+           deleteFlag0: null,
+           approveStatus: null,
+           blackListUser: null,
+           logo: null,
+           pvCount0: null,
+           followSum: null,
+           answerSum: null
+        }]
+        ,
+        /** 存储VQuestionUserAnswerFollow单个结果*/
+        VQuestionUserAnswerFollowResult:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          id0: null,
+          name: null,
+          status0: null,
+          deleteFlag0: null,
+          approveStatus: null,
+          blackListUser: null,
+          logo: null,
+          pvCount0: null,
+          followSum: null,
+          answerSum: null
+        }
+        ,
+        /** 存储VQuestionUserAnswerFollow插入结果*/
+        VQuestionUserAnswerFollowInsertParam:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          id0: null,
+          name: null,
+          status0: null,
+          deleteFlag0: null,
+          approveStatus: null,
+          blackListUser: null,
+          logo: null,
+          pvCount0: null,
+          followSum: null,
+          answerSum: null
+        }
+        ,
+       /** 存储VQuestionUserAnswerFollow主键更新*/
+       VQuestionUserAnswerFollowUpdateByPrimaryKeyParam:{
+         source:{
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            isTop: null,
+            pvCount: null,
+            updateTime: null,
+            createTime: null,
+            blackFlag: null,
+            deleteFlag: null,
+            status: null,
+            isSave: null,
+            tag: null,
+            id0: null,
+            name: null,
+            status0: null,
+            deleteFlag0: null,
+            approveStatus: null,
+            blackListUser: null,
+            logo: null,
+            pvCount0: null,
+            followSum: null,
+            answerSum: null
+         }
+         ,
+         target:{
+         }
+       }
+       ,
+       /** 存储VQuestionUserAnswerFollow更新*/
+       VQuestionUserAnswerFollowUpdateBaseParam:{
+         source:{
+           id: null,
+           userName: null,
+           title: null,
+           content: null,
+           isTop: null,
+           pvCount: null,
+           updateTime: null,
+           createTime: null,
+           blackFlag: null,
+           deleteFlag: null,
+           status: null,
+           isSave: null,
+           tag: null,
+           id0: null,
+           name: null,
+           status0: null,
+           deleteFlag0: null,
+           approveStatus: null,
+           blackListUser: null,
+           logo: null,
+           pvCount0: null,
+           followSum: null,
+           answerSum: null
+         }
+         ,
+         target:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          id0: null,
+          name: null,
+          status0: null,
+          deleteFlag0: null,
+          approveStatus: null,
+          blackListUser: null,
+          logo: null,
+          pvCount0: null,
+          followSum: null,
+          answerSum: null
+         }
+       }
+       ,
+       /** 存储VQuestionUserAnswerFollow多条件查询条件*/
+       VQuestionUserAnswerFollowQueryBaseParam:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          id0: null,
+          name: null,
+          status0: null,
+          deleteFlag0: null,
+          approveStatus: null,
+          blackListUser: null,
+          logo: null,
+          pvCount0: null,
+          followSum: null,
+          answerSum: null
+       }
+       ,
+       /** 存储VQuestionUserAnswerFollow多条件查询条件(分页，去除分页的num和size)*/
+       VQuestionUserAnswerFollowQueryBasePageHelperParam:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          id0: null,
+          name: null,
+          status0: null,
+          deleteFlag0: null,
+          approveStatus: null,
+          blackListUser: null,
+          logo: null,
+          pvCount0: null,
+          followSum: null,
+          answerSum: null
+       }
+       ,
+       /** 存储VQuestionUserAnswerFollow存储多条件查询结果(分页，去除分页的num和size)*/
+       VQuestionUserAnswerFollowQueryBasePageHelperResult:{
+          pageNum: null,
+          pageSize: null,
+          size: null,
+          orderBy: null,
+          startRow: null,
+          endRow: null,
+          total: null,
+          pages: null,
+          list: [{
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            isTop: null,
+            pvCount: null,
+            updateTime: null,
+            createTime: null,
+            blackFlag: null,
+            deleteFlag: null,
+            status: null,
+            isSave: null,
+            tag: null,
+            id0: null,
+            name: null,
+            status0: null,
+            deleteFlag0: null,
+            approveStatus: null,
+            blackListUser: null,
+            logo: null,
+            pvCount0: null,
+            followSum: null,
+            answerSum: null
+          }],
+          firstPage: null,
+          prePage: 0,
+          nextPage: null,
+          lastPage: null,
+          isFirstPage: true,
+          isLastPage: null,
+          hasPreviousPage: null,
+          hasNextPage: null,
+          navigatePages: null,
+          navigatepageNums: []
+        }
+    ,
         /** 存储TTag多个结果*/
         TTagResults:[{
            id: null,
@@ -606,6 +1027,86 @@ var vue = new Vue({
             status: null,
             email: null,
             phone: null
+          }],
+          firstPage: null,
+          prePage: 0,
+          nextPage: null,
+          lastPage: null,
+          isFirstPage: true,
+          isLastPage: null,
+          hasPreviousPage: null,
+          hasNextPage: null,
+          navigatePages: null,
+          navigatepageNums: []
+        }
+    ,
+        /** 存储VQuestionAnswerSum多个结果*/
+        VQuestionAnswerSumResults:[{
+           answerSum: null,
+           questionId: null
+        }]
+        ,
+        /** 存储VQuestionAnswerSum单个结果*/
+        VQuestionAnswerSumResult:{
+          answerSum: null,
+          questionId: null
+        }
+        ,
+        /** 存储VQuestionAnswerSum插入结果*/
+        VQuestionAnswerSumInsertParam:{
+          answerSum: null,
+          questionId: null
+        }
+        ,
+       /** 存储VQuestionAnswerSum主键更新*/
+       VQuestionAnswerSumUpdateByPrimaryKeyParam:{
+         source:{
+            answerSum: null,
+            questionId: null
+         }
+         ,
+         target:{
+         }
+       }
+       ,
+       /** 存储VQuestionAnswerSum更新*/
+       VQuestionAnswerSumUpdateBaseParam:{
+         source:{
+           answerSum: null,
+           questionId: null
+         }
+         ,
+         target:{
+          answerSum: null,
+          questionId: null
+         }
+       }
+       ,
+       /** 存储VQuestionAnswerSum多条件查询条件*/
+       VQuestionAnswerSumQueryBaseParam:{
+          answerSum: null,
+          questionId: null
+       }
+       ,
+       /** 存储VQuestionAnswerSum多条件查询条件(分页，去除分页的num和size)*/
+       VQuestionAnswerSumQueryBasePageHelperParam:{
+          answerSum: null,
+          questionId: null
+       }
+       ,
+       /** 存储VQuestionAnswerSum存储多条件查询结果(分页，去除分页的num和size)*/
+       VQuestionAnswerSumQueryBasePageHelperResult:{
+          pageNum: null,
+          pageSize: null,
+          size: null,
+          orderBy: null,
+          startRow: null,
+          endRow: null,
+          total: null,
+          pages: null,
+          list: [{
+            answerSum: null,
+            questionId: null
           }],
           firstPage: null,
           prePage: 0,
@@ -1863,6 +2364,212 @@ var vue = new Vue({
           navigatepageNums: []
         }
     ,
+        /** 存储VHotQuestion多个结果*/
+        VHotQuestionResults:[{
+           id: null,
+           userName: null,
+           title: null,
+           content: null,
+           isTop: null,
+           pvCount: null,
+           updateTime: null,
+           createTime: null,
+           blackFlag: null,
+           deleteFlag: null,
+           status: null,
+           isSave: null,
+           tag: null,
+           followSum: null,
+           answerSum: null,
+           lastAnswerTime: null
+        }]
+        ,
+        /** 存储VHotQuestion单个结果*/
+        VHotQuestionResult:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          followSum: null,
+          answerSum: null,
+          lastAnswerTime: null
+        }
+        ,
+        /** 存储VHotQuestion插入结果*/
+        VHotQuestionInsertParam:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          followSum: null,
+          answerSum: null,
+          lastAnswerTime: null
+        }
+        ,
+       /** 存储VHotQuestion主键更新*/
+       VHotQuestionUpdateByPrimaryKeyParam:{
+         source:{
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            isTop: null,
+            pvCount: null,
+            updateTime: null,
+            createTime: null,
+            blackFlag: null,
+            deleteFlag: null,
+            status: null,
+            isSave: null,
+            tag: null,
+            followSum: null,
+            answerSum: null,
+            lastAnswerTime: null
+         }
+         ,
+         target:{
+         }
+       }
+       ,
+       /** 存储VHotQuestion更新*/
+       VHotQuestionUpdateBaseParam:{
+         source:{
+           id: null,
+           userName: null,
+           title: null,
+           content: null,
+           isTop: null,
+           pvCount: null,
+           updateTime: null,
+           createTime: null,
+           blackFlag: null,
+           deleteFlag: null,
+           status: null,
+           isSave: null,
+           tag: null,
+           followSum: null,
+           answerSum: null,
+           lastAnswerTime: null
+         }
+         ,
+         target:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          followSum: null,
+          answerSum: null,
+          lastAnswerTime: null
+         }
+       }
+       ,
+       /** 存储VHotQuestion多条件查询条件*/
+       VHotQuestionQueryBaseParam:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          followSum: null,
+          answerSum: null,
+          lastAnswerTime: null
+       }
+       ,
+       /** 存储VHotQuestion多条件查询条件(分页，去除分页的num和size)*/
+       VHotQuestionQueryBasePageHelperParam:{
+          id: null,
+          userName: null,
+          title: null,
+          content: null,
+          isTop: null,
+          pvCount: null,
+          updateTime: null,
+          createTime: null,
+          blackFlag: null,
+          deleteFlag: null,
+          status: null,
+          isSave: null,
+          tag: null,
+          followSum: null,
+          answerSum: null,
+          lastAnswerTime: null
+       }
+       ,
+       /** 存储VHotQuestion存储多条件查询结果(分页，去除分页的num和size)*/
+       VHotQuestionQueryBasePageHelperResult:{
+          pageNum: null,
+          pageSize: null,
+          size: null,
+          orderBy: null,
+          startRow: null,
+          endRow: null,
+          total: null,
+          pages: null,
+          list: [{
+            id: null,
+            userName: null,
+            title: null,
+            content: null,
+            isTop: null,
+            pvCount: null,
+            updateTime: null,
+            createTime: null,
+            blackFlag: null,
+            deleteFlag: null,
+            status: null,
+            isSave: null,
+            tag: null,
+            followSum: null,
+            answerSum: null,
+            lastAnswerTime: null
+          }],
+          firstPage: null,
+          prePage: 0,
+          nextPage: null,
+          lastPage: null,
+          isFirstPage: true,
+          isLastPage: null,
+          hasPreviousPage: null,
+          hasNextPage: null,
+          navigatePages: null,
+          navigatepageNums: []
+        }
+    ,
         /** 存储TQuestionTag多个结果*/
         TQuestionTagResults:[{
            id: null,
@@ -2269,6 +2976,86 @@ var vue = new Vue({
             id: null,
             answerId: null,
             reason: null
+          }],
+          firstPage: null,
+          prePage: 0,
+          nextPage: null,
+          lastPage: null,
+          isFirstPage: true,
+          isLastPage: null,
+          hasPreviousPage: null,
+          hasNextPage: null,
+          navigatePages: null,
+          navigatepageNums: []
+        }
+    ,
+        /** 存储VQuestionFollowSum多个结果*/
+        VQuestionFollowSumResults:[{
+           followSum: null,
+           questionId: null
+        }]
+        ,
+        /** 存储VQuestionFollowSum单个结果*/
+        VQuestionFollowSumResult:{
+          followSum: null,
+          questionId: null
+        }
+        ,
+        /** 存储VQuestionFollowSum插入结果*/
+        VQuestionFollowSumInsertParam:{
+          followSum: null,
+          questionId: null
+        }
+        ,
+       /** 存储VQuestionFollowSum主键更新*/
+       VQuestionFollowSumUpdateByPrimaryKeyParam:{
+         source:{
+            followSum: null,
+            questionId: null
+         }
+         ,
+         target:{
+         }
+       }
+       ,
+       /** 存储VQuestionFollowSum更新*/
+       VQuestionFollowSumUpdateBaseParam:{
+         source:{
+           followSum: null,
+           questionId: null
+         }
+         ,
+         target:{
+          followSum: null,
+          questionId: null
+         }
+       }
+       ,
+       /** 存储VQuestionFollowSum多条件查询条件*/
+       VQuestionFollowSumQueryBaseParam:{
+          followSum: null,
+          questionId: null
+       }
+       ,
+       /** 存储VQuestionFollowSum多条件查询条件(分页，去除分页的num和size)*/
+       VQuestionFollowSumQueryBasePageHelperParam:{
+          followSum: null,
+          questionId: null
+       }
+       ,
+       /** 存储VQuestionFollowSum存储多条件查询结果(分页，去除分页的num和size)*/
+       VQuestionFollowSumQueryBasePageHelperResult:{
+          pageNum: null,
+          pageSize: null,
+          size: null,
+          orderBy: null,
+          startRow: null,
+          endRow: null,
+          total: null,
+          pages: null,
+          list: [{
+            followSum: null,
+            questionId: null
           }],
           firstPage: null,
           prePage: 0,
@@ -2905,6 +3692,344 @@ var vue = new Vue({
     methods: {
             /** 处理queryByPrimaryKey */
 
+            /** 主键更新 */
+            updateByPrimaryKey() {
+              let self = this;
+              axios.post(updateByPrimaryKey, self.UpdateByPrimaryKeyParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 插入 */
+            insert() {
+              let self = this;
+              axios.post(insert, self.InsertParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("insert 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 主键删除 */
+            deleteByPrimaryKey() {
+              let self = this;
+              axios.post(deleteByPrimaryKey,  {
+                  params: {
+                  }
+             }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 分页查询 -- 存放的是默认的data */
+            queryBasePageHelper(pageNum,pageSize) {
+              let self = this;
+              axios.post(queryBasePageHelper+"?pageNum="+pageNum+"&pageSize="+pageSize, self.QueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.QueryBasePageHelperResult = data.content;
+                        console.log(self.QueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+           /** 分页查询  --  存放的是指定的data.sub */
+            queryBasePageHelperSub(pageNum,pageSize,sub) {
+              let self = this;
+              axios.post(queryBasePageHelper+"?pageNum="+pageNum+"&pageSize="+pageSize, self.QueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.$set(self.QueryBasePageHelperResult,sub,data.content);
+                        console.log(self.QueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+            /** 主键查询 */
+            queryByPrimaryKey() {
+              let self = this;
+              axios.get(queryByPrimaryKey, {
+                  params: {
+                  }
+              }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.Result = data.content;
+                        console.log(self.Result);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+                    function (response) {
+                    //失败回调
+                     alert(self.alertError);
+              })
+            },
+
+
+            /** 多条件查询 */
+            queryBase() {
+              let self = this;
+              axios.post(queryBase, self.QueryBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.Results = data.content;
+                        console.log(self.Results);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+
+            /** 多条件更新 */
+            updateBase() {
+              let self = this;
+              axios.post(updateBase, self.UpdateBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+           },
+
+
+            /** 主键更新VQuestionUserAnswerFollow */
+            updateVQuestionUserAnswerFollowByPrimaryKey() {
+              let self = this;
+              axios.post(updateVQuestionUserAnswerFollowByPrimaryKey, self.VQuestionUserAnswerFollowUpdateByPrimaryKeyParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 插入VQuestionUserAnswerFollow */
+            insertVQuestionUserAnswerFollow() {
+              let self = this;
+              axios.post(insertVQuestionUserAnswerFollow, self.VQuestionUserAnswerFollowInsertParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("insert 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 主键删除VQuestionUserAnswerFollow */
+            deleteVQuestionUserAnswerFollowByPrimaryKey() {
+              let self = this;
+              axios.post(deleteVQuestionUserAnswerFollowByPrimaryKey,  {
+                  params: {
+                  }
+             }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 分页查询VQuestionUserAnswerFollow -- 存放的是默认的data */
+            queryBasePageHelperVQuestionUserAnswerFollow(pageNum,pageSize) {
+              let self = this;
+              axios.post(queryBasePageHelperVQuestionUserAnswerFollow+"?pageNum="+pageNum+"&pageSize="+pageSize, self.VQuestionUserAnswerFollowQueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionUserAnswerFollowQueryBasePageHelperResult = data.content;
+                        console.log(self.VQuestionUserAnswerFollowQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+           /** 分页查询VQuestionUserAnswerFollow  --  存放的是指定的data.sub */
+            queryBasePageHelperVQuestionUserAnswerFollowSub(pageNum,pageSize,sub) {
+              let self = this;
+              axios.post(queryBasePageHelperVQuestionUserAnswerFollow+"?pageNum="+pageNum+"&pageSize="+pageSize, self.VQuestionUserAnswerFollowQueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.$set(self.VQuestionUserAnswerFollowQueryBasePageHelperResult,sub,data.content);
+                        console.log(self.VQuestionUserAnswerFollowQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+            /** 主键查询VQuestionUserAnswerFollow */
+            queryVQuestionUserAnswerFollowByPrimaryKey() {
+              let self = this;
+              axios.get(queryVQuestionUserAnswerFollowByPrimaryKey, {
+                  params: {
+                  }
+              }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionUserAnswerFollowResult = data.content;
+                        console.log(self.VQuestionUserAnswerFollowResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+                    function (response) {
+                    //失败回调
+                     alert(self.alertError);
+              })
+            },
+
+
+            /** 多条件查询VQuestionUserAnswerFollow */
+            queryBaseVQuestionUserAnswerFollow() {
+              let self = this;
+              axios.post(queryBaseVQuestionUserAnswerFollow, self.VQuestionUserAnswerFollowQueryBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionUserAnswerFollowResults = data.content;
+                        console.log(self.VQuestionUserAnswerFollowResults);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+
+            /** 多条件更新VQuestionUserAnswerFollow */
+            updateBaseVQuestionUserAnswerFollow() {
+              let self = this;
+              axios.post(updateBaseVQuestionUserAnswerFollow, self.VQuestionUserAnswerFollowUpdateBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+           },
+
+
             /** 主键更新TTag */
             updateTTagByPrimaryKey() {
               let self = this;
@@ -3228,6 +4353,175 @@ var vue = new Vue({
             updateBaseVReportUserUser() {
               let self = this;
               axios.post(updateBaseVReportUserUser, self.VReportUserUserUpdateBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+           },
+
+
+            /** 主键更新VQuestionAnswerSum */
+            updateVQuestionAnswerSumByPrimaryKey() {
+              let self = this;
+              axios.post(updateVQuestionAnswerSumByPrimaryKey, self.VQuestionAnswerSumUpdateByPrimaryKeyParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 插入VQuestionAnswerSum */
+            insertVQuestionAnswerSum() {
+              let self = this;
+              axios.post(insertVQuestionAnswerSum, self.VQuestionAnswerSumInsertParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("insert 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 主键删除VQuestionAnswerSum */
+            deleteVQuestionAnswerSumByPrimaryKey() {
+              let self = this;
+              axios.post(deleteVQuestionAnswerSumByPrimaryKey,  {
+                  params: {
+                  }
+             }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 分页查询VQuestionAnswerSum -- 存放的是默认的data */
+            queryBasePageHelperVQuestionAnswerSum(pageNum,pageSize) {
+              let self = this;
+              axios.post(queryBasePageHelperVQuestionAnswerSum+"?pageNum="+pageNum+"&pageSize="+pageSize, self.VQuestionAnswerSumQueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionAnswerSumQueryBasePageHelperResult = data.content;
+                        console.log(self.VQuestionAnswerSumQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+           /** 分页查询VQuestionAnswerSum  --  存放的是指定的data.sub */
+            queryBasePageHelperVQuestionAnswerSumSub(pageNum,pageSize,sub) {
+              let self = this;
+              axios.post(queryBasePageHelperVQuestionAnswerSum+"?pageNum="+pageNum+"&pageSize="+pageSize, self.VQuestionAnswerSumQueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.$set(self.VQuestionAnswerSumQueryBasePageHelperResult,sub,data.content);
+                        console.log(self.VQuestionAnswerSumQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+            /** 主键查询VQuestionAnswerSum */
+            queryVQuestionAnswerSumByPrimaryKey() {
+              let self = this;
+              axios.get(queryVQuestionAnswerSumByPrimaryKey, {
+                  params: {
+                  }
+              }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionAnswerSumResult = data.content;
+                        console.log(self.VQuestionAnswerSumResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+                    function (response) {
+                    //失败回调
+                     alert(self.alertError);
+              })
+            },
+
+
+            /** 多条件查询VQuestionAnswerSum */
+            queryBaseVQuestionAnswerSum() {
+              let self = this;
+              axios.post(queryBaseVQuestionAnswerSum, self.VQuestionAnswerSumQueryBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionAnswerSumResults = data.content;
+                        console.log(self.VQuestionAnswerSumResults);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+
+            /** 多条件更新VQuestionAnswerSum */
+            updateBaseVQuestionAnswerSum() {
+              let self = this;
+              axios.post(updateBaseVQuestionAnswerSum, self.VQuestionAnswerSumUpdateBaseParam)
               .then(function (response) {
                    let data = response.data;
                     console.log(data);
@@ -4434,6 +5728,175 @@ var vue = new Vue({
            },
 
 
+            /** 主键更新VHotQuestion */
+            updateVHotQuestionByPrimaryKey() {
+              let self = this;
+              axios.post(updateVHotQuestionByPrimaryKey, self.VHotQuestionUpdateByPrimaryKeyParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 插入VHotQuestion */
+            insertVHotQuestion() {
+              let self = this;
+              axios.post(insertVHotQuestion, self.VHotQuestionInsertParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("insert 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 主键删除VHotQuestion */
+            deleteVHotQuestionByPrimaryKey() {
+              let self = this;
+              axios.post(deleteVHotQuestionByPrimaryKey,  {
+                  params: {
+                  }
+             }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 分页查询VHotQuestion -- 存放的是默认的data */
+            queryBasePageHelperVHotQuestion(pageNum,pageSize) {
+              let self = this;
+              axios.post(queryBasePageHelperVHotQuestion+"?pageNum="+pageNum+"&pageSize="+pageSize, self.VHotQuestionQueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VHotQuestionQueryBasePageHelperResult = data.content;
+                        console.log(self.VHotQuestionQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+           /** 分页查询VHotQuestion  --  存放的是指定的data.sub */
+            queryBasePageHelperVHotQuestionSub(pageNum,pageSize,sub) {
+              let self = this;
+              axios.post(queryBasePageHelperVHotQuestion+"?pageNum="+pageNum+"&pageSize="+pageSize, self.VHotQuestionQueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.$set(self.VHotQuestionQueryBasePageHelperResult,sub,data.content);
+                        console.log(self.VHotQuestionQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+            /** 主键查询VHotQuestion */
+            queryVHotQuestionByPrimaryKey() {
+              let self = this;
+              axios.get(queryVHotQuestionByPrimaryKey, {
+                  params: {
+                  }
+              }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VHotQuestionResult = data.content;
+                        console.log(self.VHotQuestionResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+                    function (response) {
+                    //失败回调
+                     alert(self.alertError);
+              })
+            },
+
+
+            /** 多条件查询VHotQuestion */
+            queryBaseVHotQuestion() {
+              let self = this;
+              axios.post(queryBaseVHotQuestion, self.VHotQuestionQueryBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VHotQuestionResults = data.content;
+                        console.log(self.VHotQuestionResults);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+
+            /** 多条件更新VHotQuestion */
+            updateBaseVHotQuestion() {
+              let self = this;
+              axios.post(updateBaseVHotQuestion, self.VHotQuestionUpdateBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+           },
+
+
             /** 主键更新TQuestionTag */
             updateTQuestionTagByPrimaryKey() {
               let self = this;
@@ -5103,6 +6566,175 @@ var vue = new Vue({
             updateBaseTReportAnswer() {
               let self = this;
               axios.post(updateBaseTReportAnswer, self.TReportAnswerUpdateBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+           },
+
+
+            /** 主键更新VQuestionFollowSum */
+            updateVQuestionFollowSumByPrimaryKey() {
+              let self = this;
+              axios.post(updateVQuestionFollowSumByPrimaryKey, self.VQuestionFollowSumUpdateByPrimaryKeyParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 插入VQuestionFollowSum */
+            insertVQuestionFollowSum() {
+              let self = this;
+              axios.post(insertVQuestionFollowSum, self.VQuestionFollowSumInsertParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("insert 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 主键删除VQuestionFollowSum */
+            deleteVQuestionFollowSumByPrimaryKey() {
+              let self = this;
+              axios.post(deleteVQuestionFollowSumByPrimaryKey,  {
+                  params: {
+                  }
+             }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                         if(data.content == true)
+                         alert("delete 成功");
+                    } else {
+                         alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })},
+
+
+            /** 分页查询VQuestionFollowSum -- 存放的是默认的data */
+            queryBasePageHelperVQuestionFollowSum(pageNum,pageSize) {
+              let self = this;
+              axios.post(queryBasePageHelperVQuestionFollowSum+"?pageNum="+pageNum+"&pageSize="+pageSize, self.VQuestionFollowSumQueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionFollowSumQueryBasePageHelperResult = data.content;
+                        console.log(self.VQuestionFollowSumQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+           /** 分页查询VQuestionFollowSum  --  存放的是指定的data.sub */
+            queryBasePageHelperVQuestionFollowSumSub(pageNum,pageSize,sub) {
+              let self = this;
+              axios.post(queryBasePageHelperVQuestionFollowSum+"?pageNum="+pageNum+"&pageSize="+pageSize, self.VQuestionFollowSumQueryBasePageHelperParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.$set(self.VQuestionFollowSumQueryBasePageHelperResult,sub,data.content);
+                        console.log(self.VQuestionFollowSumQueryBasePageHelperResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+            /** 主键查询VQuestionFollowSum */
+            queryVQuestionFollowSumByPrimaryKey() {
+              let self = this;
+              axios.get(queryVQuestionFollowSumByPrimaryKey, {
+                  params: {
+                  }
+              }).then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionFollowSumResult = data.content;
+                        console.log(self.VQuestionFollowSumResult);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+                    function (response) {
+                    //失败回调
+                     alert(self.alertError);
+              })
+            },
+
+
+            /** 多条件查询VQuestionFollowSum */
+            queryBaseVQuestionFollowSum() {
+              let self = this;
+              axios.post(queryBaseVQuestionFollowSum, self.VQuestionFollowSumQueryBaseParam)
+              .then(function (response) {
+                   let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.VQuestionFollowSumResults = data.content;
+                        console.log(self.VQuestionFollowSumResults);
+                    } else {
+                        alert(data.msg);
+                    }
+              }).catch(
+              function (response) {
+                  //失败回调
+                  alert(self.alertError);
+              })
+            },
+
+
+
+            /** 多条件更新VQuestionFollowSum */
+            updateBaseVQuestionFollowSum() {
+              let self = this;
+              axios.post(updateBaseVQuestionFollowSum, self.VQuestionFollowSumUpdateBaseParam)
               .then(function (response) {
                    let data = response.data;
                     console.log(data);
