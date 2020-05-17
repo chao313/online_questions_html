@@ -85,16 +85,17 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <a href="" class="aw-user-nav-dropdown">
-                    <img :alt="userName" src="local/avatar-mid-img.png">{{userName}}
+                    <img :alt="userName" :src="path(TUserResult.logo)">{{userName}}
                 </a>
                 <div class="aw-dropdown dropdown-list pull-right">
                     <ul class="aw-dropdown-list">
-                        <li><a href=""><i class="icon icon-inbox"></i> 个人主面<span
-                                class="badge badge-important collapse" id="inbox_unread" style="display: none;">0</span></a>
+                        <li><a href="javaScript:;" @click="routerToPerson(userName)">
+                            个人主面<span
+                                class="badge badge-important collapse" id="inbox_unread"
+                                style="display: none;">0</span></a>
                         </li>
-                        <li class="hidden-xs"><a href=""><i
-                                class="icon icon-setting"></i> 设置</a></li>
-                        <li><a href=""><i class="icon icon-logout"></i> 退出</a></li>
+                        <li><a href="javaScript:;" @click="routerToSetting()">设置</a></li>
+                        <li><a href="javaScript:;" @click="loginOut()">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -239,12 +240,12 @@
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5"
                                            href="" data-id="52528"><img
-                                                src="local/avatar-mid-img.png" :alt="value.userName"></a>
+                                                src="local/avatar-mid-img.png" :alt="value.master.userName"></a>
                                         <!-- end 用户头像 -->
                                         <div class="title">
                                             <p>
                                                 <a class="aw-user-name" href=""
-                                                   @click="routerToPerson(value.userName)"
+                                                   @click="routerToPerson(value.master.userName)"
                                                    data-id="52528"><span>{{value.master.userName}}</span></a>
 
                                         </div>
@@ -461,7 +462,38 @@
                 id: null,
                 tag: null
             }],
+            TUserResult: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null,
+                signature: null
+            },
         },
+        computed: {
+            path() {
+                return function (value) {
+
+                    if (value == null) {
+                        return 'local/avatar-mid-img.png';
+                    } else {
+
+                        return BASE_URL + "/" + value;
+                    }
+                }
+            }
+        },
+
         methods: {
             routerToLogin() {
                 //跳转携带参数
@@ -478,7 +510,51 @@
                 }
                 window.open(WEBSTROM_BASE_URL + "/index.html?" + queryStr, '_self');
             },
-
+            routerToSetting() {
+                //跳转携带参数
+                window.open(WEBSTROM_BASE_URL + "/setting.html?", '_self');
+            },
+            routerToPerson(userNameView) {
+                //跳转携带参数
+                let queryStr = "";
+                queryStr = queryStr + "userNameView=" + userNameView + "";
+                window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
+            },
+            loginOut() {
+                let self = this;
+                axios.get(loginOut, {}).then(function (res) {
+                    let response = res.data;
+                    if (response.code == 0) {
+                        if (response.content == true) {
+                            self.$message({
+                                type: 'success',
+                                message: '退出成功',
+                                duration: 1000
+                            });
+                            self.routerToTag();
+                        } else {
+                            self.$message({
+                                type: 'success',
+                                message: '退出失败',
+                                duration: 1000
+                            });
+                        }
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '退出异常' + response.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            }
         }
     });
 </script>
@@ -492,701 +568,730 @@
                 id: null,
                 tag: null
             }],
-        }
+        },
+        methods: {}
     });
 </script>
 <script>
     axios.defaults.withCredentials = true;
     var vue = new Vue({
-            el: "#body",
-            data: {
-                userId: '',
-                questionId: '',
-                userName: null,
-                /** 存储TQuestions插入结果*/
-                TQuestionsInsertParam: {
-                    id: null,
-                    userId: null,
-                    title: null,
-                    content: null,
-                    status: null,
-                    deleteFlag: null,
-                    blackFlag: null,
-                    createTime: null,
-                    updateTime: null
-                },
-                /** 存储TQuestions单个结果*/
-                TQuestionsResult: {
-                    id: null,
-                    userId: null,
-                    title: null,
-                    content: null,
-                    status: null,
-                    deleteFlag: null,
-                    blackFlag: null,
-                    createTime: null,
-                    updateTime: null
-                },
-                /** 存储TAnswer插入结果*/
-                TAnswerInsertParam: {
-                    id: null,
-                    userName: null,
-                    questionId: null,
-                    questionTitle: null,
-                    content: null,
-                    deleteFlag: null,
-                    status: null,
-                    blackFlag: null,
-                    time: null,
-                    answerId: null
-                }
-                ,
-                /** 存储TAnswer多条件查询条件(分页，去除分页的num和size)*/
-                TAnswerQueryBasePageHelperParam: {
-                    id: null,
-                    userId: null,
-                    questionId: null,
-                    content: null,
-                    deleteFlag: null,
-                    status: null,
-                    blackFlag: null,
-                    time: null,
-                    answerId: null,
-                    pageNum: 1,
-                    pageSize: 10
-                }
-                ,
-                /** 存储TAnswer存储多条件查询结果(分页，去除分页的num和size)*/
-                TAnswerQueryBasePageHelperResult: {
-                    pageNum: null,
-                    pageSize: null,
-                    size: null,
-                    orderBy: null,
-                    startRow: null,
-                    endRow: null,
-                    total: null,
-                    pages: null,
-                    list: [{
-                        id: null,
-                        userId: null,
-                        questionId: null,
-                        content: null,
-                        deleteFlag: null,
-                        status: null,
-                        blackFlag: null,
-                        time: null,
-                        answerId: null
-                    }],
-                    firstPage: null,
-                    prePage: 0,
-                    nextPage: null,
-                    lastPage: null,
-                    isFirstPage: true,
-                    isLastPage: null,
-                    hasPreviousPage: null,
-                    hasNextPage: null,
-                    navigatePages: null,
-                    navigatepageNums: []
-                }
-                ,
-                TTagQueryBaseParam: {
-                    id: null,
-                    tag: null
-                },
-                TTagResults: [{
-                    id: null,
-                    tag: null
-                }],
-                /** 存储TFollowQuestion单个结果*/
-                TFollowQuestionResult: {
-                    questionId: null,
-                    userName: null,
-                    cteateTime: null
-                }
-                ,
-                /** 存储TFollowQuestion插入结果*/
-                TFollowQuestionInsertParam: {
-                    questionId: null,
-                    userName: null,
-                    cteateTime: null
-                },
-                /** 存储TReportQuestion插入结果*/
-                TReportQuestionInsertParam: {
-                    id: null,
-                    questionId: null,
-                    questionName: null,
-                    reason: null
-                },
-                /** 存储TReportAnswer插入结果*/
-                TReportAnswerInsertParam: {
-                    id: null,
-                    answerId: null,
-                    reason: null
-                },
-                /** 存储TAnswerSecond插入结果*/
-                TAnswerSecondInsertParam: {
-                    id: null,
-                    userName: null,
-                    questionId: null,
-                    questionTitle: null,
-                    content: null,
-                    deleteFlag: null,
-                    status: null,
-                    blackFlag: null,
-                    time: null,
-                    answerId: null
-                }
+        el: "#body",
+        data: {
+            userId: '',
+            questionId: '',
+            userName: null,
+            /** 存储TQuestions插入结果*/
+            TQuestionsInsertParam: {
+                id: null,
+                userId: null,
+                title: null,
+                content: null,
+                status: null,
+                deleteFlag: null,
+                blackFlag: null,
+                createTime: null,
+                updateTime: null
             },
-            computed: {
-                base64Decode() {
-                    return function (value) {
+            /** 存储TQuestions单个结果*/
+            TQuestionsResult: {
+                id: null,
+                userId: null,
+                title: null,
+                content: null,
+                status: null,
+                deleteFlag: null,
+                blackFlag: null,
+                createTime: null,
+                updateTime: null
+            },
+            /** 存储TAnswer插入结果*/
+            TAnswerInsertParam: {
+                id: null,
+                userName: null,
+                questionId: null,
+                questionTitle: null,
+                content: null,
+                deleteFlag: null,
+                status: null,
+                blackFlag: null,
+                time: null,
+                answerId: null
+            }
+            ,
+            /** 存储TAnswer多条件查询条件(分页，去除分页的num和size)*/
+            TAnswerQueryBasePageHelperParam: {
+                id: null,
+                userId: null,
+                questionId: null,
+                content: null,
+                deleteFlag: null,
+                status: null,
+                blackFlag: null,
+                time: null,
+                answerId: null,
+                pageNum: 1,
+                pageSize: 10
+            }
+            ,
+            /** 存储TAnswer存储多条件查询结果(分页，去除分页的num和size)*/
+            TAnswerQueryBasePageHelperResult: {
+                pageNum: null,
+                pageSize: null,
+                size: null,
+                orderBy: null,
+                startRow: null,
+                endRow: null,
+                total: null,
+                pages: null,
+                list: [{
+                    id: null,
+                    userId: null,
+                    questionId: null,
+                    content: null,
+                    deleteFlag: null,
+                    status: null,
+                    blackFlag: null,
+                    time: null,
+                    answerId: null
+                }],
+                firstPage: null,
+                prePage: 0,
+                nextPage: null,
+                lastPage: null,
+                isFirstPage: true,
+                isLastPage: null,
+                hasPreviousPage: null,
+                hasNextPage: null,
+                navigatePages: null,
+                navigatepageNums: []
+            }
+            ,
+            TTagQueryBaseParam: {
+                id: null,
+                tag: null
+            },
+            TTagResults: [{
+                id: null,
+                tag: null
+            }],
+            /** 存储TFollowQuestion单个结果*/
+            TFollowQuestionResult: {
+                questionId: null,
+                userName: null,
+                cteateTime: null
+            }
+            ,
+            /** 存储TFollowQuestion插入结果*/
+            TFollowQuestionInsertParam: {
+                questionId: null,
+                userName: null,
+                cteateTime: null
+            },
+            /** 存储TReportQuestion插入结果*/
+            TReportQuestionInsertParam: {
+                id: null,
+                questionId: null,
+                questionName: null,
+                reason: null
+            },
+            /** 存储TReportAnswer插入结果*/
+            TReportAnswerInsertParam: {
+                id: null,
+                answerId: null,
+                reason: null
+            },
+            /** 存储TAnswerSecond插入结果*/
+            TAnswerSecondInsertParam: {
+                id: null,
+                userName: null,
+                questionId: null,
+                questionTitle: null,
+                content: null,
+                deleteFlag: null,
+                status: null,
+                blackFlag: null,
+                time: null,
+                answerId: null
+            }
+        },
+        computed: {
+            base64Decode() {
+                return function (value) {
 
-                        return base64Decode(value);
+                    return base64Decode(value);
 
+                }
+            }
+        }
+        ,
+        created() {
+            /**
+             * 1.接收外界参数
+             */
+            var questionId = queryUrlParam('id')
+            this.questionId = questionId;
+            this.queryTQuestionsByPrimaryKey(questionId)
+            this.TAnswerQueryBasePageHelperParam.questionId = questionId;
+            this.getUserId();
+            this.getUserName();
+            this.queryBasePageHelperTAnswer();
+            this.queryBaseTTag();
+        }
+        ,
+        methods: {
+
+            /** 主键查询TQuestions */
+            queryTQuestionsByPrimaryKey(id) {
+                let self = this;
+                axios.get(queryTQuestionsByPrimaryKey, {
+                    params: {
+                        id: id
                     }
-                }
-            }
-            ,
-            created() {
-                /**
-                 * 1.接收外界参数
-                 */
-                var questionId = queryUrlParam('id')
-                this.questionId = questionId;
-                this.queryTQuestionsByPrimaryKey(questionId)
-                this.TAnswerQueryBasePageHelperParam.questionId = questionId;
-                this.getUserId();
-                this.getUserName();
-                this.queryBasePageHelperTAnswer();
-                this.queryBaseTTag();
-            }
-            ,
-            methods: {
-
-                /** 主键查询TQuestions */
-                queryTQuestionsByPrimaryKey(id) {
-                    let self = this;
-                    axios.get(queryTQuestionsByPrimaryKey, {
-                        params: {
-                            id: id
-                        }
-                    }).then(function (response) {
-                        let data = response.data;
-                        console.log(data);
-                        if (data.code == 0) {
-                            self.TQuestionsResult = data.content;
-                            self.TQuestionsResult.content = base64Decode(data.content.content)
-                            console.log(self.TQuestionsResult);
-                        } else {
-                            alert(data.msg);
-                        }
-                    }).catch(
-                        function (response) {
-                            //失败回调
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常，请检查服务',
-                                duration: 1000
-                            })
-                        })
-                }
-                ,
-                answer() {
-
-                }
-                ,
-                getUserId() {
-                    let self = this;
-                    axios.get(getUserId, {}).then(function (res) {
-                        let response = res.data;
-                        if (response.code == 0) {
-                            self.userId = response.content;
-                            topHead.userId = response.content;
-                            answer.userId = response.content;
-                            // self.$message({
-                            //     type: 'success',
-                            //     message: '查询成功',
-                            //     duration: 1000
-                            // });
-                        } else {
-                            // self.$message({
-                            //     type: 'error',
-                            //     message: '查询异常' + response.msg,
-                            //     duration: 1000
-                            // });
-                            console.info("用户未登录");
-                        }
-                    }).catch(
-                        function (response) {
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常，请检查服务',
-                                duration: 1000
-                            })
-                        })
-
-
-                }
-                ,
-                getUserName() {
-                    let self = this;
-                    axios.get(getUserName, {}).then(function (res) {
-                        let response = res.data;
-                        if (response.code == 0) {
-                            self.userName = response.content;
-                            topHead.userName = response.content;
-                            answer.userName = response.content;
-                            self.queryTFollowQuestionByPrimaryKey(self.questionId, self.userName);
-                            // self.$message({
-                            //     type: 'success',
-                            //     message: '查询成功',
-                            //     duration: 1000
-                            // });
-                        } else {
-                            // self.$message({
-                            //     type: 'error',
-                            //     message: '查询异常' + response.msg,
-                            //     duration: 1000
-                            // });
-                            console.info("用户未登录");
-                        }
-                    }).catch(
-                        function (response) {
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常，请检查服务',
-                                duration: 1000
-                            })
-                        })
-
-
-                }
-                ,
-                insertTAnswer() {
-                    let self = this;
-                    if (self.userName == null) {
+                }).then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        self.TQuestionsResult = data.content;
+                        self.TQuestionsResult.content = base64Decode(data.content.content)
+                        console.log(self.TQuestionsResult);
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                    function (response) {
+                        //失败回调
                         self.$message({
                             type: 'error',
-                            message: '用户未登陆',
+                            message: '网络异常，请检查服务',
                             duration: 1000
-                        });
-                        return;
+                        })
+                    })
+            }
+            ,
+            answer() {
+
+            }
+            ,
+            getUserId() {
+                let self = this;
+                axios.get(getUserId, {}).then(function (res) {
+                    let response = res.data;
+                    if (response.code == 0) {
+                        self.userId = response.content;
+                        topHead.userId = response.content;
+                        answer.userId = response.content;
+                        // self.$message({
+                        //     type: 'success',
+                        //     message: '查询成功',
+                        //     duration: 1000
+                        // });
+                    } else {
+                        // self.$message({
+                        //     type: 'error',
+                        //     message: '查询异常' + response.msg,
+                        //     duration: 1000
+                        // });
+                        console.info("用户未登录");
                     }
-                    self.TAnswerInsertParam.id = uuid();
-                    self.TAnswerInsertParam.userName = self.userName;
-                    self.TAnswerInsertParam.questionId = self.questionId;
-                    self.TAnswerInsertParam.questionTitle = self.TQuestionsResult.title;
-                    self.TAnswerInsertParam.content = base64Encode(editor.txt.html());
-                    self.TAnswerInsertParam.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
-                    axios.post(insertTAnswer, self.TAnswerInsertParam)
-                        .then(function (response) {
-                            let data = response.data;
-                            console.log(data);
-                            if (data.code == 0) {
-                                if (data.content == true) {
-                                    self.queryBasePageHelperTAnswer();
-                                    self.$message({
-                                        type: 'success',
-                                        message: '发布成功',
-                                        duration: 1000
-                                    });
-                                }
-                            } else {
-                                self.$message({
-                                    type: 'success',
-                                    message: '发布异常:' + data.msg,
-                                    duration: 1000
-                                });
-                            }
-                        }).catch(
-                        function (response) {
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常，请检查服务',
-                                duration: 1000
-                            })
+                }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
                         })
-                }
-                ,
-                /** 分页查询TAnswer -- 存放的是默认的data */
-                queryBasePageHelperTAnswer() {
-                    let self = this;
-                    let pageNum = self.TAnswerQueryBasePageHelperParam.pageNum;
-                    let pageSize = self.TAnswerQueryBasePageHelperParam.pageSize;
-                    axios.post(queryBasePageSecondHelper + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAnswerQueryBasePageHelperParam)
-                        .then(function (response) {
-                            let data = response.data;
-                            console.log(data);
-                            if (data.code == 0) {
-                                self.TAnswerQueryBasePageHelperResult = data.content;
-                                self.TAnswerQueryBasePageHelperResult.list.forEach(value => {
-                                    console.info(value);
-                                    value.content = base64Decode(value.content);
-                                })
-                            } else {
-                                self.$message({
-                                    type: 'error',
-                                    message: '查询异常' + data.msg,
-                                    duration: 1000
-                                });
-                            }
-                        }).catch(
-                        function (response) {
-                            //失败回调
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常，请检查服务',
-                                duration: 1000
-                            })
+                    })
+
+
+            }
+            ,
+            getUserName() {
+                let self = this;
+                axios.get(getUserName, {}).then(function (res) {
+                    let response = res.data;
+                    if (response.code == 0) {
+                        self.userName = response.content;
+                        topHead.userName = response.content;
+                        answer.userName = response.content;
+                        self.queryTFollowQuestionByPrimaryKey(self.questionId, self.userName);
+                        self.queryTUserByPrimaryKey(self.userName);//查询用户详细信息
+                        // self.$message({
+                        //     type: 'success',
+                        //     message: '查询成功',
+                        //     duration: 1000
+                        // });
+                    } else {
+                        // self.$message({
+                        //     type: 'error',
+                        //     message: '查询异常' + response.msg,
+                        //     duration: 1000
+                        // });
+                        console.info("用户未登录");
+                    }
+                }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
                         })
+                    })
+
+
+            }
+            ,
+            insertTAnswer() {
+                let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
                 }
-                ,
-                /** 多条件查询TTag */
-                queryBaseTTag() {
-                    let self = this;
-                    axios.post(queryBaseTTag, self.TTagQueryBaseParam)
-                        .then(function (res) {
-                            let response = res.data;
-                            if (response.code == 0) {
-                                self.TTagResults = response.content;
-                                topHead.TTagResults = response.content;
-                                // self.$message({
-                                //     type: 'success',
-                                //     message: '查询成功',
-                                //     duration: 1000
-                                // });
-                            } else {
-                                self.$message({
-                                    type: 'error',
-                                    message: '查询异常' + response.msg,
-                                    duration: 1000
-                                });
-                            }
-                        }).catch(
-                        function (response) {
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常，请检查服务',
-                                duration: 1000
-                            })
-                        })
-                }
-                ,
-                /** 主键查询TFollowQuestion */
-                queryTFollowQuestionByPrimaryKey(questionId, userName) {
-                    let self = this;
-                    axios.get(queryTFollowQuestionByPrimaryKey, {
-                        params: {
-                            questionId: questionId,
-                            userName: userName
-                        }
-                    }).then(function (response) {
+                self.TAnswerInsertParam.id = uuid();
+                self.TAnswerInsertParam.userName = self.userName;
+                self.TAnswerInsertParam.questionId = self.questionId;
+                self.TAnswerInsertParam.questionTitle = self.TQuestionsResult.title;
+                self.TAnswerInsertParam.content = base64Encode(editor.txt.html());
+                self.TAnswerInsertParam.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                axios.post(insertTAnswer, self.TAnswerInsertParam)
+                    .then(function (response) {
                         let data = response.data;
                         console.log(data);
                         if (data.code == 0) {
-                            if (data.content) {
-                                self.TFollowQuestionResult = data.content;
-                            } else {
-                                self.TFollowQuestionResult.userName = null;
-                                self.TFollowQuestionResult.questionId = null;
-                            }
-                            console.log(self.TFollowQuestionResult);
-                        } else {
-                            alert(data.msg);
-                        }
-                    }).catch(
-                        function (response) {
-                            //失败回调
-                            alert(self.alertError);
-                        })
-                }
-                ,
-                /** 主键删除TFollowQuestion */
-                deleteTFollowQuestionByPrimaryKey(questionId, userName) {
-                    let self = this;
-                    axios.get(deleteTFollowQuestionByPrimaryKey, {
-                        params: {
-                            questionId: questionId,
-                            userName: userName
-                        }
-                    }).then(function (response) {
-                        let data = response.data;
-                        console.log(data);
-                        if (data.code == 0) {
-                            console.info("questionId" + questionId)
-                            console.info("userName" + userName)
                             if (data.content == true) {
-                                self.queryTFollowQuestionByPrimaryKey(questionId, userName);
+                                self.queryBasePageHelperTAnswer();
                                 self.$message({
                                     type: 'success',
-                                    message: '取消关注成功',
+                                    message: '发布成功',
                                     duration: 1000
                                 });
                             }
                         } else {
                             self.$message({
-                                type: 'error',
-                                message: '取消关注成功' + data.msg,
+                                type: 'success',
+                                message: '发布异常:' + data.msg,
                                 duration: 1000
                             });
                         }
                     }).catch(
-                        function (response) {
-                            //失败回调
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常，请检查服务',
-                                duration: 1000
-                            })
-                        })
-                }
-                ,
-                /** 插入TFollowQuestion */
-                insertTFollowQuestion() {
-                    let self = this;
-                    axios.post(insertTFollowQuestion, self.TFollowQuestionInsertParam)
-                        .then(function (response) {
-                            let data = response.data;
-                            console.log(data);
-                            if (data.code == 0) {
-                                self.queryTFollowQuestionByPrimaryKey(self.TFollowQuestionInsertParam.questionId, self.TFollowQuestionInsertParam.userName);
-                                if (data.content == true)
-                                    self.$message({
-                                        type: 'success',
-                                        message: '关注成功',
-                                        duration: 1000
-                                    });
-                            } else {
-                                self.$message({
-                                    type: 'error',
-                                    message: '关注异常' + data.msg,
-                                    duration: 1000
-                                });
-                            }
-                        }).catch(
-                        function (response) {
-                            //失败回调
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常，请检查服务',
-                                duration: 1000
-                            })
-                        })
-                }
-                ,
-
-                /** 关注 */
-                follow() {
-                    this.TFollowQuestionInsertParam.questionId = this.questionId;
-                    this.TFollowQuestionInsertParam.userName = this.userName;
-                    this.TFollowQuestionInsertParam.cteateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
-                    ;
-                    if (this.userName == null) {
+                    function (response) {
                         self.$message({
                             type: 'error',
-                            message: '用户未登陆',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            }
+            ,
+            /** 分页查询TAnswer -- 存放的是默认的data */
+            queryBasePageHelperTAnswer() {
+                let self = this;
+                let pageNum = self.TAnswerQueryBasePageHelperParam.pageNum;
+                let pageSize = self.TAnswerQueryBasePageHelperParam.pageSize;
+                axios.post(queryBasePageSecondHelper + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAnswerQueryBasePageHelperParam)
+                    .then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            self.TAnswerQueryBasePageHelperResult = data.content;
+                            self.TAnswerQueryBasePageHelperResult.list.forEach(value => {
+                                console.info(value);
+                                value.content = base64Decode(value.content);
+                            })
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '查询异常' + data.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                    function (response) {
+                        //失败回调
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            }
+            ,
+            /** 多条件查询TTag */
+            queryBaseTTag() {
+                let self = this;
+                axios.post(queryBaseTTag, self.TTagQueryBaseParam)
+                    .then(function (res) {
+                        let response = res.data;
+                        if (response.code == 0) {
+                            self.TTagResults = response.content;
+                            topHead.TTagResults = response.content;
+                            // self.$message({
+                            //     type: 'success',
+                            //     message: '查询成功',
+                            //     duration: 1000
+                            // });
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '查询异常' + response.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
+            }
+            ,
+            /** 主键查询TFollowQuestion */
+            queryTFollowQuestionByPrimaryKey(questionId, userName) {
+                let self = this;
+                axios.get(queryTFollowQuestionByPrimaryKey, {
+                    params: {
+                        questionId: questionId,
+                        userName: userName
+                    }
+                }).then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        if (data.content) {
+                            self.TFollowQuestionResult = data.content;
+                        } else {
+                            self.TFollowQuestionResult.userName = null;
+                            self.TFollowQuestionResult.questionId = null;
+                        }
+                        console.log(self.TFollowQuestionResult);
+                    } else {
+                        alert(data.msg);
+                    }
+                }).catch(
+                    function (response) {
+                        //失败回调
+                        alert(self.alertError);
+                    })
+            }
+            ,
+            /** 主键删除TFollowQuestion */
+            deleteTFollowQuestionByPrimaryKey(questionId, userName) {
+                let self = this;
+                axios.get(deleteTFollowQuestionByPrimaryKey, {
+                    params: {
+                        questionId: questionId,
+                        userName: userName
+                    }
+                }).then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        console.info("questionId" + questionId)
+                        console.info("userName" + userName)
+                        if (data.content == true) {
+                            self.queryTFollowQuestionByPrimaryKey(questionId, userName);
+                            self.$message({
+                                type: 'success',
+                                message: '取消关注成功',
+                                duration: 1000
+                            });
+                        }
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '取消关注成功' + data.msg,
                             duration: 1000
                         });
-                        return;
                     }
-                    this.insertTFollowQuestion();
-                    this.queryTFollowQuestionByPrimaryKey(this.questionId, this.userName);
-                }
-                ,
-                /** 取消关注 */
-                unFollow() {
-                    this.TFollowQuestionInsertParam.questionId = this.questionId;
-                    this.TFollowQuestionInsertParam.userName = this.userName;
-                    if (this.userName == null) {
+                }).catch(
+                    function (response) {
+                        //失败回调
                         self.$message({
                             type: 'error',
-                            message: '用户未登陆',
+                            message: '网络异常，请检查服务',
                             duration: 1000
-                        });
-                        return;
-                    }
-                    this.deleteTFollowQuestionByPrimaryKey(this.questionId, this.userName);
-
-                }
-                ,
-                routerToPerson(userNameView) {
-                    //跳转携带参数
-                    let queryStr = "";
-                    queryStr = queryStr + "userNameView=" + userNameView + "";
-                    window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
-                }
-                ,
-
-                /** 插入TReportQuestion */
-                insertTReportQuestion() {
-                    let self = this;
-                    self.TReportQuestionInsertParam.id = uuid();
-                    axios.post(insertTReportQuestion, self.TReportQuestionInsertParam)
-                        .then(function (response) {
-                            let data = response.data;
-                            console.log(data);
-                            if (data.code == 0) {
-                                if (data.content == true)
-                                    self.$message({
-                                        type: 'success',
-                                        message: '举报成功',
-                                        duration: 1000
-                                    });
-                            } else {
+                        })
+                    })
+            }
+            ,
+            /** 插入TFollowQuestion */
+            insertTFollowQuestion() {
+                let self = this;
+                axios.post(insertTFollowQuestion, self.TFollowQuestionInsertParam)
+                    .then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            self.queryTFollowQuestionByPrimaryKey(self.TFollowQuestionInsertParam.questionId, self.TFollowQuestionInsertParam.userName);
+                            if (data.content == true)
                                 self.$message({
                                     type: 'success',
-                                    message: '举报失败',
+                                    message: '关注成功',
                                     duration: 1000
                                 });
-                            }
-                        }).catch(
-                        function (response) {
-                            console.info(response);
+                        } else {
                             self.$message({
                                 type: 'error',
-                                message: '网络异常'
+                                message: '关注异常' + data.msg,
+                                duration: 1000
                             });
-                        })
-                }
-                ,
-                report(questionId, title) {
-                    let self = this;
-                    self.$prompt('请输入举报理由', '提示', {
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                    }).then(({value}) => {
-                        if (value == null) {
-                            self.$message({
-                                type: 'error',
-                                message: '举报理由不能为空'
-                            });
-                            return;
                         }
-                        self.TReportQuestionInsertParam.questionId = questionId;
-                        self.TReportQuestionInsertParam.questionName = title;
-                        self.TReportQuestionInsertParam.reason = value;
-                        self.insertTReportQuestion();
-                    }).catch((res) => {
-                        console.info(res);
+                    }).catch(
+                    function (response) {
+                        //失败回调
                         self.$message({
                             type: 'error',
-                            message: '网络异常'
-                        });
-                    });
-                }
-                ,
-                /** 插入TReportAnswer */
-                insertTReportAnswer() {
-                    let self = this;
-                    self.TReportAnswerInsertParam.id = uuid();
-                    axios.post(insertTReportAnswer, self.TReportAnswerInsertParam)
-                        .then(function (response) {
-                            let data = response.data;
-                            console.log(data);
-                            if (data.code == 0) {
-                                if (data.content == true)
-                                    alert("insert 成功");
-                            } else {
-                                alert(data.msg);
-                            }
-                        }).catch(
-                        function (response) {
-                            //失败回调
-                            alert(self.alertError);
+                            message: '网络异常，请检查服务',
+                            duration: 1000
                         })
-                }
-                ,
-                reportAnswer(answerId) {
-                    let self = this;
-                    self.$prompt('请输入举报理由', '提示', {
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                    }).then(({value}) => {
-                        if (value == null) {
-                            self.$message({
-                                type: 'error',
-                                message: '举报理由不能为空'
-                            });
-                            return;
-                        }
-                        self.TReportAnswerInsertParam.answerId = answerId;
-                        self.TReportAnswerInsertParam.reason = value;
-                        self.insertTReportAnswer();
-                    }).catch((res) => {
-                        console.info(res);
-                        self.$message({
-                            type: 'error',
-                            message: '网络异常'
-                        });
-                    });
-                }
-                ,
-                answerToAnswer(answerId) {
-                    let self = this;
-                    self.$prompt('请输入回复内容', '提示', {
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                    }).then(({value}) => {
-                        if (value == null) {
-                            self.$message({
-                                type: 'error',
-                                message: '回复内容不能为空'
-                            });
-                            return;
-                        }
-                        self.TAnswerSecondInsertParam.id = uuid();
-                        self.TAnswerSecondInsertParam.userName = self.userName;
-                        self.TAnswerSecondInsertParam.questionId = self.questionId;
-                        self.TAnswerSecondInsertParam.content = base64Encode(value);
-                        self.TAnswerSecondInsertParam.answerId = answerId;
-                        self.TAnswerSecondInsertParam.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
-                        self.insertTAnswerSecond();
-                    }).catch((res) => {
-                        console.info(res);
-                        self.$message({
-                            type: 'error',
-                            message: '网络异常'
-                        });
-                    });
-                }
-                ,
-                /** 插入TAnswerSecond */
-                insertTAnswerSecond() {
-                    let self = this;
-                    axios.post(insertTAnswerSecond, self.TAnswerSecondInsertParam)
-                        .then(function (response) {
-                            let data = response.data;
-                            console.log(data);
-                            if (data.code == 0) {
-                                if (data.content == true){
-                                    self.$message({
-                                        type: 'success',
-                                        message: '回复成功'
-                                    });
-                                    self.queryBasePageHelperTAnswer();
-                                }
-                            } else {
-                                self.$message({
-                                    type: 'success',
-                                    message: '回复异常' + data.msg
-                                });
-                            }
-                        }).catch(
-                        function (response) {
-                            //失败回调
-                            console.info(response);
-                            self.$message({
-                                type: 'error',
-                                message: '网络异常'
-                            });
-                        })
-                }
-                ,
+                    })
+            }
+            ,
 
+            /** 关注 */
+            follow() {
+                this.TFollowQuestionInsertParam.questionId = this.questionId;
+                this.TFollowQuestionInsertParam.userName = this.userName;
+                this.TFollowQuestionInsertParam.cteateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                ;
+                if (this.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
+                this.insertTFollowQuestion();
+                this.queryTFollowQuestionByPrimaryKey(this.questionId, this.userName);
+            }
+            ,
+            /** 取消关注 */
+            unFollow() {
+                this.TFollowQuestionInsertParam.questionId = this.questionId;
+                this.TFollowQuestionInsertParam.userName = this.userName;
+                if (this.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
+                this.deleteTFollowQuestionByPrimaryKey(this.questionId, this.userName);
 
             }
-        })
-    ;
+            ,
+            routerToPerson(userNameView) {
+                //跳转携带参数
+                let queryStr = "";
+                queryStr = queryStr + "userNameView=" + userNameView + "";
+                window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
+            }
+            ,
+
+            /** 插入TReportQuestion */
+            insertTReportQuestion() {
+                let self = this;
+                self.TReportQuestionInsertParam.id = uuid();
+                axios.post(insertTReportQuestion, self.TReportQuestionInsertParam)
+                    .then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content == true)
+                                self.$message({
+                                    type: 'success',
+                                    message: '举报成功',
+                                    duration: 1000
+                                });
+                        } else {
+                            self.$message({
+                                type: 'success',
+                                message: '举报失败',
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                    function (response) {
+                        console.info(response);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常'
+                        });
+                    })
+            }
+            ,
+            report(questionId, title) {
+                let self = this;
+                self.$prompt('请输入举报理由', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value}) => {
+                    if (value == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '举报理由不能为空'
+                        });
+                        return;
+                    }
+                    self.TReportQuestionInsertParam.questionId = questionId;
+                    self.TReportQuestionInsertParam.questionName = title;
+                    self.TReportQuestionInsertParam.reason = value;
+                    self.insertTReportQuestion();
+                }).catch((res) => {
+                    console.info(res);
+                    self.$message({
+                        type: 'error',
+                        message: '网络异常'
+                    });
+                });
+            }
+            ,
+            /** 插入TReportAnswer */
+            insertTReportAnswer() {
+                let self = this;
+                self.TReportAnswerInsertParam.id = uuid();
+                axios.post(insertTReportAnswer, self.TReportAnswerInsertParam)
+                    .then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content == true)
+                                alert("insert 成功");
+                        } else {
+                            alert(data.msg);
+                        }
+                    }).catch(
+                    function (response) {
+                        //失败回调
+                        alert(self.alertError);
+                    })
+            }
+            ,
+            reportAnswer(answerId) {
+                let self = this;
+                self.$prompt('请输入举报理由', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value}) => {
+                    if (value == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '举报理由不能为空'
+                        });
+                        return;
+                    }
+                    self.TReportAnswerInsertParam.answerId = answerId;
+                    self.TReportAnswerInsertParam.reason = value;
+                    self.insertTReportAnswer();
+                }).catch((res) => {
+                    console.info(res);
+                    self.$message({
+                        type: 'error',
+                        message: '网络异常'
+                    });
+                });
+            }
+            ,
+            answerToAnswer(answerId) {
+                let self = this;
+                self.$prompt('请输入回复内容', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                }).then(({value}) => {
+                    if (value == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '回复内容不能为空'
+                        });
+                        return;
+                    }
+                    self.TAnswerSecondInsertParam.id = uuid();
+                    self.TAnswerSecondInsertParam.userName = self.userName;
+                    self.TAnswerSecondInsertParam.questionId = self.questionId;
+                    self.TAnswerSecondInsertParam.content = base64Encode(value);
+                    self.TAnswerSecondInsertParam.answerId = answerId;
+                    self.TAnswerSecondInsertParam.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                    self.insertTAnswerSecond();
+                }).catch((res) => {
+                    console.info(res);
+                    self.$message({
+                        type: 'error',
+                        message: '网络异常'
+                    });
+                });
+            }
+            ,
+            /** 插入TAnswerSecond */
+            insertTAnswerSecond() {
+                let self = this;
+                axios.post(insertTAnswerSecond, self.TAnswerSecondInsertParam)
+                    .then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content == true) {
+                                self.$message({
+                                    type: 'success',
+                                    message: '回复成功'
+                                });
+                                self.queryBasePageHelperTAnswer();
+                            }
+                        } else {
+                            self.$message({
+                                type: 'success',
+                                message: '回复异常' + data.msg
+                            });
+                        }
+                    }).catch(
+                    function (response) {
+                        //失败回调
+                        console.info(response);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常'
+                        });
+                    })
+            }
+            ,
+            /** 主键查询TUser */
+            queryTUserByPrimaryKey(name) {
+                let self = this;
+                axios.get(queryTUserByPrimaryKey, {
+                    params: {
+                        name: name
+                    }
+                }).then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        topHead.TUserResult = data.content;
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '获取用户信息异常:' + data.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
+                    function (response) {
+                        console.info(response);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常',
+                            duration: 1000
+                        });
+                    })
+
+            }
+        }
+    });
 
     function answer() {
         vue.insertTAnswer();

@@ -71,18 +71,17 @@
             <div class="aw-user-nav">
                 <!-- 登陆&注册栏 -->
                 <a href="" class="aw-user-nav-dropdown">
-                    <img :alt="userName" src="local/avatar-mid-img.png">{{userName}}
+                    <img :alt="userName" :src="path(TUserResult.logo)">{{userName}}
                 </a>
                 <div class="aw-dropdown dropdown-list pull-right">
                     <ul class="aw-dropdown-list">
-                        <li><a href="javaScript:;" @click="routerToPerson(userName)"><i class="icon icon-inbox"></i>
+                        <li><a href="javaScript:;" @click="routerToPerson(userName)">
                             个人主面<span
-                                    class="badge badge-important collapse" id="inbox_unread"
-                                    style="display: none;">0</span></a>
+                                class="badge badge-important collapse" id="inbox_unread"
+                                style="display: none;">0</span></a>
                         </li>
-                        <li class="hidden-xs"><a href=""><i
-                                class="icon icon-setting"></i> 设置</a></li>
-                        <li><a href=""><i class="icon icon-logout"></i> 退出</a></li>
+                        <li><a href="javaScript:;" @click="routerToSetting()">设置</a></li>
+                        <li><a href="javaScript:;" @click="loginOut()">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -272,6 +271,7 @@
 <script type="text/javascript" charset="utf-8" src="vueJs/axios.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="vueJs/api.js"></script>
 <script>
+    axios.defaults.withCredentials = true;
     var topHead = new Vue({
         el: "#top",
         data: {
@@ -280,7 +280,37 @@
             TTagResults: [{
                 id: null,
                 tag: null
-            }]
+            }],
+            TUserResult: {
+                id: null,
+                name: null,
+                password: null,
+                salt: null,
+                phone: null,
+                email: null,
+                status: null,
+                createTime: null,
+                updateTime: null,
+                deleteFlag: null,
+                approveStatus: null,
+                blackListUser: null,
+                logo: null,
+                pvCount: null,
+                signature: null
+            },
+        },
+        computed: {
+            path() {
+                return function (value) {
+
+                    if (value == null) {
+                        return 'local/avatar-mid-img.png';
+                    } else {
+
+                        return BASE_URL + "/" + value;
+                    }
+                }
+            }
         },
         methods: {
             routerToLogin() {
@@ -302,7 +332,53 @@
                 let queryStr = "";
                 queryStr = queryStr + "userNameView=" + userNameView + "";
                 window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
+            },
+            routerToSetting() {
+                //跳转携带参数
+                window.open(WEBSTROM_BASE_URL + "/setting.html?", '_self');
+            },
+            routerToPerson(userNameView) {
+                //跳转携带参数
+                let queryStr = "";
+                queryStr = queryStr + "userNameView=" + userNameView + "";
+                window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
+            },
+            loginOut() {
+                let self = this;
+                axios.get(loginOut, {}).then(function (res) {
+                    let response = res.data;
+                    if (response.code == 0) {
+                        if (response.content == true) {
+                            self.$message({
+                                type: 'success',
+                                message: '退出成功',
+                                duration: 1000
+                            });
+                            self.routerToTag();
+                        } else {
+                            self.$message({
+                                type: 'success',
+                                message: '退出失败',
+                                duration: 1000
+                            });
+                        }
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '退出异常' + response.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
+                    function (response) {
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常，请检查服务',
+                            duration: 1000
+                        })
+                    })
             }
+
         }
     });
 </script>
@@ -480,6 +556,7 @@
                     if (response.code == 0) {
                         self.userName = response.content;
                         topHead.userName = response.content;
+                        self.queryTUserByPrimaryKey(self.userName);//查询用户详细信息
                         // self.$message({
                         //     type: 'success',
                         //     message: '查询成功',
@@ -533,6 +610,36 @@
                         })
                     })
             },
+            /** 主键查询TUser */
+            queryTUserByPrimaryKey(name) {
+                let self = this;
+                axios.get(queryTUserByPrimaryKey, {
+                    params: {
+                        name: name
+                    }
+                }).then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    if (data.code == 0) {
+                        topHead.TUserResult = data.content;
+                    } else {
+                        self.$message({
+                            type: 'error',
+                            message: '获取用户信息异常:' + data.msg,
+                            duration: 1000
+                        });
+                    }
+                }).catch(
+                    function (response) {
+                        console.info(response);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常',
+                            duration: 1000
+                        });
+                    })
+
+            }
         }
     });
 
