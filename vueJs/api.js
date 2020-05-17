@@ -27,6 +27,23 @@ var validCheckCode = BASE_URL + '/EmailController/validCheckCode';
 /* 密码找回url */
 var forgetPassword = BASE_URL + '/EmailController/forgetPassword';
 
+/** TAnswerSecond */
+/** 根据主键更新TAnswerSecond */
+var updateTAnswerSecondByPrimaryKey = BASE_URL + '/TAnswerSecondController/updateByPrimaryKey';
+/** 单条插入TAnswerSecond */
+var insertTAnswerSecond = BASE_URL + '/TAnswerSecondController/insert';
+/** 根据主键删除TAnswerSecond */
+var deleteTAnswerSecondByPrimaryKey = BASE_URL + '/TAnswerSecondController/deleteByPrimaryKey';
+/** 分页查询TAnswerSecond */
+var queryBasePageHelperTAnswerSecond = BASE_URL + '/TAnswerSecondController/queryBasePageHelper';
+/** 根据主键查询TAnswerSecond */
+var queryTAnswerSecondByPrimaryKey = BASE_URL + '/TAnswerSecondController/queryByPrimaryKey';
+/** 多条件查询TAnswerSecond */
+var queryBaseTAnswerSecond = BASE_URL + '/TAnswerSecondController/queryBase';
+/** 批量插入TAnswerSecond */
+var insertsTAnswerSecond = BASE_URL + '/TAnswerSecondController/inserts';
+/** 多条件更新TAnswerSecond */
+var updateBaseTAnswerSecond = BASE_URL + '/TAnswerSecondController/updateBase';
 
 /** TReportUser */
 /** 根据主键更新TReportUser */
@@ -172,6 +189,10 @@ var queryBaseTAnswer = BASE_URL + '/TAnswerController/queryBase';
 var insertsTAnswer = BASE_URL + '/TAnswerController/inserts';
 /** 多条件更新TAnswer */
 var updateBaseTAnswer = BASE_URL + '/TAnswerController/updateBase';
+/** 多条件更新TAnswer */
+var queryBasePageSecondHelper = BASE_URL + '/TAnswerController/queryBasePageSecondHelper';
+
+
 
 /** TQuestions */
 /** 根据主键更新TQuestions */

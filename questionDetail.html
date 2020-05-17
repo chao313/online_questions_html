@@ -245,28 +245,64 @@
                                             <p>
                                                 <a class="aw-user-name" href=""
                                                    @click="routerToPerson(value.userName)"
-                                                   data-id="52528"><span>{{value.userName}}</span></a>
-                                            <p class="text-color-999 aw-agree-by">
+                                                   data-id="52528"><span>{{value.master.userName}}</span></a>
 
-                                            </p>
                                         </div>
-                                        <div v-html="value.content">
+                                        <div v-html="base64Decode(value.master.content)">
+
                                         </div>
                                         <div class="mod-footer">
+
                                             <div class="pull-right">
-                                                <!-- end 投票栏 -->
+                                                {{value.master.time}}
                                                 <a class="aw-add-comment active" data-id="50873" data-type="answer"
                                                    data-comment-count="0" data-first-click="collapse"
-                                                   href="javascript:;" @click="reportAnswer(value.id)"></i>举报</a>
+                                                   href="javascript:;" @click="reportAnswer(value.master.id)"></i>举报</a>
                                                 <a class="aw-add-comment active" data-id="50873" data-type="answer"
                                                    data-comment-count="0" data-first-click="collapse"
-                                                   href="javascript:;"></i>回复</a>
+                                                   href="javascript:;"
+                                                   @click="answerToAnswer(value.master.id)"></i>回复</a>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="mod-body aw-feed-list">
+                                        <template v-for="(value,index) in value.slaves">
+                                            <div class="aw-item" uninterested_count="0" force_fold="0">
+                                                <div class="mod-head">
+                                                    <a class="anchor" name="answer_50838"></a>
+                                                    <!-- 用户头像 -->
+                                                    <a class="aw-user-img aw-border-radius-5"
+                                                       href="" data-id="52528"><img
+                                                            src="local/avatar-mid-img.png" :alt="value.userName"></a>
+                                                    <!-- end 用户头像 -->
+                                                    <div class="title">
+                                                        <p>
+                                                            <a class="aw-user-name" href=""
+                                                               @click="routerToPerson(value.userName)"
+                                                               data-id="52528"><span>{{value.userName}}</span></a>
 
+                                                    </div>
+                                                    <div v-html="base64Decode(value.content)">
+
+                                                    </div>
+                                                    <div class="mod-footer">
+
+                                                        <div class="pull-right">
+                                                            {{value.time}}
+                                                            <a class="aw-add-comment active" data-id="50873"
+                                                               data-type="answer"
+                                                               data-comment-count="0" data-first-click="collapse"
+                                                               href="javascript:;"
+                                                               @click="reportAnswer(value.id)"></i>举报</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
                                 </div>
                             </template>
+
                         </div>
                     </div>
                     <!-- end 问题详细模块 -->
@@ -586,8 +622,31 @@
                     id: null,
                     answerId: null,
                     reason: null
+                },
+                /** 存储TAnswerSecond插入结果*/
+                TAnswerSecondInsertParam: {
+                    id: null,
+                    userName: null,
+                    questionId: null,
+                    questionTitle: null,
+                    content: null,
+                    deleteFlag: null,
+                    status: null,
+                    blackFlag: null,
+                    time: null,
+                    answerId: null
                 }
             },
+            computed: {
+                base64Decode() {
+                    return function (value) {
+
+                        return base64Decode(value);
+
+                    }
+                }
+            }
+            ,
             created() {
                 /**
                  * 1.接收外界参数
@@ -600,7 +659,8 @@
                 this.getUserName();
                 this.queryBasePageHelperTAnswer();
                 this.queryBaseTTag();
-            },
+            }
+            ,
             methods: {
 
                 /** 主键查询TQuestions */
@@ -629,7 +689,8 @@
                                 duration: 1000
                             })
                         })
-                },
+                }
+                ,
                 answer() {
 
                 }
@@ -665,7 +726,9 @@
                         })
 
 
-                }, getUserName() {
+                }
+                ,
+                getUserName() {
                     let self = this;
                     axios.get(getUserName, {}).then(function (res) {
                         let response = res.data;
@@ -697,7 +760,8 @@
                         })
 
 
-                },
+                }
+                ,
                 insertTAnswer() {
                     let self = this;
                     if (self.userName == null) {
@@ -742,13 +806,14 @@
                                 duration: 1000
                             })
                         })
-                },
+                }
+                ,
                 /** 分页查询TAnswer -- 存放的是默认的data */
                 queryBasePageHelperTAnswer() {
                     let self = this;
                     let pageNum = self.TAnswerQueryBasePageHelperParam.pageNum;
                     let pageSize = self.TAnswerQueryBasePageHelperParam.pageSize;
-                    axios.post(queryBasePageHelperTAnswer + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAnswerQueryBasePageHelperParam)
+                    axios.post(queryBasePageSecondHelper + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAnswerQueryBasePageHelperParam)
                         .then(function (response) {
                             let data = response.data;
                             console.log(data);
@@ -774,7 +839,8 @@
                                 duration: 1000
                             })
                         })
-                },
+                }
+                ,
                 /** 多条件查询TTag */
                 queryBaseTTag() {
                     let self = this;
@@ -804,7 +870,8 @@
                                 duration: 1000
                             })
                         })
-                },
+                }
+                ,
                 /** 主键查询TFollowQuestion */
                 queryTFollowQuestionByPrimaryKey(questionId, userName) {
                     let self = this;
@@ -832,7 +899,8 @@
                             //失败回调
                             alert(self.alertError);
                         })
-                },
+                }
+                ,
                 /** 主键删除TFollowQuestion */
                 deleteTFollowQuestionByPrimaryKey(questionId, userName) {
                     let self = this;
@@ -871,7 +939,8 @@
                                 duration: 1000
                             })
                         })
-                },
+                }
+                ,
                 /** 插入TFollowQuestion */
                 insertTFollowQuestion() {
                     let self = this;
@@ -903,7 +972,8 @@
                                 duration: 1000
                             })
                         })
-                },
+                }
+                ,
 
                 /** 关注 */
                 follow() {
@@ -921,7 +991,8 @@
                     }
                     this.insertTFollowQuestion();
                     this.queryTFollowQuestionByPrimaryKey(this.questionId, this.userName);
-                },
+                }
+                ,
                 /** 取消关注 */
                 unFollow() {
                     this.TFollowQuestionInsertParam.questionId = this.questionId;
@@ -936,13 +1007,15 @@
                     }
                     this.deleteTFollowQuestionByPrimaryKey(this.questionId, this.userName);
 
-                },
+                }
+                ,
                 routerToPerson(userNameView) {
                     //跳转携带参数
                     let queryStr = "";
                     queryStr = queryStr + "userNameView=" + userNameView + "";
                     window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
-                },
+                }
+                ,
 
                 /** 插入TReportQuestion */
                 insertTReportQuestion() {
@@ -974,7 +1047,8 @@
                                 message: '网络异常'
                             });
                         })
-                },
+                }
+                ,
                 report(questionId, title) {
                     let self = this;
                     self.$prompt('请输入举报理由', '提示', {
@@ -999,7 +1073,8 @@
                             message: '网络异常'
                         });
                     });
-                },
+                }
+                ,
                 /** 插入TReportAnswer */
                 insertTReportAnswer() {
                     let self = this;
@@ -1019,7 +1094,8 @@
                             //失败回调
                             alert(self.alertError);
                         })
-                },
+                }
+                ,
                 reportAnswer(answerId) {
                     let self = this;
                     self.$prompt('请输入举报理由', '提示', {
@@ -1043,7 +1119,69 @@
                             message: '网络异常'
                         });
                     });
-                },
+                }
+                ,
+                answerToAnswer(answerId) {
+                    let self = this;
+                    self.$prompt('请输入回复内容', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                    }).then(({value}) => {
+                        if (value == null) {
+                            self.$message({
+                                type: 'error',
+                                message: '回复内容不能为空'
+                            });
+                            return;
+                        }
+                        self.TAnswerSecondInsertParam.id = uuid();
+                        self.TAnswerSecondInsertParam.userName = self.userName;
+                        self.TAnswerSecondInsertParam.questionId = self.questionId;
+                        self.TAnswerSecondInsertParam.content = base64Encode(value);
+                        self.TAnswerSecondInsertParam.answerId = answerId;
+                        self.TAnswerSecondInsertParam.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+                        self.insertTAnswerSecond();
+                    }).catch((res) => {
+                        console.info(res);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常'
+                        });
+                    });
+                }
+                ,
+                /** 插入TAnswerSecond */
+                insertTAnswerSecond() {
+                    let self = this;
+                    axios.post(insertTAnswerSecond, self.TAnswerSecondInsertParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true){
+                                    self.$message({
+                                        type: 'success',
+                                        message: '回复成功'
+                                    });
+                                    self.queryBasePageHelperTAnswer();
+                                }
+                            } else {
+                                self.$message({
+                                    type: 'success',
+                                    message: '回复异常' + data.msg
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            //失败回调
+                            console.info(response);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常'
+                            });
+                        })
+                }
+                ,
 
 
             }
