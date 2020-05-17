@@ -123,7 +123,6 @@
 														<span class="topic-tag" data-id="3868">
 								<a href="" class="text"><span>{{TQuestionsResult.tag}}</span></a>
 							</span>
-
                         </div>
                     </div>
                     <!-- end 话题bar -->
@@ -157,9 +156,11 @@
                                 <div class="pull-right more-operate">
                                     <a class="text-color-999 dropdown-toggle" data-toggle="dropdown"
                                        id="question_share">
-                                        <i class="icon icon-share"></i>分享</a>
-                                    <a href="javascript:;" class="text-color-999"
-                                       onclick=""><i class="icon icon-report"></i>举报</a></div>
+                                        <a href="javascript:;" class="text-color-999"
+                                           @click="report(TQuestionsResult.id,TQuestionsResult.title)"><i
+                                                class="icon icon-report"></i>举报</a>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
@@ -250,6 +251,17 @@
                                             </p>
                                         </div>
                                         <div v-html="value.content">
+                                        </div>
+                                        <div class="mod-footer">
+                                            <div class="pull-right">
+                                                <!-- end 投票栏 -->
+                                                <a class="aw-add-comment active" data-id="50873" data-type="answer"
+                                                   data-comment-count="0" data-first-click="collapse"
+                                                   href="javascript:;" @click="reportAnswer(value.id)"></i>举报</a>
+                                                <a class="aw-add-comment active" data-id="50873" data-type="answer"
+                                                   data-comment-count="0" data-first-click="collapse"
+                                                   href="javascript:;"></i>回复</a>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -561,8 +573,20 @@
                     questionId: null,
                     userName: null,
                     cteateTime: null
+                },
+                /** 存储TReportQuestion插入结果*/
+                TReportQuestionInsertParam: {
+                    id: null,
+                    questionId: null,
+                    questionName: null,
+                    reason: null
+                },
+                /** 存储TReportAnswer插入结果*/
+                TReportAnswerInsertParam: {
+                    id: null,
+                    answerId: null,
+                    reason: null
                 }
-
             },
             created() {
                 /**
@@ -918,7 +942,109 @@
                     let queryStr = "";
                     queryStr = queryStr + "userNameView=" + userNameView + "";
                     window.open(WEBSTROM_BASE_URL + "/person.html?" + queryStr, '_self');
-                }
+                },
+
+                /** 插入TReportQuestion */
+                insertTReportQuestion() {
+                    let self = this;
+                    self.TReportQuestionInsertParam.id = uuid();
+                    axios.post(insertTReportQuestion, self.TReportQuestionInsertParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true)
+                                    self.$message({
+                                        type: 'success',
+                                        message: '举报成功',
+                                        duration: 1000
+                                    });
+                            } else {
+                                self.$message({
+                                    type: 'success',
+                                    message: '举报失败',
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            console.info(response);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常'
+                            });
+                        })
+                },
+                report(questionId, title) {
+                    let self = this;
+                    self.$prompt('请输入举报理由', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                    }).then(({value}) => {
+                        if (value == null) {
+                            self.$message({
+                                type: 'error',
+                                message: '举报理由不能为空'
+                            });
+                            return;
+                        }
+                        self.TReportQuestionInsertParam.questionId = questionId;
+                        self.TReportQuestionInsertParam.questionName = title;
+                        self.TReportQuestionInsertParam.reason = value;
+                        self.insertTReportQuestion();
+                    }).catch((res) => {
+                        console.info(res);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常'
+                        });
+                    });
+                },
+                /** 插入TReportAnswer */
+                insertTReportAnswer() {
+                    let self = this;
+                    self.TReportAnswerInsertParam.id = uuid();
+                    axios.post(insertTReportAnswer, self.TReportAnswerInsertParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true)
+                                    alert("insert 成功");
+                            } else {
+                                alert(data.msg);
+                            }
+                        }).catch(
+                        function (response) {
+                            //失败回调
+                            alert(self.alertError);
+                        })
+                },
+                reportAnswer(answerId) {
+                    let self = this;
+                    self.$prompt('请输入举报理由', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                    }).then(({value}) => {
+                        if (value == null) {
+                            self.$message({
+                                type: 'error',
+                                message: '举报理由不能为空'
+                            });
+                            return;
+                        }
+                        self.TReportAnswerInsertParam.answerId = answerId;
+                        self.TReportAnswerInsertParam.reason = value;
+                        self.insertTReportAnswer();
+                    }).catch((res) => {
+                        console.info(res);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常'
+                        });
+                    });
+                },
+
 
             }
         })

@@ -596,7 +596,7 @@
      * 发布
      */
     function submit() {
-        vue.TQuestionsInsertParam.status = 1;
+        vue.TQuestionsInsertParam.isSave = 1;
         if (vue.TQuestionsInsertParam.id) {
             /**如果id不为空 -> 更新*/
             vue.updateTQuestionsByPrimaryKey();
@@ -609,7 +609,7 @@
      * 存为草稿
      */
     function save() {
-        vue.TQuestionsInsertParam.status = 0;
+        vue.TQuestionsInsertParam.isSave = 0;
         if (vue.TQuestionsInsertParam.id) {
             /**如果id不为空 -> 更新*/
             vue.updateTQuestionsByPrimaryKey();

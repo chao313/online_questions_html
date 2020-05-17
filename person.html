@@ -126,6 +126,11 @@
                             </span>
                             <h1>{{userNameView}}<i></i></h1>
                             <p class="aw-user-flag">
+
+                            </p>
+                            <br><br>
+                            <p class="aw-user-flag pull-right" @click="reportUser(userNameView)">
+                                举报
                             </p>
 
 
@@ -168,15 +173,15 @@
                                                             <h4 class="aw-hide-txt">
                                                                 <a href="javascript:;"
                                                                    @click="routerToQuestionDetail(value.id)"><span>{{value.title}}</span></a>
-                                                                <template v-if="value.status == 0">
+                                                                <template v-if="value.isSave == 0">
                                                                     <a href="javascript:;"
                                                                        class="aw-question-tags hidden-xs contribute"><span>待发布</span></a>
                                                                 </template>
-                                                                <template v-else-if="value.status == 1">
+                                                                <template v-else-if="value.status == 0">
                                                                     <a href="javascript:;"
-                                                                       class="aw-question-tags hidden-xs contribute"><span>已发布</span></a>
+                                                                       class="aw-question-tags hidden-xs contribute"><span>发布中</span></a>
                                                                 </template>
-                                                                <template v-else-if="value.status == 2">
+                                                                <template v-else-if="value.status == 1">
                                                                     <a href="javascript:;"
                                                                        class="aw-question-tags hidden-xs contribute"><span>已终结</span></a>
                                                                 </template>
@@ -188,10 +193,10 @@
                                                                    class="aw-question-tags pull-right hidden-xs contribute"><span>修改</span></a>
 
                                                                 <a href="javascript:;"
-                                                                   @click="updateTQuestionsByPrimaryKey(1, value.id)"
+                                                                   @click="updateTQuestionsByPrimaryKey(0, value.id)"
                                                                    class="aw-question-tags-op-green pull-right hidden-xs contribute"><span>发布</span></a>
                                                                 <a href="javascript:;"
-                                                                   @click="updateTQuestionsByPrimaryKey(2, value.id)"
+                                                                   @click="updateTQuestionsByPrimaryKey(1, value.id)"
                                                                    class="aw-question-tags-op-red pull-right hidden-xs contribute"><span>终结</span></a>
                                                             </h4>
                                                         </div>
@@ -246,6 +251,10 @@
                                                                    @click="routerToQuestionDetail(value.questionId)">
                                                                     <span>{{value.questionTitle}}</span>
                                                                 </a>
+                                                                <a href="javascript:;"
+                                                                   @click="deleteAnswer(value.id,value.questionId)"
+                                                                   class="aw-question-tags-op-red pull-right hidden-xs
+                                                                    contribute"><span>删除</span></a>
                                                             </h4>
                                                         </div>
                                                         <div class="mod-body">
@@ -616,6 +625,7 @@
                     userId: null,
                     title: null,
                     content: null,
+                    isSave: null,
                     status: null,
                     deleteFlag: null,
                     blackFlag: null,
@@ -639,6 +649,7 @@
                         userId: null,
                         title: null,
                         content: null,
+                        isSave: null,
                         status: null,
                         deleteFlag: null,
                         blackFlag: null,
@@ -662,6 +673,7 @@
                     userId: null,
                     title: null,
                     content: null,
+                    isSave: null,
                     status: null,
                     deleteFlag: null,
                     blackFlag: null,
@@ -674,6 +686,7 @@
                     userId: null,
                     title: null,
                     content: null,
+                    isSave: null,
                     status: null,
                     deleteFlag: null,
                     blackFlag: null,
@@ -802,6 +815,7 @@
                     userId: null,
                     title: null,
                     content: null,
+                    isSave: null,
                     status: null,
                     deleteFlag: null,
                     blackFlag: null,
@@ -905,6 +919,7 @@
                         content: null,
                         tag: null,
                         status: null,
+                        isSave: null,
                         deleteFlag: null,
                         blackFlag: null,
                         createTime: null,
@@ -917,7 +932,12 @@
                         id: null,
                     }
                 }
-
+                , /** 存储TReportUser插入结果*/
+                TReportUserInsertParam: {
+                    id: null,
+                    userName: null,
+                    reason: null
+                }
 
             },
             created() {
@@ -1172,7 +1192,7 @@
                     let self = this;
                     self.TAnswerQueryBasePageHelperParam.pageNum = self.TAnswerQueryBasePageHelperResult.pageNum;
                     self.TAnswerQueryBasePageHelperParam.pageSize = self.TAnswerQueryBasePageHelperResult.pageSize;
-                    self.queryBasePageHelperTQuestions(self.TAnswerQueryBasePageHelperParam.pageNum, self.TAnswerQueryBasePageHelperParam.pageSize);
+                    self.queryBasePageHelperTAnswer(self.TAnswerQueryBasePageHelperParam.pageNum, self.TAnswerQueryBasePageHelperParam.pageSize);
                 },
                 routerToQuestionDetail(id) {
                     //跳转携带参数
@@ -1527,6 +1547,177 @@
                             })
                         })
                 },
+                /** 删除回答 */
+                deleteAnswer(answerId, questionId) {
+                    let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
+                    self.queryTQuestionsByPrimaryKey(answerId, questionId);
+
+
+                },
+                /** 主键删除TAnswer */
+                deleteTAnswerByPrimaryKey(id) {
+                    let self = this;
+                    axios.get(deleteTAnswerByPrimaryKey, {
+                        params: {
+                            id: id
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            if (data.content == true) {
+                                self.$message({
+                                    type: 'success',
+                                    message: '操作成功',
+                                    duration: 1000
+                                });
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '操作失败' + response.msg,
+                                    duration: 1000
+                                });
+                            }
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '操作失败' + response.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                        function (response) {
+                            //失败回调
+                            console.error(response);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+                /** 主键查询TQuestions */
+                queryTQuestionsByPrimaryKey(answerId, questionId) {
+                    let self = this;
+                    axios.get(queryTQuestionsByPrimaryKey, {
+                        params: {
+                            id: questionId
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            data.content;
+                            if (data.content.status == 1) {
+                                /*代表终结*/
+                                self.$message({
+                                    type: 'error',
+                                    message: '问题已经终结,无法删除',
+                                    duration: 1000
+                                });
+                            } else if (data.content.status == 0) {
+                                self.deleteTAnswerByPrimaryKey(answerId);
+                                self.queryBasePageHelperTAnswer(self.TAnswerQueryBasePageHelperParam.pageNum, self.TAnswerQueryBasePageHelperParam.pageSize);
+                            }
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '操作失败' + response.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                        function (response) {
+                            //失败回调
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
+                },
+                /** 插入TReportAnswer */
+                insertTReportAnswer() {
+                    let self = this;
+                    self.TReportAnswerInsertParam.id = uuid();
+                    axios.post(insertTReportAnswer, self.TReportAnswerInsertParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true)
+                                    alert("insert 成功");
+                            } else {
+                                alert(data.msg);
+                            }
+                        }).catch(
+                        function (response) {
+                            //失败回调
+                            alert(self.alertError);
+                        })
+                },
+                /** 插入TReportUser */
+                insertTReportUser() {
+                    let self = this;
+                    self.TReportUserInsertParam.id = uuid();
+                    axios.post(insertTReportUser, self.TReportUserInsertParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true)
+                                    self.$message({
+                                        type: 'success',
+                                        message: '举报成功'
+                                    });
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '举报失败' + data.msg
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            console.info(response);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常'
+                            });
+                        })
+                },
+                reportUser(userName) {
+                    let self = this;
+                    self.$prompt('请输入举报理由', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                    }).then(({value}) => {
+                        if (value == null) {
+                            self.$message({
+                                type: 'error',
+                                message: '举报理由不能为空'
+                            });
+                            return;
+                        }
+                        self.TReportUserInsertParam.userName = userName;
+                        self.TReportUserInsertParam.reason = value;
+                        self.insertTReportUser();
+                    }).catch((res) => {
+                        console.info(res);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常'
+                        });
+                    });
+                },
+
             }
         })
     ;

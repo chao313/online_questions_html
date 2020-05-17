@@ -28,6 +28,60 @@ var validCheckCode = BASE_URL + '/EmailController/validCheckCode';
 var forgetPassword = BASE_URL + '/EmailController/forgetPassword';
 
 
+/** TReportUser */
+/** 根据主键更新TReportUser */
+var updateTReportUserByPrimaryKey = BASE_URL + '/TReportUserController/updateByPrimaryKey';
+/** 单条插入TReportUser */
+var insertTReportUser = BASE_URL + '/TReportUserController/insert';
+/** 根据主键删除TReportUser */
+var deleteTReportUserByPrimaryKey = BASE_URL + '/TReportUserController/deleteByPrimaryKey';
+/** 分页查询TReportUser */
+var queryBasePageHelperTReportUser = BASE_URL + '/TReportUserController/queryBasePageHelper';
+/** 根据主键查询TReportUser */
+var queryTReportUserByPrimaryKey = BASE_URL + '/TReportUserController/queryByPrimaryKey';
+/** 多条件查询TReportUser */
+var queryBaseTReportUser = BASE_URL + '/TReportUserController/queryBase';
+/** 批量插入TReportUser */
+var insertsTReportUser = BASE_URL + '/TReportUserController/inserts';
+/** 多条件更新TReportUser */
+var updateBaseTReportUser = BASE_URL + '/TReportUserController/updateBase';
+
+/** TReportAnswer */
+/** 根据主键更新TReportAnswer */
+var updateTReportAnswerByPrimaryKey = BASE_URL + '/TReportAnswerController/updateByPrimaryKey';
+/** 单条插入TReportAnswer */
+var insertTReportAnswer = BASE_URL + '/TReportAnswerController/insert';
+/** 根据主键删除TReportAnswer */
+var deleteTReportAnswerByPrimaryKey = BASE_URL + '/TReportAnswerController/deleteByPrimaryKey';
+/** 分页查询TReportAnswer */
+var queryBasePageHelperTReportAnswer = BASE_URL + '/TReportAnswerController/queryBasePageHelper';
+/** 根据主键查询TReportAnswer */
+var queryTReportAnswerByPrimaryKey = BASE_URL + '/TReportAnswerController/queryByPrimaryKey';
+/** 多条件查询TReportAnswer */
+var queryBaseTReportAnswer = BASE_URL + '/TReportAnswerController/queryBase';
+/** 批量插入TReportAnswer */
+var insertsTReportAnswer = BASE_URL + '/TReportAnswerController/inserts';
+/** 多条件更新TReportAnswer */
+var updateBaseTReportAnswer = BASE_URL + '/TReportAnswerController/updateBase';
+
+/** TReportQuestion */
+/** 根据主键更新TReportQuestion */
+var updateTReportQuestionByPrimaryKey = BASE_URL + '/TReportQuestionController/updateByPrimaryKey';
+/** 单条插入TReportQuestion */
+var insertTReportQuestion = BASE_URL + '/TReportQuestionController/insert';
+/** 根据主键删除TReportQuestion */
+var deleteTReportQuestionByPrimaryKey = BASE_URL + '/TReportQuestionController/deleteByPrimaryKey';
+/** 分页查询TReportQuestion */
+var queryBasePageHelperTReportQuestion = BASE_URL + '/TReportQuestionController/queryBasePageHelper';
+/** 根据主键查询TReportQuestion */
+var queryTReportQuestionByPrimaryKey = BASE_URL + '/TReportQuestionController/queryByPrimaryKey';
+/** 多条件查询TReportQuestion */
+var queryBaseTReportQuestion = BASE_URL + '/TReportQuestionController/queryBase';
+/** 批量插入TReportQuestion */
+var insertsTReportQuestion = BASE_URL + '/TReportQuestionController/inserts';
+/** 多条件更新TReportQuestion */
+var updateBaseTReportQuestion = BASE_URL + '/TReportQuestionController/updateBase';
+
 /** TFollowQuestion */
 /** 根据主键更新TFollowQuestion */
 var updateTFollowQuestionByPrimaryKey = BASE_URL + '/TFollowQuestionController/updateByPrimaryKey';
