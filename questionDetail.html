@@ -62,7 +62,7 @@
             </div>
             <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="javaScript:;" @click="routerToTag()">全部</a></li>
+                    <li class="active"><a href="javaScript:;" @click="routerToTag()">首页</a></li>
                     <template v-for="(value,index) in TTagResults">
                         <li>
                             <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
@@ -90,7 +90,7 @@
                 <div class="aw-dropdown dropdown-list pull-right">
                     <ul class="aw-dropdown-list">
                         <li><a href="javaScript:;" @click="routerToPerson(userName)">
-                            个人主面<span
+                            个人主页<span
                                 class="badge badge-important collapse" id="inbox_unread"
                                 style="display: none;">0</span></a>
                         </li>
@@ -240,7 +240,7 @@
                                         <!-- 用户头像 -->
                                         <a class="aw-user-img aw-border-radius-5"
                                            href="" data-id="52528"><img
-                                                src="local/avatar-mid-img.png" :alt="value.master.userName"></a>
+                                                :src="path(value.master.logo)" :alt="value.master.userName"></a>
                                         <!-- end 用户头像 -->
                                         <div class="title">
                                             <p>
@@ -249,7 +249,7 @@
                                                    data-id="52528"><span>{{value.master.userName}}</span></a>
 
                                         </div>
-                                        <div v-html="base64Decode(value.master.content)">
+                                        <div v-html="base64Decode(value.master.answerContent)">
 
                                         </div>
                                         <div class="mod-footer">
@@ -274,7 +274,7 @@
                                                     <!-- 用户头像 -->
                                                     <a class="aw-user-img aw-border-radius-5"
                                                        href="" data-id="52528"><img
-                                                            src="local/avatar-mid-img.png" :alt="value.userName"></a>
+                                                            :src="path(value.logo)" :alt="value.userName"></a>
                                                     <!-- end 用户头像 -->
                                                     <div class="title">
                                                         <p>
@@ -283,7 +283,7 @@
                                                                data-id="52528"><span>{{value.userName}}</span></a>
 
                                                     </div>
-                                                    <div v-html="base64Decode(value.content)">
+                                                    <div v-html="base64Decode(value.answerContent)">
 
                                                     </div>
                                                     <div class="mod-footer">
@@ -321,39 +321,20 @@
                         <div class="mod-body">
                             <dl>
                                 <dt class="pull-left aw-border-radius-5">
-                                    <a href=""><img :alt="TUserResultQuestion.name"
-                                                    :src="path(TUserResultQuestion.logo)"></a>
+                                    <a href="javascript:;" @click="routerToPerson(TUserResultQuestion.name)"><img
+                                            :alt="TUserResultQuestion.name"
+                                            :src="path(TUserResultQuestion.logo)"></a>
                                 </dt>
                                 <dd class="pull-left">
-                                    <a class="aw-user-name" href=""
+                                    <a class="aw-user-name" href="javascript:;"
+                                       @click="routerToPerson(TUserResultQuestion.name)"
                                        data-id="45510"><span>{{TUserResultQuestion.name}}</span></a>
-                                    <a class=""
-                                       onclick=""
-                                       data-original-title="取消关注"></a>
                                     <p>{{TUserResultQuestion.signature}}</p>
                                 </dd>
                             </dl>
                         </div>
                     </div>
                     <!-- end 发起人 -->
-
-
-                    <!-- 推荐内容 -->
-                    <div class="aw-mod">
-                        <div class="mod-head">
-                            <h3>推荐内容</h3>
-                        </div>
-                        <div class="mod-body font-size-12">
-                            <ul>
-                                <li>
-                                    <a href="">Window快捷键学习</a>
-                                <li><a href="">岁月如歌, 坦然应对</a></li>
-                                <li><a href="">如何优化Windows的启动</a></li>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- end 推荐内容 -->
 
                     <!-- 问题状态 -->
                     <div class="aw-mod question-status">
@@ -410,7 +391,7 @@
                                     <a href="javascript:;"
                                        onclick="answer()"
                                        class="btn btn-normal btn-success pull-right btn-reply"
-                                       id="publish_submit">回复</a>
+                                       id="publish_submit">回答</a>
 
 
                                 </div>
@@ -434,7 +415,7 @@
 <script type="text/javascript" charset="utf-8" src="vueJs/api.js"></script>
 <div class="aw-footer-wrap">
     <div class="aw-footer">
-        Copyright © 2020<span class="hidden-xs"> - 潮文工作室 QQ号：2942200183, All Rights Reserved</span>
+        Copyright © 2020<span class="hidden-xs"> - 短书ShortBook  All Rights Reserved</span>
     </div>
 </div>
 <script>
@@ -544,7 +525,7 @@
     });
 </script>
 <script>
-    var answer = new Vue({
+    var answerVue = new Vue({
         el: "#answer",
         data: {
             userId: null,
@@ -836,7 +817,7 @@
                     if (response.code == 0) {
                         self.userId = response.content;
                         topHead.userId = response.content;
-                        answer.userId = response.content;
+                        answerVue.userId = response.content;
                         // self.$message({
                         //     type: 'success',
                         //     message: '查询成功',
@@ -869,7 +850,7 @@
                     if (response.code == 0) {
                         self.userName = response.content;
                         topHead.userName = response.content;
-                        answer.userName = response.content;
+                        answerVue.userName = response.content;
                         self.queryTFollowQuestionByPrimaryKey(self.questionId, self.userName);
                         self.queryTUserByPrimaryKey(self.userName);//查询用户详细信息
                         // self.$message({
@@ -907,9 +888,18 @@
                     });
                     return;
                 }
+                if (editor.txt.html() == null || editor.txt.html() == '<p><br></p>') {
+                    self.$message({
+                        type: 'error',
+                        message: '请输入评论!',
+                        duration: 1000
+                    });
+                    return;
+                }
                 self.TAnswerInsertParam.id = uuid();
                 self.TAnswerInsertParam.userName = self.userName;
                 self.TAnswerInsertParam.questionId = self.questionId;
+                self.TAnswerInsertParam.blackFlag = 0;
                 self.TAnswerInsertParam.questionTitle = self.TQuestionsResult.title;
                 self.TAnswerInsertParam.content = base64Encode(editor.txt.html());
                 self.TAnswerInsertParam.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
@@ -920,6 +910,7 @@
                         if (data.code == 0) {
                             if (data.content == true) {
                                 self.queryBasePageHelperTAnswer();
+                                // editor.txt.html('');
                                 self.$message({
                                     type: 'success',
                                     message: '发布成功',
@@ -948,6 +939,7 @@
                 let self = this;
                 let pageNum = self.TAnswerQueryBasePageHelperParam.pageNum;
                 let pageSize = self.TAnswerQueryBasePageHelperParam.pageSize;
+                self.TAnswerQueryBasePageHelperParam.blackFlag = 0;
                 axios.post(queryBasePageSecondHelper + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TAnswerQueryBasePageHelperParam)
                     .then(function (response) {
                         let data = response.data;
@@ -1220,14 +1212,25 @@
                         console.log(data);
                         if (data.code == 0) {
                             if (data.content == true)
-                                alert("insert 成功");
+                                self.$message({
+                                    type: 'success',
+                                    message: '举报成功',
+                                    duration: 1000
+                                });
                         } else {
-                            alert(data.msg);
+                            self.$message({
+                                type: 'success',
+                                message: '举报失败',
+                                duration: 1000
+                            });
                         }
                     }).catch(
                     function (response) {
-                        //失败回调
-                        alert(self.alertError);
+                        console.info(response);
+                        self.$message({
+                            type: 'error',
+                            message: '网络异常'
+                        });
                     })
             }
             ,
@@ -1274,6 +1277,7 @@
                     self.TAnswerSecondInsertParam.questionId = self.questionId;
                     self.TAnswerSecondInsertParam.content = base64Encode(value);
                     self.TAnswerSecondInsertParam.answerId = answerId;
+                    self.TAnswerSecondInsertParam.blackFlag = 0;
                     self.TAnswerSecondInsertParam.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
                     self.insertTAnswerSecond();
                 }).catch((res) => {
@@ -1328,8 +1332,9 @@
                     let data = response.data;
                     console.log(data);
                     if (data.code == 0) {
+                        console.info(data.content)
                         topHead.TUserResult = data.content;
-                        answer.TUserResult = data.content;
+                        answerVue.TUserResult = data.content;
                         self.TUserResult = data.content;
                     } else {
                         self.$message({
@@ -1361,6 +1366,8 @@
                     console.log(data);
                     if (data.code == 0) {
                         self.TUserResultQuestion = data.content;
+                        topHead.TUserResultQuestion = data.content;
+                        answerVue.TUserResultQuestion = data.content;
                     } else {
                         self.$message({
                             type: 'error',

@@ -32,6 +32,25 @@ var queryBasePageHelperVQuestionUserAnswerFollow = BASE_URL + '/VQuestionUserAns
 
 var queryBasePageHelperVHotQuestion = BASE_URL + '/VHotQuestionController/queryBasePageHelper';
 
+
+/** VFollowPersonUser */
+/** 根据主键更新VFollowPersonUser */
+var updateVFollowPersonUserByPrimaryKey = BASE_URL + '/VFollowPersonUserController/updateByPrimaryKey';
+/** 单条插入VFollowPersonUser */
+var insertVFollowPersonUser = BASE_URL + '/VFollowPersonUserController/insert';
+/** 根据主键删除VFollowPersonUser */
+var deleteVFollowPersonUserByPrimaryKey = BASE_URL + '/VFollowPersonUserController/deleteByPrimaryKey';
+/** 分页查询VFollowPersonUser */
+var queryBasePageHelperVFollowPersonUser = BASE_URL + '/VFollowPersonUserController/queryBasePageHelper';
+/** 根据主键查询VFollowPersonUser */
+var queryVFollowPersonUserByPrimaryKey = BASE_URL + '/VFollowPersonUserController/queryByPrimaryKey';
+/** 多条件查询VFollowPersonUser */
+var queryBaseVFollowPersonUser = BASE_URL + '/VFollowPersonUserController/queryBase';
+/** 批量插入VFollowPersonUser */
+var insertsVFollowPersonUser = BASE_URL + '/VFollowPersonUserController/inserts';
+/** 多条件更新VFollowPersonUser */
+var updateBaseVFollowPersonUser = BASE_URL + '/VFollowPersonUserController/updateBase';
+
 /** TAnswerSecond */
 /** 根据主键更新TAnswerSecond */
 var updateTAnswerSecondByPrimaryKey = BASE_URL + '/TAnswerSecondController/updateByPrimaryKey';

@@ -47,7 +47,7 @@
             </div>
             <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="javaScript:;" @click="routerToTag()">全部</a></li>
+                    <li class="active"><a href="javaScript:;" @click="routerToTag()">首页</a></li>
                     <template v-for="(value,index) in TTagResults">
                         <li>
                             <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
@@ -76,7 +76,7 @@
                 <div class="aw-dropdown dropdown-list pull-right">
                     <ul class="aw-dropdown-list">
                         <li><a href="javaScript:;" @click="routerToPerson(userName)">
-                            个人主面<span
+                            个人主页<span
                                 class="badge badge-important collapse" id="inbox_unread"
                                 style="display: none;">0</span></a>
                         </li>
@@ -180,19 +180,20 @@
                             <template v-for="(value,index) in VHotQuestionQueryBasePageHelperResult.list">
                                 <dl>
                                     <dt class="pull-left aw-border-radius-5">
-                                        <a href=""><img alt=""
-                                                        src="local/topic-mid-img.png"></a>
+                                        <a href="javaScript:;" @click="routerToQuestionDetail(value.id)"><img alt=""
+                                                                                                              src="local/topic-mid-img.png"></a>
                                     </dt>
                                     <dd class="pull-left">
                                         <p class="clearfix">
 						                 <span class="topic-tag">
                                              {{value.title}}
-						                 	<a href="" class="text" data-id="2078"><span>{{value.tag}}</span></a>
+						                 	<a href="javaScript:;" @click="routerToQuestionDetail(value.id)"><span>{{value.tag}}</span></a>
 						                 </span>
                                         </p>
                                         <p><b>{{dealZero(value.answerSum)}}</b> 个回复,
                                             <b>{{dealZero(value.followSum)}}</b> 人关注
-                                            最新<b>{{dealZero(value.lastAnswerTime)}}</b> 回复
+                                            <br>
+                                            <b>{{dealZero(value.lastAnswerTime)}}</b> 回复
                                         </p>
                                     </dd>
                                 </dl>
@@ -207,11 +208,12 @@
                             <template v-for="(value,index) in TUserQueryBasePageHelperResult.list">
                                 <dl>
                                     <dt class="pull-left aw-border-radius-5">
-                                        <a href=""><img :alt="value.name"
-                                                        :src="path(value.logo)"></a>
+                                        <a href="javaScript:;" @click="routerToPerson(value.name)"><img
+                                                :alt="value.name"
+                                                :src="path(value.logo)"></a>
                                     </dt>
                                     <dd class="pull-left">
-                                        <a href="" data-id="8618"
+                                        <a href="javaScript:;" @click="routerToPerson(value.name)"
                                            class="aw-user-name"><span>{{value.name}}</span> </a>
                                         <p class="signature"></p>
                                         <p>{{value.signature}}</p>
@@ -231,7 +233,7 @@
 
 <div class="aw-footer-wrap">
     <div class="aw-footer">
-        Copyright © 2020<span class="hidden-xs"> - 潮文工作室 QQ号：2942200183, All Rights Reserved</span>
+        Copyright © 2020<span class="hidden-xs"> - 短书ShortBook  All Rights Reserved</span>
     </div>
 </div>
 </div>
