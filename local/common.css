@@ -375,7 +375,7 @@ a.aw-load-more-content{display: block;}
 .aw-mod.aw-topic-recommend-list .mod-footer a{margin-top:10px;font-size: 12px;}
 /* 邀请回复 */
 .aw-mod.email-invite-replay .btn-success{margin-top:10px;}
-/* 发起 */
+/* 提问 */
 .aw-mod.publish-help .mod-body p, .aw-mod.topic-edit-help .mod-body p{padding:10px 0;color: #999;}
 /* 用户列表页按擅长话题搜索 */
 .aw-mod.people-sort .mod-body{position: relative;}
@@ -626,7 +626,7 @@ blockquote {margin: 0 40px;padding: 0 15px;font-size: 14px;color: #777;border-le
 .aw-article-content .aw-feed-list .mod-footer{margin:0;}
 .aw-article-content .aw-feed-list .aw-article-replay-box{margin:10px 0 0;padding:0;}
 
-/* 发起问题页面 */
+/* 提问问题页面 */
 .aw-mod-publish{padding:0 20px 20px;}
 .aw-mod-publish h3{margin-top:30px;}
 .aw-publish-title{position: relative;}
@@ -646,7 +646,7 @@ blockquote {margin: 0 40px;padding: 0 15px;font-size: 14px;color: #777;border-le
 .aw-auth-img input{width:76px;margin: 0 0 0 5px;}
 .aw-auth-img img{height: 30px;}
 .aw-mod-publish .aw-edit-topic-box .aw-dropdown-list{max-height: 252px;}
-/* 发起已有问题推荐 */
+/* 提问已有问题推荐 */
 .aw-publish-suggest-question{margin-bottom: 10px;}
 .aw-publish-suggest-question p{margin:0;padding:5px 10px;border-bottom: 1px solid #dcdcdc;}
 .aw-publish-suggest-question ul li a{display:block;padding:5px 10px;border-bottom: 1px solid #dcdcdc;font-size: 12px;}
@@ -865,7 +865,7 @@ blockquote {margin: 0 40px;padding: 0 15px;font-size: 14px;color: #777;border-le
 /* 私信弹窗 */
 .aw-inbox .aw-dropdown{top: auto;}
 
-/* 发起box */
+/* 提问box */
 .aw-publish-box input{width:170px !important;}
 .aw-publish-box .modal-body{padding-bottom: 0px;}
 .aw-publish-box #qp_captcha{height: 36px;margin-left: 10px;}
@@ -1052,7 +1052,7 @@ blockquote {margin: 0 40px;padding: 0 15px;font-size: 14px;color: #777;border-le
 	.aw-article-list .aw-item {padding: 10px 15px;}
 	/*弹窗*/
 	.aw-publish-box .modal-dialog, .aw-question-redirect-box .modal-dialog, .aw-inbox .modal-dialog, .aw-topic-edit-note-box .modal-dialog, .aw-tips-box .modal-dialog, .aw-image-box .modal-dialog, .aw-link-box .modal-dialog, .aw-edit-comment-box .modal-dialog, .aw-publish-box .modal-content {width: auto;}
-	/*发起问题页面*/
+	/*提问问题页面*/
 	.aw-publish-title input, .aw-publish-article .aw-publish-title input {width: 68%;}
 	.aw-publish-title .dropdown {width: 30%;}
 	/*个人页面*/
@@ -1083,7 +1083,7 @@ blockquote {margin: 0 40px;padding: 0 15px;font-size: 14px;color: #777;border-le
 	/* 分类导航 */
 	.category dl {padding:0;}
 	.category dl dd {width: 80px;}
-	/* 发起页面 */
+	/* 提问页面 */
 	.aw-publish-title input, .aw-publish-article .aw-publish-title input {width: 58%;}
 	.aw-publish-title .dropdown {width: 40%;}
 	.aw-mod-publish .mod-footer .aw-anonymity {margin:0 20px 0 0;}

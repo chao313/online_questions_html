@@ -65,10 +65,27 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="javaScript:;" @click="routerToTag()">首页</a></li>
                     <template v-for="(value,index) in TTagResults">
+                        <template v-if="index <= 4 ">
+                            <li>
+                                <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                            </li>
+                        </template>
+                    </template>
+                    <template v-if="TTagResults.length > 4 ">
                         <li>
-                            <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                            <a style="font-weight:bold;">更多</a>
+                            <div class="dropdown-list pull-right">
+                                <ul id="extensions-nav-list">
+                                    <template v-for="(value,index) in TTagResults">
+                                        <template v-if="index > 4 ">
+                                            <li>
+                                                <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                                            </li>
+                                        </template>
+                                    </template>
+                                </ul>
+                            </div>
                         </li>
-                        </option>
                     </template>
                 </ul>
             </nav>
@@ -101,13 +118,12 @@
                 </div>
             </div>
             <!-- end 用户栏 -->
-            <!-- 发起 -->
+            <!-- 提问 -->
             <div class="aw-publish-btn">
                 <a id="header_publish" class="btn-primary" href="javaScript:;"
-                   @click="routerToPublish()"><i
-                        class="icon icon-ask"></i>发起</a>
+                   @click="routerToPublish()">提问</a>
             </div>
-            <!-- end 发起 -->
+            <!-- end 提问 -->
         </template>
     </div>
 </div>
@@ -119,7 +135,7 @@
                 <div class="col-sm-12 col-md-9 aw-main-content">
                     <!-- tab 切换 -->
                     <ul class="nav nav-tabs aw-nav-tabs active">
-                        <h2 class="hidden-xs"><i class="icon icon-ask"></i> 发起</h2>
+                        <h2 class="hidden-xs">提问</h2>
                     </ul>
                     <!-- end tab 切换 -->
                     <form action="" method="post"
@@ -184,7 +200,7 @@
                                 <span class="aw-anonymity">
                                     <a id="saveDraft" data-type="question" onclick="save()">保存草稿</a></span>
                                 <a class="btn btn-large btn-success btn-publish-submit" id="publish_submit"
-                                   onclick="submit()">确认发起</a>
+                                   onclick="submit()">确认提问</a>
 
                             </div>
                         </div>
@@ -192,10 +208,10 @@
                 </div>
                 <!-- 侧边栏 -->
                 <div class="col-sm-12 col-md-3 aw-side-bar hidden-xs">
-                    <!-- 问题发起指南 -->
+                    <!-- 问题提问指南 -->
                     <div class="aw-mod publish-help">
                         <div class="mod-head">
-                            <h3>问题发起指南</h3>
+                            <h3>问题提问指南</h3>
                         </div>
                         <div class="mod-body">
                             <p><b>• 问题标题:</b> 请用准确的语言描述您发布的问题思想</p>
@@ -203,7 +219,7 @@
                             <p><b>• 选择类别:</b> 选择类别用于分类</p>
                         </div>
                     </div>
-                    <!-- end 问题发起指南 -->
+                    <!-- end 问题提问指南 -->
                 </div>
                 <!-- end 侧边栏 -->
             </div>
@@ -346,7 +362,7 @@
                                 message: '退出成功',
                                 duration: 1000
                             });
-                            self.routerToTag();
+                            self.routerToLogin();
                         } else {
                             self.$message({
                                 type: 'success',

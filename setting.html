@@ -56,10 +56,27 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="javaScript:;" @click="routerToTag()">首页</a></li>
                     <template v-for="(value,index) in TTagResults">
+                        <template v-if="index <= 4 ">
+                            <li>
+                                <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                            </li>
+                        </template>
+                    </template>
+                    <template v-if="TTagResults.length > 4 ">
                         <li>
-                            <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                            <a style="font-weight:bold;">更多</a>
+                            <div class="dropdown-list pull-right">
+                                <ul id="extensions-nav-list">
+                                    <template v-for="(value,index) in TTagResults">
+                                        <template v-if="index > 4 ">
+                                            <li>
+                                                <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                                            </li>
+                                        </template>
+                                    </template>
+                                </ul>
+                            </div>
                         </li>
-                        </option>
                     </template>
                 </ul>
             </nav>
@@ -93,17 +110,16 @@
                 </div>
             </div>
             <!-- end 用户栏 -->
-            <!-- 发起 -->
+            <!-- 提问 -->
             <div class="aw-publish-btn">
                 <a id="header_publish" class="btn-primary" href="javaScript:;"
-                   @click="routerToPublish()"><i
-                        class="icon icon-ask"></i>发起</a>
+                   @click="routerToPublish()">提问</a>
             </div>
-            <!-- end 发起 -->
+            <!-- end 提问 -->
         </template>
         <!-- end 用户栏 -->
-        <!-- 发起 -->
-        <!-- end 发起 -->
+        <!-- 提问 -->
+        <!-- end 提问 -->
     </div>
 </div>
 
@@ -303,7 +319,7 @@
                                 message: '退出成功',
                                 duration: 1000
                             });
-                            self.routerToTag();
+                            self.routerToLogin();
                         } else {
                             self.$message({
                                 type: 'success',

@@ -60,10 +60,27 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="javaScript:;" @click="routerToTag()">首页</a></li>
                     <template v-for="(value,index) in TTagResults">
+                        <template v-if="index <= 4 ">
+                            <li>
+                                <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                            </li>
+                        </template>
+                    </template>
+                    <template v-if="TTagResults.length > 4 ">
                         <li>
-                            <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                            <a style="font-weight:bold;">更多</a>
+                            <div class="dropdown-list pull-right">
+                                <ul id="extensions-nav-list">
+                                    <template v-for="(value,index) in TTagResults">
+                                        <template v-if="index > 4 ">
+                                            <li>
+                                                <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                                            </li>
+                                        </template>
+                                    </template>
+                                </ul>
+                            </div>
                         </li>
-                        </option>
                     </template>
                 </ul>
             </nav>
@@ -95,13 +112,12 @@
                     </ul>
                 </div>
             </div>
-            <!-- 发起 -->
+            <!-- 提问 -->
             <div class="aw-publish-btn">
                 <a id="header_publish" class="btn-primary" href="javaScript:;"
-                   @click="routerToPublish()"><i
-                        class="icon icon-ask"></i>发起</a>
+                   @click="routerToPublish()">提问</a>
             </div>
-            <!-- end 发起 -->
+            <!-- end 提问 -->
         </template>
     </div>
 </div>
@@ -115,13 +131,15 @@
                         <div class="mod-head">
                             <img :src="path(TUserResultView.logo)" :alt="TUserResultView.name">
                             <span class="pull-right operate">
-                                <template v-if="TFollowPersonResult.userName == null">
+                                <template v-if="userName != userNameView">
+                                 <template v-if="TFollowPersonResult.userName == null">
                                     <a href="javascript:;" @click="follow()"
                                        class="follow btn btn-normal btn-success pull-left "><span>关注</span></a>
-                                </template>
-                                <template v-else>
+                                 </template>
+                                 <template v-else>
                                     <a href="javascript:;" @click="unFollow()"
                                        class="follow btn btn-normal btn-success active"><span>取消关注</span></a>
+                                 </template>
                                 </template>
                             </span>
                             <h1>{{userNameView}}<i></i></h1>
@@ -132,9 +150,11 @@
                                 {{TUserResultView.email}}
                             </p>
                             <br><br>
-                            <p class="aw-user-flag pull-right" @click="reportUser(userNameView)">
-                                举报
-                            </p>
+                            <template v-if="userName != userNameView">
+                                <p class="aw-user-flag pull-right" @click="reportUser(userNameView)">
+                                    举报
+                                </p>
+                            </template>
 
 
                         </div>
@@ -149,10 +169,10 @@
                                         class="badge">{{TFollowQuestionQueryBasePageHelperResult.total}}</span></a>
                                 </li>
                                 <li><a href="#contents_followes" data-toggle="tab">关注的人<span
-                                        class="badge">{{VFollowPersonUserQueryBasePageHelperResult.total}}</span></a>
+                                        class="badge">{{TFollowPersonQueryBasePageHelperResultFollowed.total}}</span></a>
                                 </li>
                                 <li><a href="#contents_followed" data-toggle="tab">被人关注<span
-                                        class="badge">{{TFollowPersonQueryBasePageHelperResultFollowed.total}}</span></a>
+                                        class="badge">{{VFollowPersonUserQueryBasePageHelperResult.total}}</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -356,8 +376,9 @@
                                                 <div class="mod-body">
                                                     <ul id="contents_user_follows" class="clearfix">
                                                         <template
-                                                                v-if="VFollowPersonUserQueryBasePageHelperResult.total != null"
-                                                                v-for="(value,index) in VFollowPersonUserQueryBasePageHelperResult.list">
+                                                                v-if="TFollowPersonQueryBasePageHelperResultFollowed.total != null"
+                                                                v-for="(value,index) in TFollowPersonQueryBasePageHelperResultFollowed.list">
+
                                                             <li>
                                                                 <div class="mod-head">
                                                                     <a class="aw-user-img pull-left aw-border-radius-5"
@@ -414,16 +435,15 @@
                                                 <div class="mod-body">
                                                     <ul class="clearfix">
                                                         <template
-                                                                v-if="TFollowPersonQueryBasePageHelperResultFollowed.total != null"
-                                                                v-for="(value,index) in TFollowPersonQueryBasePageHelperResultFollowed.list">
-
+                                                                v-if="VFollowPersonUserQueryBasePageHelperResult.total != null"
+                                                                v-for="(value,index) in VFollowPersonUserQueryBasePageHelperResult.list">
                                                             <li>
                                                                 <div class="mod-head">
                                                                     <a class="aw-user-img pull-left aw-border-radius-5"
                                                                        data-id="49009"
                                                                        href="">
                                                                         <img :src="path(value.logo)"
-                                                                             :alt="value.userNameFollow">
+                                                                             :alt="value.userName">
                                                                     </a>
                                                                     <p>
                                                                         <a href="javaScript:;"
@@ -443,16 +463,16 @@
                                                 <div class="page-control">
                                                     <div class="mt10">
                                                         <template
-                                                                v-if="TFollowPersonQueryBasePageHelperResultFollowed.total != null">
+                                                                v-if="VFollowPersonUserQueryBasePageHelperResult.total != null">
                                                             <!--/** */:page-size 数一页的数量！！！-->
                                                             <el-pagination
-                                                                    v-show="TFollowPersonQueryBasePageHelperResultFollowed.list.length > 0"
+                                                                    v-show="VFollowPersonUserQueryBasePageHelperResult.list.length > 0"
                                                                     background
                                                                     @current-change="handleCurrentChangeVFollowPersonUser"
-                                                                    :current-page.sync="TFollowPersonQueryBasePageHelperResultFollowed.pageNum"
-                                                                    :page-size="TFollowPersonQueryBasePageHelperResultFollowed.pageSize"
+                                                                    :current-page.sync="VFollowPersonUserQueryBasePageHelperResult.pageNum"
+                                                                    :page-size="VFollowPersonUserQueryBasePageHelperResult.pageSize"
                                                                     layout="total, prev, pager, next, jumper"
-                                                                    :total="TFollowPersonQueryBasePageHelperResultFollowed.total">
+                                                                    :total="VFollowPersonUserQueryBasePageHelperResult.total">
                                                             </el-pagination>
                                                         </template>
                                                     </div>
@@ -564,7 +584,7 @@
                                 message: '退出成功',
                                 duration: 1000
                             });
-                            self.routerToTag();
+                            self.routerToLogin();
                         } else {
                             self.$message({
                                 type: 'success',
@@ -598,10 +618,10 @@
     var vue = new Vue({
             el: "#body",
             data: {
-                userId: '',
-                questionId: '',
-                userName: '',//当前登陆的userName
-                userNameView: '',//用于外人查看的userName
+                userId: null,
+                questionId: null,
+                userName: null,//当前登陆的userName
+                userNameView: null,//用于外人查看的userName
                 /** 存储TQuestions多条件查询条件(分页，去除分页的num和size)*/
                 TQuestionsQueryBasePageHelperParam: {
                     id: null,
@@ -1103,11 +1123,11 @@
                             self.userName = response.content;
                             topHead.userName = response.content;
                             self.queryTFollowPersonByPrimaryKey(self.userNameView, self.userName)
-                            /**查询关注的人*/
-                            self.VFollowPersonUserQueryBasePageHelperParam.userName = self.userName;
+                            /**查询被人关注的人*/
+                            self.VFollowPersonUserQueryBasePageHelperParam.userNameFollow = self.userNameView;
                             self.queryBasePageHelperVFollowPersonUser(self.VFollowPersonUserQueryBasePageHelperParam.pageNum, self.VFollowPersonUserQueryBasePageHelperParam.pageSize)
-                            /**查询被关注的人*/
-                            self.TFollowPersonQueryBasePageHelperParamFollowed.userNameFollow = self.userName;
+                            /**查询关注的人*/
+                            self.TFollowPersonQueryBasePageHelperParamFollowed.userName = self.userNameView;
                             self.queryBasePageHelperTFollowPersonFollowed(self.TFollowPersonQueryBasePageHelperParamFollowed.pageNum, self.TFollowPersonQueryBasePageHelperParamFollowed.pageSize)
                             self.queryTUserByPrimaryKey(self.userName);//查询用户详细信息
 
@@ -1352,6 +1372,14 @@
                 /** 插入TFollowPerson */
                 insertTFollowPerson() {
                     let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
                     axios.post(insertTFollowPerson, self.TFollowPersonInsertParam)
                         .then(function (response) {
                             let data = response.data;
@@ -1535,6 +1563,15 @@
                 },
                 /** 关注 */
                 follow() {
+                    let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
                     this.TFollowPersonInsertParam.userNameFollow = this.userNameView;
                     this.TFollowPersonInsertParam.userName = this.userName;
                     this.TFollowPersonInsertParam.cteateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
@@ -1551,6 +1588,15 @@
                 },
                 /** 取消关注 */
                 unFollow() {
+                    let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
                     this.TFollowPersonInsertParam.userNameView = this.userNameView;
                     this.TFollowPersonInsertParam.userName = this.userName;
                     if (this.userName == null) {
@@ -1721,6 +1767,14 @@
                 /** 插入TReportAnswer */
                 insertTReportAnswer() {
                     let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
                     self.TReportAnswerInsertParam.id = uuid();
                     axios.post(insertTReportAnswer, self.TReportAnswerInsertParam)
                         .then(function (response) {
@@ -1741,6 +1795,14 @@
                 /** 插入TReportUser */
                 insertTReportUser() {
                     let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
                     self.TReportUserInsertParam.id = uuid();
                     axios.post(insertTReportUser, self.TReportUserInsertParam)
                         .then(function (response) {
@@ -1769,6 +1831,14 @@
                 },
                 reportUser(userName) {
                     let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
                     self.$prompt('请输入举报理由', '提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',

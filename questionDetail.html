@@ -64,10 +64,27 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="javaScript:;" @click="routerToTag()">首页</a></li>
                     <template v-for="(value,index) in TTagResults">
+                        <template v-if="index <= 4 ">
+                            <li>
+                                <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                            </li>
+                        </template>
+                    </template>
+                    <template v-if="TTagResults.length > 4 ">
                         <li>
-                            <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                            <a style="font-weight:bold;">更多</a>
+                            <div class="dropdown-list pull-right">
+                                <ul id="extensions-nav-list">
+                                    <template v-for="(value,index) in TTagResults">
+                                        <template v-if="index > 4 ">
+                                            <li>
+                                                <a href="javaScript:;" @click="routerToTag(value.tag)"><span>{{value.tag}}</span></a>
+                                            </li>
+                                        </template>
+                                    </template>
+                                </ul>
+                            </div>
                         </li>
-                        </option>
                     </template>
                 </ul>
             </nav>
@@ -100,15 +117,14 @@
                 </div>
             </div>
             <!-- end 用户栏 -->
-            <!-- 发起 -->
+            <!-- 提问 -->
             <div class="aw-publish-btn">
                 <a id="header_publish" class="btn-primary" href="javaScript:;"
-                   @click="routerToPublish()"><i
-                        class="icon icon-ask"></i>发起</a>
+                   @click="routerToPublish()">提问</a>
             </div>
-            <!-- end 发起 -->
+            <!-- end 提问 -->
         </template>
-        <!-- end 发起 -->
+        <!-- end 提问 -->
     </div>
 </div>
 <div class="aw-container-wrap" id="body">
@@ -226,7 +242,7 @@
                     <div class="aw-mod aw-question-comment">
                         <div class="mod-head">
                             <ul class="nav nav-tabs aw-nav-tabs active">
-                                <h2 class="hidden-xs">{{TAnswerQueryBasePageHelperResult.total}} 个回复</h2>
+                                <h2 class="hidden-xs">{{TAnswerQueryBasePageHelperResult.total}} 个回答</h2>
                             </ul>
                         </div>
 
@@ -313,10 +329,10 @@
                 </div>
                 <!-- 侧边栏 -->
                 <div class="col-md-3 aw-side-bar hidden-xs hidden-sm">
-                    <!-- 发起人 -->
+                    <!-- 提问人 -->
                     <div class="aw-mod">
                         <div class="mod-head">
-                            <h3>发起人</h3>
+                            <h3>提问人</h3>
                         </div>
                         <div class="mod-body">
                             <dl>
@@ -334,7 +350,7 @@
                             </dl>
                         </div>
                     </div>
-                    <!-- end 发起人 -->
+                    <!-- end 提问人 -->
 
                     <!-- 问题状态 -->
                     <div class="aw-mod question-status">
@@ -497,7 +513,7 @@
                                 message: '退出成功',
                                 duration: 1000
                             });
-                            self.routerToTag();
+                            self.routerToLogin();
                         } else {
                             self.$message({
                                 type: 'success',
@@ -916,6 +932,7 @@
                                     message: '发布成功',
                                     duration: 1000
                                 });
+                                editor.txt.clear()
                             }
                         } else {
                             self.$message({
@@ -1071,6 +1088,14 @@
             /** 插入TFollowQuestion */
             insertTFollowQuestion() {
                 let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 axios.post(insertTFollowQuestion, self.TFollowQuestionInsertParam)
                     .then(function (response) {
                         let data = response.data;
@@ -1104,6 +1129,15 @@
 
             /** 关注 */
             follow() {
+                let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 this.TFollowQuestionInsertParam.questionId = this.questionId;
                 this.TFollowQuestionInsertParam.userName = this.userName;
                 this.TFollowQuestionInsertParam.cteateTime = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
@@ -1122,6 +1156,14 @@
             ,
             /** 取消关注 */
             unFollow() {
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 this.TFollowQuestionInsertParam.questionId = this.questionId;
                 this.TFollowQuestionInsertParam.userName = this.userName;
                 if (this.userName == null) {
@@ -1147,6 +1189,14 @@
             /** 插入TReportQuestion */
             insertTReportQuestion() {
                 let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 self.TReportQuestionInsertParam.id = uuid();
                 axios.post(insertTReportQuestion, self.TReportQuestionInsertParam)
                     .then(function (response) {
@@ -1178,6 +1228,14 @@
             ,
             report(questionId, title) {
                 let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 self.$prompt('请输入举报理由', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -1205,6 +1263,14 @@
             /** 插入TReportAnswer */
             insertTReportAnswer() {
                 let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 self.TReportAnswerInsertParam.id = uuid();
                 axios.post(insertTReportAnswer, self.TReportAnswerInsertParam)
                     .then(function (response) {
@@ -1236,6 +1302,14 @@
             ,
             reportAnswer(answerId) {
                 let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 self.$prompt('请输入举报理由', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -1261,6 +1335,14 @@
             ,
             answerToAnswer(answerId) {
                 let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 self.$prompt('请输入回复内容', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -1292,6 +1374,14 @@
             /** 插入TAnswerSecond */
             insertTAnswerSecond() {
                 let self = this;
+                if (self.userName == null) {
+                    self.$message({
+                        type: 'error',
+                        message: '用户未登陆',
+                        duration: 1000
+                    });
+                    return;
+                }
                 axios.post(insertTAnswerSecond, self.TAnswerSecondInsertParam)
                     .then(function (response) {
                         let data = response.data;
