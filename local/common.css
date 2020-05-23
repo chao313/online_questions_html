@@ -1100,3 +1100,4 @@ blockquote {margin: 0 40px;padding: 0 15px;font-size: 14px;color: #777;border-le
 #c_log_list img{
   width: auto;max-width: 100%;
 }
+.bg-search{background-image:url("../images/search.png")}

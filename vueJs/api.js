@@ -29,6 +29,7 @@ var forgetPassword = BASE_URL + '/EmailController/forgetPassword';
 
 
 var queryBasePageHelperVQuestionUserAnswerFollow = BASE_URL + '/VQuestionUserAnswerFollowController/queryBasePageHelper';
+var queryByContentLikePageHelper = BASE_URL + '/VQuestionUserAnswerFollowController/queryByContentLikePageHelper';
 
 var queryBasePageHelperVHotQuestion = BASE_URL + '/VHotQuestionController/queryBasePageHelper';
 

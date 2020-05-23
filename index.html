@@ -11,6 +11,7 @@
     <title>短书ShortBook</title>
     <link rel="stylesheet" type="text/css" href="local/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="local/icon.css">
+    <script src="js/font.js"></script>
     <link href="local/common.css" rel="stylesheet" type="text/css">
     <link href="local/link.css" rel="stylesheet" type="text/css">
     <link href="local/style.css" rel="stylesheet" type="text/css">
@@ -31,7 +32,10 @@
                   method="post">
                 <input type="text" name="question_content" id="question_contents"
                        placeholder="搜索问题、话题或人....."
-                       class="form-control">
+                       class="form-control"
+                       v-model="word"
+                >
+                <span title="搜索" id="global_search_btns" onclick="search()">搜索</span>
             </form>
         </div>
 
@@ -265,6 +269,7 @@
         data: {
             userId: null,
             userName: null,
+            word: '',
             TTagResults: [{
                 id: null,
                 tag: null
@@ -381,8 +386,8 @@
                     username: '',
                     password:
                         ''
-                }
-                ,
+                },
+                word: '',
                 /** 存储TQuestions多条件查询条件(分页，去除分页的num和size)*/
                 TQuestionsQueryBasePageHelperParam: {
                     id: null,
@@ -798,37 +803,45 @@
                         []
                 }
             },
-            computed: {
-                path() {
-                    return function (value) {
+            computed:
+                {
+                    path() {
+                        return function (value) {
 
-                        if (value == null) {
-                            return 'local/avatar-mid-img.png';
-                        } else {
+                            if (value == null) {
+                                return 'local/avatar-mid-img.png';
+                            } else {
 
-                            return BASE_URL + "/" + value;
+                                return BASE_URL + "/" + value;
+                            }
+                        }
+                    }
+                    ,
+                    dealZero() {
+                        return function (value) {
+
+                            if (value == null) {
+                                return '0';
+                            } else {
+
+                                return value;
+                            }
                         }
                     }
                 }
-                ,
-                dealZero() {
-                    return function (value) {
-
-                        if (value == null) {
-                            return '0';
-                        } else {
-
-                            return value;
-                        }
-                    }
-                }
-            }
             ,
             created() {
                 var tag = queryUrlParam('tag');
                 if (tag) {
                     this.VQuestionUserAnswerFollowQueryBasePageHelperParam.tag = tag;
                     this.tag = tag;
+                    // this.word = '';
+                }
+                var word = queryUrlParam('word');
+                if (word) {
+                    this.word = word;
+                    topHead.word = word;
+                    this.tag = null;
                 }
                 this.queryBasePageHelperTQuestions(this.VQuestionUserAnswerFollowQueryBasePageHelperParam.pageNum, this.VQuestionUserAnswerFollowQueryBasePageHelperParam.pageSize);
                 this.getUserId();
@@ -845,7 +858,10 @@
                     this.VQuestionUserAnswerFollowQueryBasePageHelperParam.isSave = 1;//查找状态为发布的问题
                     this.VQuestionUserAnswerFollowQueryBasePageHelperParam.blackListUser = 0;//查找问题未拉黑的
                     this.VQuestionUserAnswerFollowQueryBasePageHelperParam.blackFlag = 0;//查找作者未拉黑的
-                    axios.post(queryBasePageHelperVQuestionUserAnswerFollow + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.VQuestionUserAnswerFollowQueryBasePageHelperParam)
+                    if (self.word != '') {
+                        self.VQuestionUserAnswerFollowQueryBasePageHelperParam.tag = null;
+                    }
+                    axios.post(queryByContentLikePageHelper + "?pageNum=" + pageNum + "&pageSize=" + pageSize + "&word=" + self.word, self.VQuestionUserAnswerFollowQueryBasePageHelperParam)
                         .then(function (response) {
                             let data = response.data;
                             console.log(data);
@@ -1079,6 +1095,13 @@
         })
     ;
 
+</script>
+<script>
+    function search() {
+        vue.word = topHead.word;
+        vue.queryBasePageHelperTQuestions(vue.VQuestionUserAnswerFollowQueryBasePageHelperParam.pageNum, vue.VQuestionUserAnswerFollowQueryBasePageHelperParam.pageSize);
+
+    }
 </script>
 </body>
 </html>

@@ -29,25 +29,12 @@
         <div class="aw-search-box  hidden-xs hidden-sm">
             <form class="navbar-search" action="" id="global_search_form"
                   method="post">
-                <label class="oldPwdTip aw-search-query-label"
-                       onclick="$(this).hide();$(&#39;#aw-search-query&#39;).focus();">搜索问题、话题或人...</label> <input
-                    class="form-control search-query" type="text" value="" autocomplete="off" name="q"
-                    id="aw-search-query" onfocus="hideOldPwdTip(&#39;aw-search-query&#39;);"
-                    onblur="toggleOldPwdTip(&#39;aw-search-query&#39;,this.value);">
-                <span title="搜索" id="global_search_btns" onclick="$(&#39;#global_search_form&#39;).submit();"><i
-                        class="icon icon-search"></i></span>
-                <div class="aw-dropdown">
-                    <div class="mod-body">
-                        <p class="title">输入关键字进行搜索</p>
-                        <ul class="aw-dropdown-list collapse"></ul>
-                        <p class="search"><span>搜索:</span><a onclick="$(&#39;#global_search_form&#39;).submit();"></a>
-                        </p>
-                    </div>
-                    <div class="mod-footer">
-                        <a href="javascript:;" onclick="$(&#39;#header_publish&#39;).click();"
-                           class="pull-right btn btn-mini btn-success publish">发起问题</a>
-                    </div>
-                </div>
+                <input type="text" name="question_content"
+                       placeholder="搜索问题、话题或人....."
+                       class="form-control"
+                       v-model="word"
+                >
+                <span title="搜索" id="global_search_btns" @click="routerToSearch()">搜索</span>
             </form>
         </div>
         <!-- end 搜索框 -->
@@ -444,6 +431,7 @@
                 id: null,
                 tag: null
             }],
+            word: '',
             TUserResult: {
                 id: null,
                 name: null,
@@ -490,6 +478,12 @@
                 if (tag) {
                     queryStr = queryStr + "tag=" + tag + "";
                 }
+                window.open(WEBSTROM_BASE_URL + "/index.html?" + queryStr, '_self');
+            },
+            routerToSearch() {
+                //跳转携带参数
+                let queryStr = "";
+                queryStr = queryStr + "word=" + this.word + "";
                 window.open(WEBSTROM_BASE_URL + "/index.html?" + queryStr, '_self');
             },
             routerToSetting() {
@@ -817,6 +811,7 @@
                     }
                 }).catch(
                     function (response) {
+                        console.info(response);
                         //失败回调
                         self.$message({
                             type: 'error',
@@ -849,6 +844,7 @@
                     }
                 }).catch(
                     function (response) {
+                        console.info(response);
                         self.$message({
                             type: 'error',
                             message: '网络异常，请检查服务',
@@ -884,6 +880,7 @@
                     }
                 }).catch(
                     function (response) {
+                        console.info(response);
                         self.$message({
                             type: 'error',
                             message: '网络异常，请检查服务',
@@ -943,6 +940,7 @@
                         }
                     }).catch(
                     function (response) {
+                        console.info(response);
                         self.$message({
                             type: 'error',
                             message: '网络异常，请检查服务',
@@ -965,7 +963,7 @@
                             self.TAnswerQueryBasePageHelperResult = data.content;
                             self.TAnswerQueryBasePageHelperResult.list.forEach(value => {
                                 console.info(value);
-                                value.content = base64Decode(value.content);
+                                // value.content = base64Decode(value.content);
                             })
                         } else {
                             self.$message({
@@ -976,6 +974,7 @@
                         }
                     }).catch(
                     function (response) {
+                        console.info(response);
                         //失败回调
                         self.$message({
                             type: 'error',
@@ -1008,6 +1007,7 @@
                         }
                     }).catch(
                     function (response) {
+                        console.info(response);
                         self.$message({
                             type: 'error',
                             message: '网络异常，请检查服务',
@@ -1077,6 +1077,7 @@
                 }).catch(
                     function (response) {
                         //失败回调
+                        console.info(response);
                         self.$message({
                             type: 'error',
                             message: '网络异常，请检查服务',
@@ -1118,6 +1119,7 @@
                     }).catch(
                     function (response) {
                         //失败回调
+                        console.info(response);
                         self.$message({
                             type: 'error',
                             message: '网络异常，请检查服务',
@@ -1533,7 +1535,6 @@
     E.viewSource.init(editor);
 </script>
 </div>
-
 </body>
 
 </html>

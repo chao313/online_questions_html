@@ -36,9 +36,12 @@
         <div class="aw-search-box  hidden-xs hidden-sm">
             <form class="navbar-search" action="" id="global_search_form"
                   method="post">
-                <input type="text" name="question_content" id="question_contents"
+                <input type="text" name="question_content"
                        placeholder="搜索问题、话题或人....."
-                       class="form-control">
+                       class="form-control"
+                       v-model="word"
+                >
+                <span title="搜索" id="global_search_btns" @click="routerToSearch()">搜索</span>
             </form>
         </div>
 
@@ -251,6 +254,7 @@
                 id: null,
                 tag: null
             }],
+            word: '',
             TUserResult: {
                 id: null,
                 name: null,
@@ -307,6 +311,12 @@
             routerToSetting() {
                 //跳转携带参数
                 window.open(WEBSTROM_BASE_URL + "/setting.html?", '_self');
+            },
+            routerToSearch() {
+                //跳转携带参数
+                let queryStr = "";
+                queryStr = queryStr + "word=" + this.word + "";
+                window.open(WEBSTROM_BASE_URL + "/index.html?" + queryStr, '_self');
             },
             loginOut() {
                 let self = this;
