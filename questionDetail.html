@@ -30,7 +30,7 @@
             <form class="navbar-search" action="" id="global_search_form"
                   method="post">
                 <input type="text" name="question_content"
-                       placeholder="搜索问题、话题或人....."
+                       placeholder="搜索问题..."
                        class="form-control"
                        v-model="word"
                 >
@@ -893,6 +893,14 @@
             ,
             insertTAnswer() {
                 let self = this;
+                if (self.TQuestionsResult.status == 1) {
+                    self.$message({
+                        type: 'error',
+                        message: '问题已经终结!无法回复!',
+                        duration: 2000
+                    });
+                    return;
+                }
                 if (self.userName == null) {
                     self.$message({
                         type: 'error',
@@ -1336,7 +1344,16 @@
             }
             ,
             answerToAnswer(answerId) {
+
                 let self = this;
+                if (self.TQuestionsResult.status == 1) {
+                    self.$message({
+                        type: 'error',
+                        message: '问题已经终结!无法回复!',
+                        duration: 2000
+                    });
+                    return;
+                }
                 if (self.userName == null) {
                     self.$message({
                         type: 'error',

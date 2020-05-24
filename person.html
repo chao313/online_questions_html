@@ -31,7 +31,7 @@
             <form class="navbar-search" action="" id="global_search_form"
                   method="post">
                 <input type="text" name="question_content"
-                       placeholder="搜索问题、话题或人....."
+                       placeholder="搜索问题..."
                        class="form-control"
                        v-model="word"
                 >
@@ -274,7 +274,26 @@
                                                                        @click="deleteAnswer(value.id,value.questionId)"
                                                                        class="aw-question-tags-op-red pull-right hidden-xs
                                                                     contribute"><span>删除</span></a>
+                                                                    <a href="javascript:;"
+                                                                       @click="editAnswer(value.id,value.content)"
+                                                                       class="aw-question-tags-op-green pull-right hidden-xs
+                                                                    contribute"><span>编辑</span></a>
                                                                 </template>
+                                                                <div :id="'div'+value.id" v-show="value.showEdit">
+                                                                <textarea style="display: none;" :id="value.id"
+                                                                          rows="15"
+                                                                          name="question_detail"></textarea>
+                                                                    <div :id="'wmd-input'+value.id">
+
+                                                                    </div>
+                                                                    <a href="javascript:;" @click="cancalEditerAnswer()"
+                                                                       class="aw-question-tags-op-green pull-right hidden-xs
+                                                                    contribute"><span>取消编辑</span></a>
+                                                                    <a href="javascript:;"
+                                                                       @click="updateAnswer(value.id)"
+                                                                       class="aw-question-tags-op-green pull-right hidden-xs
+                                                                    contribute"><span>保存</span></a>
+                                                                </div>
                                                             </h4>
                                                         </div>
                                                         <div class="mod-body">
@@ -485,6 +504,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8" src="local/wangEditor.js"></script>
+<script type="text/javascript" charset="utf-8" src="local/wangEditorExt.js"></script>
+<script type="text/javascript" charset="utf-8" src="local/plugin.js"></script>
 <script type="text/javascript" charset="utf-8" src="vueJs/vue.js"></script>
 <link rel="stylesheet" href="css/ElementIndex.css">
 <script src="js/ElementIndex.js"></script>
@@ -621,6 +643,7 @@
                 questionId: null,
                 userName: null,//当前登陆的userName
                 userNameView: null,//用于外人查看的userName
+                editor: null,
                 /** 存储TQuestions多条件查询条件(分页，去除分页的num和size)*/
                 TQuestionsQueryBasePageHelperParam: {
                     id: null,
@@ -742,7 +765,8 @@
                         status: null,
                         blackFlag: null,
                         time: null,
-                        answerId: null
+                        answerId: null,
+                        showEdit: null
                     }],
                     firstPage: null,
                     prePage: 0,
@@ -1009,7 +1033,25 @@
                     hasNextPage: null,
                     navigatePages: null,
                     navigatepageNums: []
-                }
+                },
+                /** 存储TAnswer主键更新*/
+                TAnswerUpdateByPrimaryKeyParam: {
+                    source: {
+                        userName: null,
+                        questionId: null,
+                        questionTitle: null,
+                        content: null,
+                        deleteFlag: null,
+                        status: null,
+                        blackFlag: null,
+                        time: null,
+                        answerId: null
+                    }
+                    ,
+                    target: {
+                        id: null,
+                    }
+                },
             },
             computed: {
                 base64Decode() {
@@ -1199,6 +1241,7 @@
                                 self.TAnswerQueryBasePageHelperResult = data.content;
                                 self.TAnswerQueryBasePageHelperResult.list.forEach(value => {
                                     value.content = base64Decode(value.content);
+                                    value.showEdit = false;
                                 })
                             } else {
                                 self.$message({
@@ -1952,6 +1995,138 @@
                     self.VFollowPersonUserQueryBasePageHelperParam.pageNum = self.VFollowPersonUserQueryBasePageHelperResult.pageNum;
                     self.VFollowPersonUserQueryBasePageHelperParam.pageSize = self.VFollowPersonUserQueryBasePageHelperResult.pageSize;
                     self.queryBasePageHelperTFollowPersonFollowed(self.VFollowPersonUserQueryBasePageHelperParam.pageNum, self.VFollowPersonUserQueryBasePageHelperParam.pageSize);
+                },
+                editAnswer(answerId, content) {
+                    let tmp = [];
+                    let self = this;
+                    self.TAnswerQueryBasePageHelperResult.list.forEach(value => {
+                        value.showEdit = false;
+                        if (value.id == answerId) {
+                            value.showEdit = true;
+                        }
+                        tmp.push(value);
+                    });
+                    self.TAnswerQueryBasePageHelperResult.list = tmp;
+
+                    /**编辑回复*/
+                    var E = window.wangEditor;
+                    var $text1 = $('#' + answerId);
+                    self.editor = new E('#wmd-input' + answerId);
+                    self.editor.customConfig.onchange = function (html) {
+                        $text1.val(html)
+                    };
+                    self.editor.customConfig.onchange = function (html) {
+                        $text1.val(html)
+                    };
+                    self.editor.customConfig.codeType = {
+                        title: "选择代码类型:",
+                        type: [
+                            "C/C++", "Php", "C#", "Java", "Css", "Sql", "Html", "Bash/Shell"
+                        ]
+                    };
+                    self.editor.customConfig.uploadImgServer = uploadFile;
+                    self.editor.customConfig.onchangeTimeout = 200;
+                    self.editor.customConfig.uploadImgTimeout = 30000;
+                    self.editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
+                    self.editor.customConfig.uploadFileName = 'files';
+                    self.editor.customConfig.customUploadImg = function (files, insert) {
+                        var form = new FormData();
+                        files.forEach(file => form.append('files', file, file.name));
+                        axios.post(uploadFile, form)
+                            .then(function (res) {
+                                let response = res.data;
+                                if (response.code == 0) {
+
+                                    response.content.forEach(url => {
+                                        console.info(BASE_URL + url);
+                                        insert(BASE_URL + "/" + url);//插入图片
+                                    })
+                                } else {
+                                    console.info(response.msg)
+                                }
+                            }).catch(
+                            function (response) {
+                                console.info(response)
+                            });
+
+                    }
+
+                    self.editor.create();
+                    self.editor.txt.html($text1.val());
+                    E.attach.init('#wmd-input' + answerId, "question");
+                    E.viewSource.init(self.editor);
+                    self.editor.txt.html(content);
+                },
+
+                cancalEditerAnswer() {
+                    let tmp = [];
+                    let self = this;
+                    self.TAnswerQueryBasePageHelperResult.list.forEach(value => {
+                        value.showEdit = false;
+                        tmp.push(value);
+                    });
+                    self.TAnswerQueryBasePageHelperResult.list = tmp;
+
+                },
+                updateAnswer(answerId) {
+                    let self = this;
+                    if (self.userName == null) {
+                        self.$message({
+                            type: 'error',
+                            message: '用户未登陆',
+                            duration: 1000
+                        });
+                        return;
+                    }
+                    if (self.editor.txt.html() == null || self.editor.txt.html() == '<p><br></p>') {
+                        self.$message({
+                            type: 'error',
+                            message: '请输入评论!',
+                            duration: 1000
+                        });
+                        return;
+                    }
+                    self.TAnswerUpdateByPrimaryKeyParam.target.id = answerId;
+                    self.TAnswerUpdateByPrimaryKeyParam.source.content = base64Encode(self.editor.txt.html());
+                    self.TAnswerUpdateByPrimaryKeyParam.source.time = dateFormat("YYYY-mm-dd HH:MM:SS", new Date());
+
+                    /** 主键更新TAnswer */
+                    axios.post(updateTAnswerByPrimaryKey, self.TAnswerUpdateByPrimaryKeyParam)
+                        .then(function (response) {
+                            let data = response.data;
+                            console.log(data);
+                            if (data.code == 0) {
+                                if (data.content == true) {
+                                    self.$message({
+                                        type: 'success',
+                                        message: '操作成功',
+                                        duration: 1000
+                                    });
+                                    self.queryBasePageHelperTAnswer(self.TAnswerQueryBasePageHelperParam.pageNum, self.TAnswerQueryBasePageHelperParam.pageSize);
+                                } else {
+                                    self.$message({
+                                        type: 'error',
+                                        message: '操作失败' + response.msg,
+                                        duration: 1000
+                                    });
+                                }
+                            } else {
+                                self.$message({
+                                    type: 'error',
+                                    message: '操作失败' + response.msg,
+                                    duration: 1000
+                                });
+                            }
+                        }).catch(
+                        function (response) {
+                            //失败回调
+                            console.error(response);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常，请检查服务',
+                                duration: 1000
+                            })
+                        })
                 },
             }
         })

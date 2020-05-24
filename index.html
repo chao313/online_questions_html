@@ -31,7 +31,7 @@
             <form class="navbar-search" action="" id="global_search_form"
                   method="post">
                 <input type="text" name="question_content" id="question_contents"
-                       placeholder="搜索问题、话题或人....."
+                       placeholder="搜索问题..."
                        class="form-control"
                        v-model="word"
                 >
@@ -160,7 +160,7 @@
                                                 • <a href="javaScript:;" @click="routerToPerson(value.name)"
                                                      class="aw-question-tags"
                                                      data-id="52695"><span>{{value.userName}}</span></a>
-                                                <span class="text-color-999">发布问题 • {{dealZero(value.followSum)}} 人关注 • {{dealZero(value.answerSum)}} 个回复	</span>
+                                                <span class="text-color-999">发布问题 • {{dealZero(value.followSum)}} 人关注 • {{dealZero(value.answerSum)}} 个回答	</span>
                                                 <span class="text-color-999 pull-right">{{value.createTime}} 创建</span>
                                             </p>
 
