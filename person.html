@@ -195,18 +195,18 @@
                                                                     </template>
                                                                     <template v-else-if="value.status == 0">
                                                                         <a href="javascript:;"
-                                                                           class="aw-question-tags hidden-xs contribute"><span>发布中</span></a>
+                                                                           class="aw-question-tags-bg-green hidden-xs contribute"><span>发布中</span></a>
                                                                     </template>
                                                                     <template v-else-if="value.status == 1">
                                                                         <a href="javascript:;"
-                                                                           class="aw-question-tags hidden-xs contribute"><span>已终结</span></a>
+                                                                           class="aw-question-tags-bg-red hidden-xs contribute"><span>已终结</span></a>
                                                                     </template>
                                                                     <a href="javascript:;"
                                                                        @click="routerToQuestionDetail(value.id)"
                                                                        class="aw-question-tags pull-right hidden-xs contribute"><span>查看</span></a>
-                                                                    <a href="javascript:;"
-                                                                       @click="routerToPublish(value.id)"
-                                                                       class="aw-question-tags pull-right hidden-xs contribute"><span>修改</span></a>
+                                                                    <!--<a href="javascript:;"-->
+                                                                       <!--@click="routerToPublish(value.id)"-->
+                                                                       <!--class="aw-question-tags pull-right hidden-xs contribute"><span>修改</span></a>-->
 
                                                                     <a href="javascript:;"
                                                                        @click="updateTQuestionsByPrimaryKey(0, value.id)"
