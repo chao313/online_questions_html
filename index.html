@@ -139,7 +139,7 @@
                                     <div class="aw-item " data-topic-id="3868,">
                                         <a class="aw-user-name hidden-xs" data-id="45510"
                                            href="" rel="nofollow"><img
-                                                :src="path(value.logo)" alt="value.name"><i
+                                                :src="path(value.logo)" :alt="value.name"><i
                                                 class="icon icon-v"></i></a>
                                         <div class="aw-question-content">
                                             <h4>
@@ -151,15 +151,15 @@
                                             <div class="pull-right hidden-xs contribute">
                                                 <a class="aw-user-name" data-id="36406"
                                                    href="" rel="nofollow"><img
-                                                        :src="path(value.logo)" alt="value.name"></a>
+                                                        :src="path(value.logo)" :alt="value.name"></a>
                                             </div>
 
                                             <p>
-                                                <a class="aw-question-tags"
-                                                   href="javaScript:;"><span>{{value.tag}}</span></a>
+                                                <a class="aw-question-tags-op-blue"
+                                                   href="javaScript:;"><span class="aw-question-tags-op-blue" >{{value.tag}}</span></a>
                                                 • <a href="javaScript:;" @click="routerToPerson(value.name)"
                                                      class="aw-question-tags"
-                                                     data-id="52695"><span>{{value.userName}}</span></a>
+                                                     data-id="52695"><span class="aw-question-tags-op-green" >{{value.userName}}</span></a>
                                                 <span class="text-color-999">发布问题 • {{dealZero(value.followSum)}} 人关注 • {{dealZero(value.answerSum)}} 个回答	</span>
                                                 <span class="text-color-999 pull-right">{{value.createTime}} 创建</span>
                                             </p>

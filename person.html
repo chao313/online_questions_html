@@ -182,14 +182,20 @@
                                         <div class="aw-profile-publish-list">
                                             <template v-if="TQuestionsQueryBasePageHelperResult.total != null"
                                                       v-for="(value,index) in TQuestionsQueryBasePageHelperResult.list">
-                                                <div class="aw-item">
-                                                    <div class="aw-mod">
-                                                        <div class="mod-head">
-                                                            <h4 class="aw-hide-txt">
-                                                                <a href="javascript:;"
-                                                                   @click="routerToQuestionDetail(value.id)"><span>{{value.title}}</span></a>
-                                                                <template v-if="userName == userNameView">
-                                                                    <template v-if="value.isSave == 0">
+                                                <template v-if="userName == userNameView">
+                                                    <div class="aw-item">
+                                                        <div class="aw-mod">
+                                                            <div class="mod-head">
+                                                                <h4 class="aw-hide-txt">
+
+                                                                    <a href="javascript:;"
+                                                                       @click="routerToQuestionDetail(value.id)"><span>{{value.title}}</span></a>
+                                                                    <template
+                                                                            v-if="value.blackFlag == 1 || value.blackFlag == 1 ">
+                                                                        <a href="javascript:;"
+                                                                           class="aw-question-tags-bg-red hidden-xs contribute"><span>已屏蔽</span></a>
+                                                                    </template>
+                                                                    <template v-else-if="value.isSave == 0">
                                                                         <a href="javascript:;"
                                                                            class="aw-question-tags hidden-xs contribute"><span>待发布</span></a>
                                                                     </template>
@@ -199,14 +205,14 @@
                                                                     </template>
                                                                     <template v-else-if="value.status == 1">
                                                                         <a href="javascript:;"
-                                                                           class="aw-question-tags-bg-red hidden-xs contribute"><span>已终结</span></a>
+                                                                           class="aw-question-tags hidden-xs contribute"><span>已终结</span></a>
                                                                     </template>
                                                                     <a href="javascript:;"
                                                                        @click="routerToQuestionDetail(value.id)"
                                                                        class="aw-question-tags pull-right hidden-xs contribute"><span>查看</span></a>
                                                                     <!--<a href="javascript:;"-->
-                                                                       <!--@click="routerToPublish(value.id)"-->
-                                                                       <!--class="aw-question-tags pull-right hidden-xs contribute"><span>修改</span></a>-->
+                                                                    <!--@click="routerToPublish(value.id)"-->
+                                                                    <!--class="aw-question-tags pull-right hidden-xs contribute"><span>修改</span></a>-->
 
                                                                     <a href="javascript:;"
                                                                        @click="updateTQuestionsByPrimaryKey(0, value.id)"
@@ -214,19 +220,47 @@
                                                                     <a href="javascript:;"
                                                                        @click="updateTQuestionsByPrimaryKey(1, value.id)"
                                                                        class="aw-question-tags-op-red pull-right hidden-xs contribute"><span>终结</span></a>
-                                                                </template>
-                                                            </h4>
+                                                                    <div class="mod-body">
+                                                                        <p class="text-color-999">
+                                                                            <a href="javascript:;"
+                                                                               class="aw-question-tags-op-blue"><span>{{value.tag}}</span></a>
+                                                                            • {{value.createTime}}
+                                                                        </p>
+                                                                    </div>
+                                                                </h4>
+
+                                                            </div>
 
                                                         </div>
-                                                        <div class="mod-body">
-                                                            <p class="text-color-999">
-                                                                <a href=""
-                                                                   class="aw-question-tags"><span>{{value.tag}}</span></a>
-                                                                • {{value.createTime}}
-                                                            </p>
-                                                        </div>
                                                     </div>
-                                                </div>
+                                                </template>
+                                                <template v-else>
+
+                                                    <template
+                                                            v-if="value.blackFlag == 0 && value.blackFlag == 0 ">
+                                                        <div class="aw-item">
+                                                            <div class="aw-mod">
+                                                                <div class="mod-head">
+                                                                    <h4 class="aw-hide-txt">
+                                                                        <a href="javascript:;"
+                                                                           @click="routerToQuestionDetail(value.id)"><span>{{value.title}}</span></a>
+                                                                        <div class="mod-body">
+                                                                            <p class="text-color-999">
+                                                                                <a href="javascript:;"
+                                                                                   class="aw-question-tags-op-blue"><span>{{value.tag}}</span></a>
+                                                                                • {{value.createTime}}
+                                                                            </p>
+                                                                        </div>
+
+                                                                    </h4>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </template>
+
                                             </template>
                                         </div>
                                     </div>
@@ -348,8 +382,8 @@
                                                         </div>
                                                         <div class="mod-body">
                                                             <p class="text-color-999">
-                                                                <a href=""
-                                                                   class="aw-question-tags"><span>{{value.tag}}</span></a>
+                                                                <a href="javascript:;"
+                                                                   class="aw-question-tags-op-blue"><span>{{value.tag}}</span></a>
                                                                 • {{value.createTime}}</p>
                                                         </div>
                                                     </div>
@@ -1293,7 +1327,7 @@
                 /** 分页查询TQuestions -- 存放的是默认的data */
                 queryBasePageHelperTQuestions(pageNum, pageSize) {
                     let self = this;
-                    axios.post(queryBasePageHelperTQuestions + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TQuestionsQueryBasePageHelperParam)
+                    axios.post(queryBasePageHelperVQuestionUserAnswerFollow + "?pageNum=" + pageNum + "&pageSize=" + pageSize, self.TQuestionsQueryBasePageHelperParam)
                         .then(function (response) {
                             let data = response.data;
                             console.log(data);
