@@ -422,19 +422,19 @@
                                                     <ul id="contents_user_follows" class="clearfix">
                                                         <template
                                                                 v-if="TFollowPersonQueryBasePageHelperResultFollowed.total != null"
-                                                                v-for="(value,index) in TFollowPersonQueryBasePageHelperResultFollowed.list">
-
+                                                                v-for="(value,index) in TFollowUserResults">
                                                             <li>
                                                                 <div class="mod-head">
                                                                     <a class="aw-user-img pull-left aw-border-radius-5"
                                                                        data-id="49009"
-                                                                       href="">
+                                                                       href="javaScript:;"
+                                                                       @click="routerToPerson(value.name)">
                                                                         <img :src="path(value.logo)"
-                                                                             :alt="value.userNameFollow">
+                                                                             :alt="value.name">
                                                                     </a>
                                                                     <p>
                                                                         <a href="javaScript:;"
-                                                                           @click="routerToPerson(value.userNameFollow)"><span>{{value.userNameFollow}}</span></a>
+                                                                           @click="routerToPerson(value.name)"><span>{{value.name}}</span></a>
                                                                     </p>
                                                                 </div>
                                                                 <div class="mod-body">
@@ -1086,6 +1086,23 @@
                         id: null,
                     }
                 },
+                TFollowUserResults: [{
+                    id: null,
+                    name: null,
+                    password: null,
+                    salt: null,
+                    phone: null,
+                    email: null,
+                    status: null,
+                    createTime: null,
+                    updateTime: null,
+                    deleteFlag: null,
+                    approveStatus: null,
+                    blackListUser: null,
+                    logo: null,
+                    pvCount: null,
+                    signature: null
+                }],
             },
             computed: {
                 base64Decode() {
@@ -1576,6 +1593,10 @@
                             console.log(data);
                             if (data.code == 0) {
                                 self.TFollowPersonQueryBasePageHelperResultFollowed = data.content;
+                                self.TFollowUserResults = [];//清空
+                                data.content.list.forEach(user => {
+                                    self.queryFollowTUserByPrimaryKey(user.userNameFollow);
+                                })
                             } else {
                                 self.$message({
                                     type: 'error',
@@ -1949,6 +1970,36 @@
                         console.log(data);
                         if (data.code == 0) {
                             topHead.TUserResult = data.content;
+                        } else {
+                            self.$message({
+                                type: 'error',
+                                message: '获取用户信息异常:' + data.msg,
+                                duration: 1000
+                            });
+                        }
+                    }).catch(
+                        function (response) {
+                            console.info(response);
+                            self.$message({
+                                type: 'error',
+                                message: '网络异常',
+                                duration: 1000
+                            });
+                        })
+
+                },
+                /** 主键查询TUser */
+                queryFollowTUserByPrimaryKey(name) {
+                    let self = this;
+                    axios.get(queryTUserByPrimaryKey, {
+                        params: {
+                            name: name
+                        }
+                    }).then(function (response) {
+                        let data = response.data;
+                        console.log(data);
+                        if (data.code == 0) {
+                            self.TFollowUserResults.push(data.content);
                         } else {
                             self.$message({
                                 type: 'error',
